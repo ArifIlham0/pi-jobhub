@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "509951543580",
+    "project_id": "jobhub-73090",
+    "storage_bucket": "jobhub-73090.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:509951543580:android:049f1a2ac400f2e79e92d9",
+        "android_client_info": {
+          "package_name": "com.dbestech.jobhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtQzeDKy92ejo-_EI6BvnnhThM4w69RMM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

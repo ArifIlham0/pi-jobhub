@@ -1,0 +1,6 @@
+package com.dbestech.jobhub
+
+import io.flutter.embedding.android.FlutterFragmentActivity
+
+class MainActivity: FlutterFragmentActivity() {
+}

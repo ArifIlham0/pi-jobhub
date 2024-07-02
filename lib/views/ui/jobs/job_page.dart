@@ -1,0 +1,301 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
+import 'package:jobhub/constants/app_constants.dart';
+import 'package:jobhub/controllers/exports.dart';
+import 'package:jobhub/models/request/bookmarks/bookmarks_model.dart';
+import 'package:jobhub/models/request/chats/create_chat.dart';
+import 'package:jobhub/models/request/messages/send_message.dart';
+import 'package:jobhub/services/helpers/chat_helper.dart';
+import 'package:jobhub/services/helpers/message_helper.dart';
+import 'package:jobhub/views/common/app_bar.dart';
+import 'package:jobhub/views/common/custom_outline_btn.dart';
+import 'package:jobhub/views/common/custom_small_btn.dart';
+import 'package:jobhub/views/common/exports.dart';
+import 'package:jobhub/views/common/height_spacer.dart';
+import 'package:jobhub/views/ui/chat/chat_list.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class JobPage extends StatefulWidget {
+  const JobPage({
+    super.key,
+    this.title,
+    this.id,
+  });
+
+  final String? title;
+  final String? id;
+
+  @override
+  State<JobPage> createState() => _JobPageState();
+}
+
+class _JobPageState extends State<JobPage> {
+  String? token;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadToken();
+  }
+
+  _loadToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      token = prefs.getString('token');
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var profileProvider = Provider.of<ProfileProvider>(context, listen: false);
+
+    return Consumer<JobsProvider>(
+      builder: (context, jobsProvider, child) {
+        jobsProvider.getJobById(widget.id);
+
+        return Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(50.h),
+            child: CustomAppBar(
+              text: widget.title,
+              actions: [
+                Consumer<BookMarkProvider>(
+                  builder: (context, bookmarkProvider, child) {
+                    bookmarkProvider.loadJobs();
+
+                    return FutureBuilder(
+                      future: jobsProvider.jobById,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return SizedBox();
+                        } else if (snapshot.hasError) {
+                          return Text("Error ${snapshot.error}");
+                        } else {
+                          final jobById = snapshot.data;
+
+                          return IconButton(
+                            onPressed: () async {
+                              if (jobById?.isBookmark == true) {
+                                await bookmarkProvider
+                                    .deleteBookmark(widget.id);
+                                setState(() {});
+                              } else {
+                                BookmarkReqResModel model =
+                                    BookmarkReqResModel(job: widget.id);
+                                await bookmarkProvider.addBookmark(
+                                    model, widget.id);
+                                setState(() {});
+                              }
+                            },
+                            icon: jobById?.isBookmark == true
+                                ? Icon(Fontisto.bookmark_alt)
+                                : Icon(Fontisto.bookmark),
+                          );
+                        }
+                      },
+                    );
+                  },
+                )
+              ],
+              child: GestureDetector(
+                onTap: () => Get.back(),
+                child: Icon(CupertinoIcons.arrow_left),
+              ),
+            ),
+          ),
+          body: FutureBuilder(
+            future: jobsProvider.jobById,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (snapshot.hasError) {
+                return Text("Error ${snapshot.error}");
+              } else {
+                final jobById = snapshot.data;
+
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: Stack(
+                    children: [
+                      ListView(
+                        physics: BouncingScrollPhysics(),
+                        padding: EdgeInsets.zero,
+                        children: [
+                          HeightSpacer(size: 30),
+                          Container(
+                            width: width,
+                            height: height * 0.27,
+                            decoration: BoxDecoration(
+                              color: Color(kLightGrey.value),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage:
+                                      NetworkImage(jobById!.imageUrl),
+                                ),
+                                HeightSpacer(size: 10),
+                                ReusableText(
+                                  text: jobById.title,
+                                  style: appstyle(
+                                      22, Color(kDark.value), FontWeight.w600),
+                                ),
+                                HeightSpacer(size: 5),
+                                ReusableText(
+                                  text: jobById.location,
+                                  style: appstyle(
+                                    16,
+                                    Color(kDarkGrey.value),
+                                    FontWeight.normal,
+                                  ),
+                                ),
+                                HeightSpacer(size: 15),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 30),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      CustomSmallButton(
+                                        width: width * 0.26,
+                                        height: height * 0.04,
+                                        color2: Color(kLight.value),
+                                        text: jobById.contract,
+                                        color: Color(kOrange.value),
+                                      ),
+                                      Row(
+                                        children: [
+                                          ReusableText(
+                                            text: jobById.salary,
+                                            style: appstyle(
+                                              17,
+                                              Color(kDark.value),
+                                              FontWeight.w600,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: width * 0.2,
+                                            child: ReusableText(
+                                              text: "/${jobById.period}",
+                                              style: appstyle(
+                                                17,
+                                                Color(kDark.value),
+                                                FontWeight.w600,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          HeightSpacer(size: 20),
+                          ReusableText(
+                            text: "Deskripsi",
+                            style: appstyle(
+                                22, Color(kDark.value), FontWeight.w600),
+                          ),
+                          HeightSpacer(size: 10),
+                          Text(
+                            jobById.description,
+                            textAlign: TextAlign.justify,
+                            maxLines: 8,
+                            style: appstyle(
+                                16, Color(kDarkGrey.value), FontWeight.normal),
+                          ),
+                          HeightSpacer(size: 20),
+                          ReusableText(
+                            text: "Persyaratan",
+                            style: appstyle(
+                                22, Color(kDark.value), FontWeight.w600),
+                          ),
+                          HeightSpacer(size: 10),
+                          SizedBox(
+                            height: height * 0.6,
+                            child: ListView.builder(
+                              itemCount: jobById.requirements.length,
+                              physics: NeverScrollableScrollPhysics(),
+                              itemBuilder: (context, index) {
+                                final req = jobById.requirements[index];
+                                String bullet = "\u2022";
+                                return Text(
+                                  "$bullet $req\n",
+                                  maxLines: 4,
+                                  textAlign: TextAlign.justify,
+                                  style: appstyle(16, Color(kDarkGrey.value),
+                                      FontWeight.normal),
+                                );
+                              },
+                            ),
+                          ),
+                          HeightSpacer(size: 20),
+                        ],
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: EdgeInsets.only(bottom: 20.h),
+                          child: CustomOutlineBtn(
+                            onTap: token != null
+                                ? () {
+                                    CreateChat model =
+                                        CreateChat(userId: jobById.agentId);
+                                    ChatHelper.applyJob(model).then(
+                                      (response) {
+                                        if (response[0]) {
+                                          SendMessage models = SendMessage(
+                                            chatId: response[1],
+                                            content:
+                                                "Halo, Saya tertarik bekerja di ${jobById.company} pada posisi ${jobById.title}, berikut CV saya ${profileProvider.cvUrl}",
+                                            receiver: jobById.agentId,
+                                          );
+                                          MessageHelper.sendMessage(models)
+                                              .whenComplete(() {
+                                            Get.to(
+                                              () => ChatList(),
+                                              transition:
+                                                  Transition.rightToLeft,
+                                              duration:
+                                                  Duration(milliseconds: 100),
+                                            );
+                                          });
+                                        }
+                                      },
+                                    );
+                                  }
+                                : null,
+                            color2: token != null
+                                ? Color(kOrange.value)
+                                : Color(kDarkGrey.value),
+                            width: width,
+                            height: height * 0.06,
+                            text: "Lamar",
+                            color: Color(kLight.value),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
+          ),
+        );
+      },
+    );
+  }
+}
