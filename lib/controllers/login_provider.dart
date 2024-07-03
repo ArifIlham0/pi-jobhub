@@ -97,7 +97,7 @@ class LoginProvider extends ChangeNotifier {
         Get.snackbar(
           "Login Failed",
           "Please check your credentials",
-          colorText: Color(kLight.value),
+          colorText: Color(kBlack2.value),
           backgroundColor: Colors.red,
           icon: Icon(Icons.add_alert),
         );
@@ -113,63 +113,71 @@ class LoginProvider extends ChangeNotifier {
     _firstTime = false;
   }
 
-  updateProfile(ProfileUpdateReq model) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<void> updateProfile(ProfileUpdateReq model) async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    String? userId = await prefs.getString('userId');
-    print(userId);
+      String? userId = await prefs.getString('userId');
+      print(userId);
 
-    AuthHelper.updateProfile(model, userId ?? "").then((response) {
-      if (response) {
-        Get.snackbar(
-          "Berhasil Update Profile",
-          "Silahkan cari pekerjaan impianmu!",
-          colorText: Color(kLight.value),
-          backgroundColor: Color(kLightBlue.value),
-          icon: Icon(Icons.add_alert),
-        );
-        Future.delayed(Duration(seconds: 3)).then(
-          (value) => Get.offAll(() => MainScreen()),
-        );
-      } else {
-        Get.snackbar(
-          "Update Failed",
-          "Please check again",
-          colorText: Color(kLight.value),
-          backgroundColor: Color(kOrange.value),
-          icon: Icon(Icons.add_alert),
-        );
-      }
-    });
+      AuthHelper.updateProfile(model, userId ?? "").then((response) {
+        if (response) {
+          Get.snackbar(
+            "Berhasil Update Profile",
+            "Silahkan cari pekerjaan impianmu!",
+            colorText: Color(kBlack2.value),
+            backgroundColor: Color(kGreen2.value),
+            icon: Icon(Icons.add_alert),
+          );
+          Future.delayed(Duration(seconds: 2)).then(
+            (value) => Get.offAll(() => MainScreen()),
+          );
+        } else {
+          Get.snackbar(
+            "Update Failed",
+            "Please check again",
+            colorText: Color(kBlack2.value),
+            backgroundColor: Color(kGreen.value),
+            icon: Icon(Icons.add_alert),
+          );
+        }
+      });
+    } finally {
+      setIsLoading = false;
+    }
   }
 
-  updateAgent(ProfileUpdateReq model) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<void> updateAgent(ProfileUpdateReq model) async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    String? userId = await prefs.getString('userId');
-    print(userId);
+      String? userId = await prefs.getString('userId');
+      print(userId);
 
-    AuthHelper.updateProfile(model, userId ?? "").then((response) {
-      if (response) {
-        Get.snackbar(
-          "Profile Update",
-          "Temukan kandidat terbaikmu!",
-          colorText: Color(kLight.value),
-          backgroundColor: Color(kLightBlue.value),
-          icon: Icon(Icons.add_alert),
-        );
-        Future.delayed(Duration(seconds: 3)).then(
-          (value) => Get.offAll(() => MainScreen()),
-        );
-      } else {
-        Get.snackbar(
-          "Update Failed",
-          "Please check again",
-          colorText: Color(kLight.value),
-          backgroundColor: Color(kOrange.value),
-          icon: Icon(Icons.add_alert),
-        );
-      }
-    });
+      AuthHelper.updateProfile(model, userId ?? "").then((response) {
+        if (response) {
+          Get.snackbar(
+            "Profile Update",
+            "Temukan kandidat terbaikmu!",
+            colorText: Color(kBlack2.value),
+            backgroundColor: Color(kGreen2.value),
+            icon: Icon(Icons.add_alert),
+          );
+          Future.delayed(Duration(seconds: 2)).then(
+            (value) => Get.offAll(() => MainScreen()),
+          );
+        } else {
+          Get.snackbar(
+            "Update Failed",
+            "Please check again",
+            colorText: Color(kBlack2.value),
+            backgroundColor: Color(kGreen.value),
+            icon: Icon(Icons.add_alert),
+          );
+        }
+      });
+    } finally {
+      setIsLoading = false;
+    }
   }
 }

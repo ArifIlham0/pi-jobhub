@@ -30,7 +30,7 @@ class CustomSmallButton extends StatelessWidget {
         side: MaterialStateProperty.all(BorderSide(color: color!)),
         padding: MaterialStateProperty.all(EdgeInsets.all(0)),
         overlayColor:
-            MaterialStateProperty.all(Color(kLight.value).withOpacity(0.2)),
+            MaterialStateProperty.all(Color(kBlack2.value).withOpacity(0.2)),
         maximumSize: MaterialStateProperty.all(
             Size(width ?? double.infinity, height ?? double.infinity)),
         shape: MaterialStateProperty.all(

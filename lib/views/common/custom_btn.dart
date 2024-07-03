@@ -14,10 +14,10 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Color(kOrange.value)),
+        backgroundColor: MaterialStateProperty.all(Color(kGreen.value)),
         minimumSize: MaterialStateProperty.all(Size(width, height * 0.065)),
         overlayColor:
-            MaterialStateProperty.all(Color(kLight.value).withOpacity(0.2)),
+            MaterialStateProperty.all(Color(kBlack2.value).withOpacity(0.2)),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(7),
@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
       child: Center(
         child: ReusableText(
           text: text!,
-          style: appstyle(16, color ?? Color(kLight.value), FontWeight.w600),
+          style: appstyle(16, color ?? Color(kWhite.value), FontWeight.w600),
         ),
       ),
     );

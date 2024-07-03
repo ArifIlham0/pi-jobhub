@@ -30,6 +30,10 @@ class JobHorizontalTile extends StatelessWidget {
           decoration: BoxDecoration(
             color: Color(kLightGrey.value),
             borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Color(kWhite.value),
+              width: 0.3,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,14 +46,14 @@ class JobHorizontalTile extends StatelessWidget {
                   WidthSpacer(width: 15),
                   ReusableText(
                     text: job!.company,
-                    style: appstyle(26, Color(kDark.value), FontWeight.w600),
+                    style: appstyle(26, Color(kWhite2.value), FontWeight.w600),
                   ),
                 ],
               ),
               HeightSpacer(size: 15),
               ReusableText(
                 text: job!.title,
-                style: appstyle(18, Color(kDark.value), FontWeight.w600),
+                style: appstyle(18, Color(kWhite2.value), FontWeight.w600),
               ),
               ReusableText(
                 text: job!.location,
@@ -64,7 +68,7 @@ class JobHorizontalTile extends StatelessWidget {
                       ReusableText(
                         text: job!.salary,
                         style:
-                            appstyle(20, Color(kDark.value), FontWeight.w600),
+                            appstyle(20, Color(kWhite2.value), FontWeight.w600),
                       ),
                       ReusableText(
                         text: "/${job!.period}",
@@ -75,8 +79,11 @@ class JobHorizontalTile extends StatelessWidget {
                   ),
                   CircleAvatar(
                     radius: 18,
-                    backgroundColor: Color(kLight.value),
-                    child: Icon(Ionicons.chevron_forward),
+                    backgroundColor: Color(kBlack2.value),
+                    child: Icon(
+                      Ionicons.chevron_forward,
+                      color: Color(kGreen.value),
+                    ),
                   ),
                 ],
               ),

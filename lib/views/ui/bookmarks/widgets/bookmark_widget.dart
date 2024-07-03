@@ -38,6 +38,10 @@ class BookmarkTileWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: Color(kLightGrey.value),
             borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Color(kWhite.value),
+              width: 0.3,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +66,7 @@ class BookmarkTileWidget extends StatelessWidget {
                             text: job!.job!.company!,
                             style: appstyle(
                               20,
-                              Color(kDark.value),
+                              Color(kWhite2.value),
                               FontWeight.w600,
                             ),
                           ),
@@ -83,11 +87,11 @@ class BookmarkTileWidget extends StatelessWidget {
                     ],
                   ),
                   CircleAvatar(
-                    backgroundColor: Color(kLight.value),
+                    backgroundColor: Color(kBlack2.value),
                     radius: 18,
                     child: Icon(
                       Ionicons.chevron_forward,
-                      color: Color(kOrange.value),
+                      color: Color(kGreen.value),
                     ),
                   ),
                 ],
@@ -100,7 +104,7 @@ class BookmarkTileWidget extends StatelessWidget {
                       text: job!.job!.salary!,
                       style: appstyle(
                         22,
-                        Color(kDark.value),
+                        Color(kWhite2.value),
                         FontWeight.w600,
                       ),
                     ),

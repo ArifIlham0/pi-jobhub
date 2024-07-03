@@ -23,14 +23,15 @@ class PageOne extends StatelessWidget {
               children: [
                 ReusableText(
                   text: "Temukan Pekerjaan Impianmu!",
-                  style: appstyle(20, Color(kLight.value), FontWeight.w500),
+                  style: appstyle(20, Color(kBlack2.value), FontWeight.w500),
                 ),
                 HeightSpacer(size: 10),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
                   child: Text(
                     "Kami membantu karir mu dengan memberikan informasi lowongan pekerjaan terbaik",
-                    style: appstyle(11, Color(kLight.value), FontWeight.normal),
+                    style:
+                        appstyle(11, Color(kBlack2.value), FontWeight.normal),
                     textAlign: TextAlign.center,
                   ),
                 ),

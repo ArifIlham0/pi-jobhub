@@ -60,7 +60,7 @@ class _AgentState extends State<Agent> {
                   HeightSpacer(size: 50),
                   ReusableText(
                     text: "Halo, Cari karyawranmu!",
-                    style: appstyle(22, Color(kDark.value), FontWeight.w600),
+                    style: appstyle(22, Color(kWhite2.value), FontWeight.w600),
                   ),
                   ReusableText(
                     text: "Isi di bawah ini untuk daftar sebagai mitra",
@@ -114,7 +114,7 @@ class _AgentState extends State<Agent> {
                         signUpProvider.obscureText
                             ? Icons.visibility_off
                             : Icons.visibility,
-                        color: Color(kDark.value),
+                        color: Color(kWhite2.value),
                       ),
                     ),
                   ),
@@ -139,7 +139,7 @@ class _AgentState extends State<Agent> {
                         Get.snackbar(
                           "Register failed",
                           "Please check your email or password",
-                          colorText: Color(kLight.value),
+                          colorText: Color(kBlack2.value),
                           backgroundColor: Colors.red,
                           icon: Icon(Icons.add_alert),
                         );

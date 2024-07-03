@@ -27,6 +27,10 @@ class VerticalTile extends StatelessWidget {
         decoration: BoxDecoration(
           color: Color(kLightGrey.value),
           borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: Color(kWhite.value),
+            width: 0.3,
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +43,7 @@ class VerticalTile extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       backgroundColor: Color(kLightGrey.value),
-                      radius: 30,
+                      radius: 25,
                       backgroundImage: NetworkImage(recentJob!.imageUrl),
                     ),
                     WidthSpacer(width: 10),
@@ -49,8 +53,8 @@ class VerticalTile extends StatelessWidget {
                       children: [
                         ReusableText(
                           text: recentJob!.company,
-                          style:
-                              appstyle(20, Color(kDark.value), FontWeight.w600),
+                          style: appstyle(
+                              20, Color(kWhite2.value), FontWeight.w600),
                         ),
                         SizedBox(
                           width: width * 0.5,
@@ -58,15 +62,18 @@ class VerticalTile extends StatelessWidget {
                             maxLine: false,
                             text: recentJob!.title,
                             style: appstyle(
-                                20, Color(kDark.value), FontWeight.w600),
+                                20, Color(kWhite2.value), FontWeight.w600),
                           ),
                         ),
                       ],
                     ),
                     CircleAvatar(
                       radius: 18,
-                      backgroundColor: Color(kLight.value),
-                      child: Icon(Ionicons.chevron_forward),
+                      backgroundColor: Color(kBlack2.value),
+                      child: Icon(
+                        Ionicons.chevron_forward,
+                        color: Color(kGreen.value),
+                      ),
                     ),
                   ],
                 ),
@@ -78,7 +85,7 @@ class VerticalTile extends StatelessWidget {
                 children: [
                   ReusableText(
                     text: recentJob!.salary,
-                    style: appstyle(23, Color(kDark.value), FontWeight.w600),
+                    style: appstyle(23, Color(kWhite2.value), FontWeight.w600),
                   ),
                   ReusableText(
                     text: "/${recentJob!.period}",

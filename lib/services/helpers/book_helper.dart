@@ -28,7 +28,6 @@ class BookMarkHelper {
 
     if (response.statusCode == 200) {
       String? bookmarkId = bookmarkReqResFromJson(response.body).id;
-      print("Berhasil add bookmark ${response.body}");
       return [true, bookmarkId];
     } else {
       return [false];
@@ -51,7 +50,6 @@ class BookMarkHelper {
     );
 
     if (response.statusCode == 200) {
-      print("Berhasil delete bookmark ${response.body}");
       return true;
     } else {
       return false;

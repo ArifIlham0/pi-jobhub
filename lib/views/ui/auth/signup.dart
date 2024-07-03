@@ -57,7 +57,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   HeightSpacer(size: 50),
                   ReusableText(
                     text: "Halo, Selamat datang!",
-                    style: appstyle(27, Color(kDark.value), FontWeight.w600),
+                    style: appstyle(27, Color(kWhite2.value), FontWeight.w600),
                   ),
                   ReusableText(
                     text: "Isi di bawah ini untuk daftar",
@@ -111,7 +111,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         signUpProvider.obscureText
                             ? Icons.visibility_off
                             : Icons.visibility,
-                        color: Color(kDark.value),
+                        color: Color(kWhite2.value),
                       ),
                     ),
                   ),
@@ -120,7 +120,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     child: TextButton(
                       style: ButtonStyle(
                         overlayColor: MaterialStateProperty.all(
-                            Color(kDark.value).withOpacity(0.1)),
+                            Color(kWhite2.value).withOpacity(0.1)),
                       ),
                       onPressed: () {
                         Get.offAll(() => LoginPage());
@@ -128,7 +128,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       child: ReusableText(
                         text: "Masuk",
                         style:
-                            appstyle(14, Color(kDark.value), FontWeight.w500),
+                            appstyle(14, Color(kWhite2.value), FontWeight.w500),
                       ),
                     ),
                   ),
@@ -138,7 +138,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     child: TextButton(
                       style: ButtonStyle(
                         overlayColor: MaterialStateProperty.all(
-                            Color(kDark.value).withOpacity(0.1)),
+                            Color(kWhite2.value).withOpacity(0.1)),
                       ),
                       onPressed: () {
                         Get.to(
@@ -156,7 +156,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           TextSpan(
                             text: "Daftar sebagai mitra",
                             style: appstyle(
-                                12, Color(kDark.value), FontWeight.w500),
+                                12, Color(kWhite2.value), FontWeight.w500),
                           ),
                         ],
                       )),
@@ -180,7 +180,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         Get.snackbar(
                           "Register failed",
                           "Please check your email or password",
-                          colorText: Color(kLight.value),
+                          colorText: Color(kBlack2.value),
                           backgroundColor: Colors.red,
                           icon: Icon(Icons.add_alert),
                         );

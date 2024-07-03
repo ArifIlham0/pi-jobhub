@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:get/get.dart';
 import 'package:jobhub/views/common/exports.dart';
 
 class PDFViewerPage extends StatelessWidget {
@@ -10,15 +11,24 @@ class PDFViewerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(kBlack2.value),
       appBar: AppBar(
+        backgroundColor: Color(kBlack2.value),
         centerTitle: true,
         title: ReusableText(
           text: "CV",
           style: appstyle(
             16,
-            Color(kDark.value),
+            Color(kWhite.value),
             FontWeight.bold,
           ),
+        ),
+        leading: IconButton(
+          color: Color(kWhite.value),
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Get.back();
+          },
         ),
       ),
       body: PDFView(

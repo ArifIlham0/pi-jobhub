@@ -26,14 +26,13 @@ class SearchWidget extends StatelessWidget {
                   children: [
                     Icon(
                       Feather.search,
-                      color: Color(kOrange.value),
+                      color: Color(kGreen.value),
                       size: 20,
                     ),
                     WidthSpacer(width: 20),
                     ReusableText(
                       text: "Cari",
-                      style:
-                          appstyle(18, Color(kOrange.value), FontWeight.w500),
+                      style: appstyle(18, Color(kGreen.value), FontWeight.w500),
                     ),
                   ],
                 ),

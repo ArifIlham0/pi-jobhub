@@ -30,7 +30,7 @@ class LoadingOutlineButton extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(color2),
         minimumSize: MaterialStateProperty.all(Size(width ?? 0, height ?? 0)),
         overlayColor:
-            MaterialStateProperty.all(Color(kLight.value).withOpacity(0.2)),
+            MaterialStateProperty.all(Color(kBlack2.value).withOpacity(0.2)),
         maximumSize: MaterialStateProperty.all(
             Size(width ?? double.infinity, height ?? double.infinity)),
         shape: MaterialStateProperty.all(
@@ -45,12 +45,12 @@ class LoadingOutlineButton extends StatelessWidget {
           SizedBox(
             height: 20.h,
             width: 20.w,
-            child: CircularProgressIndicator(color: Color(kLight.value)),
+            child: CircularProgressIndicator(color: Color(kWhite.value)),
           ),
           WidthSpacer(width: 10),
           ReusableText(
             text: "Loading..",
-            style: appstyle(16, color ?? Color(kLight.value), FontWeight.w600),
+            style: appstyle(16, color ?? Color(kWhite.value), FontWeight.w600),
           ),
         ],
       ),

@@ -223,7 +223,7 @@ class _ChatPageState extends State<ChatPage> {
                                     data.chat?.updatedAt.toString()),
                                 style: appstyle(
                                   12,
-                                  Color(kDark.value),
+                                  Color(kWhite2.value),
                                   FontWeight.normal,
                                 ),
                               ),
@@ -235,8 +235,8 @@ class _ChatPageState extends State<ChatPage> {
                                         : Alignment.centerLeft,
                                 backGroundColor:
                                     data.sender?.id == chatProvider.userId
-                                        ? Color(kOrange.value)
-                                        : Color(kLightBlue.value),
+                                        ? Color(kGreen.value)
+                                        : Color(kLightGrey.value),
                                 elevation: 0.0,
                                 clipper: ChatBubbleClipper4(
                                   radius: 8,
@@ -263,11 +263,13 @@ class _ChatPageState extends State<ChatPage> {
                                     text: data.content!,
                                     style: appstyle(
                                       14,
-                                      Color(kLight.value),
+                                      data.sender?.id == chatProvider.userId
+                                          ? Color(kBlack2.value)
+                                          : Color(kWhite.value),
                                       FontWeight.normal,
                                     ),
                                     linkStyle:
-                                        TextStyle(color: Color(kDark.value)),
+                                        TextStyle(color: Color(kWhite2.value)),
                                   ),
                                 ),
                               ),
@@ -295,12 +297,12 @@ class _ChatPageState extends State<ChatPage> {
                                 width: 20.w,
                                 height: 20.h,
                                 child: CircularProgressIndicator(
-                                    color: Color(kLightBlue.value)),
+                                    color: Color(kGreen2.value)),
                               )
                             : Icon(
                                 Icons.send,
                                 size: 24,
-                                color: Color(kLightBlue.value),
+                                color: Color(kGreen2.value),
                               ),
                       ),
                       onTapOutside: (_) {

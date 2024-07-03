@@ -101,13 +101,10 @@ class AuthHelper {
       headers: requestHeaders,
       body: jsonEncode(model),
     );
-    print("Ini body update ${response.body}");
 
     if (response.statusCode == 200) {
-      print("Berhasil update ${response.body}");
       return true;
     } else {
-      print("Gagal update ${response.body}");
       return false;
     }
   }
@@ -133,7 +130,7 @@ class AuthHelper {
 
     if (response.statusCode == 200) {
       var profile = profileResFromJson(response.body);
-      print("Berhasil ambil profile ${jsonDecode(response.body)}");
+      print("Berhasil ambil profile ${response.body}");
       return profile;
     } else {
       throw Exception("Gagal ambil profil ${jsonDecode(response.body)}");

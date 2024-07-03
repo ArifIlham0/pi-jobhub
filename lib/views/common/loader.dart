@@ -20,7 +20,7 @@ class NoData extends StatelessWidget {
           Image.asset("assets/images/optimized_search.png"),
           ReusableText(
             text: title!,
-            style: appstyle(24, Color(kDark.value), FontWeight.bold),
+            style: appstyle(24, Color(kWhite2.value), FontWeight.bold),
           ),
         ],
       ),

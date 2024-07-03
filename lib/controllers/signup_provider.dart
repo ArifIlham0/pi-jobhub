@@ -69,7 +69,7 @@ class SignUpProvider extends ChangeNotifier {
         Get.snackbar(
           "Register failed",
           "Please check your email or password",
-          colorText: Color(kLight.value),
+          colorText: Color(kBlack2.value),
           backgroundColor: Colors.red,
           icon: Icon(Icons.add_alert),
         );
@@ -86,7 +86,7 @@ class SignUpProvider extends ChangeNotifier {
         Get.snackbar(
           "Register failed",
           "Please check your email or password",
-          colorText: Color(kLight.value),
+          colorText: Color(kBlack2.value),
           backgroundColor: Colors.red,
           icon: Icon(Icons.add_alert),
         );

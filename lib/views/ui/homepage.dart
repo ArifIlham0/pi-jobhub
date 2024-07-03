@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> {
                       text: "Login",
                       style: appstyle(
                         12,
-                        Color(kDark.value),
+                        Color(kWhite2.value),
                         FontWeight.w500,
                       ),
                     ),
@@ -114,7 +114,8 @@ class _HomePageState extends State<HomePage> {
                     HeightSpacer(size: 10),
                     Text(
                       "Temukan Pekerjaan Impianmu!",
-                      style: appstyle(30, Color(kDark.value), FontWeight.bold),
+                      style:
+                          appstyle(30, Color(kWhite2.value), FontWeight.bold),
                     ),
                     HeightSpacer(size: 40),
                     SearchWidget(
@@ -154,6 +155,7 @@ class _HomePageState extends State<HomePage> {
                             return ListView.builder(
                               itemCount: jobsSnapshot?.length,
                               scrollDirection: Axis.horizontal,
+                              physics: BouncingScrollPhysics(),
                               itemBuilder: (context, index) {
                                 final jobs = jobsSnapshot?[index];
 

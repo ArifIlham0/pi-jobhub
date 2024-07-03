@@ -33,12 +33,12 @@ class DeviceInfo extends StatelessWidget {
       children: [
         ReusableText(
           text: device!,
-          style: appstyle(22, Color(kDark.value), FontWeight.bold),
+          style: appstyle(22, Color(kWhite2.value), FontWeight.bold),
         ),
         HeightSpacer(size: 15),
         ReusableText(
           text: platform!,
-          style: appstyle(22, Color(kDark.value), FontWeight.bold),
+          style: appstyle(22, Color(kWhite2.value), FontWeight.bold),
         ),
         HeightSpacer(size: 15),
         Row(
@@ -67,8 +67,8 @@ class DeviceInfo extends StatelessWidget {
                     Get.offAll(() => OnBoardingScreen());
                   },
                   text: "Keluar",
-                  color: Color(kLight.value),
-                  color2: Color(kOrange.value),
+                  color: Color(kWhite.value),
+                  color2: Color(kGreen.value),
                   height: height * 0.05,
                   width: width * 0.3,
                 );

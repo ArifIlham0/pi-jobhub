@@ -56,7 +56,7 @@ class ImageUploader extends ChangeNotifier {
       uiSettings: [
         AndroidUiSettings(
           toolbarTitle: 'Jobhub Cropper',
-          toolbarColor: Color(kLightBlue.value),
+          toolbarColor: Color(kGreen2.value),
           toolbarWidgetColor: Colors.white,
           initAspectRatio: CropAspectRatioPreset.ratio4x3,
           lockAspectRatio: true,

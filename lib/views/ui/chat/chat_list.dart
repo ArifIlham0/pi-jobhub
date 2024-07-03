@@ -76,14 +76,18 @@ class ChatList extends StatelessWidget {
                               color: Color(kLightGrey.value),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12)),
+                              border: Border.all(
+                                color: Color(kWhite.value),
+                                width: 0.3,
+                              ),
                             ),
                             child: ListTile(
                               contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 4.w),
+                                  EdgeInsets.only(right: 8.w, left: 10.w),
                               minLeadingWidth: 0,
                               minVerticalPadding: 0,
                               leading: CircleAvatar(
-                                radius: 30,
+                                radius: 25,
                                 backgroundImage:
                                     NetworkImage(user!.first.profile!),
                               ),
@@ -95,7 +99,7 @@ class ChatList extends StatelessWidget {
                                     text: user.first.username!,
                                     style: appstyle(
                                       16,
-                                      Color(kDark.value),
+                                      Color(kWhite2.value),
                                       FontWeight.w600,
                                     ),
                                   ),
@@ -123,7 +127,7 @@ class ChatList extends StatelessWidget {
                                           chat.updatedAt.toString()),
                                       style: appstyle(
                                         12,
-                                        Color(kDark.value),
+                                        Color(kWhite2.value),
                                         FontWeight.normal,
                                       ),
                                     ),

@@ -27,10 +27,8 @@ class JobsHelper {
     );
 
     if (response.statusCode == 201) {
-      print("Berhasil create job ${response.body}");
       return true;
     } else {
-      print("Gagal create job ${response.body}");
       return false;
     }
   }
@@ -101,7 +99,7 @@ class JobsHelper {
       print("Berhasil get job ${response.body}");
       return jobById;
     } else {
-      print("gAGAL get job ${response.body}");
+      print("Gagal get job ${response.body}");
       throw Exception('Failed to load jobs');
     }
   }

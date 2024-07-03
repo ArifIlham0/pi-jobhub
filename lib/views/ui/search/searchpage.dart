@@ -23,8 +23,8 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(kOrange.value),
-        iconTheme: IconThemeData(color: Color(kLight.value)),
+        backgroundColor: Color(kGreen.value),
+        iconTheme: IconThemeData(color: Color(kBlack2.value)),
         elevation: 0,
         title: CustomField(
           hintText: "Cari Lowongan",

@@ -19,7 +19,7 @@ class VerticalTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 12.h),
+      padding: EdgeInsets.only(bottom: 12.h, right: 4.w),
       child: InkWell(
         onTap: () {
           Get.to(
@@ -38,6 +38,10 @@ class VerticalTileWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: Color(kLightGrey.value),
             borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Color(kWhite.value),
+              width: 0.3,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +67,7 @@ class VerticalTileWidget extends StatelessWidget {
                             text: job!.company,
                             style: appstyle(
                               20,
-                              Color(kDark.value),
+                              Color(kWhite2.value),
                               FontWeight.w600,
                             ),
                           ),
@@ -84,11 +88,11 @@ class VerticalTileWidget extends StatelessWidget {
                     ],
                   ),
                   CircleAvatar(
-                    backgroundColor: Color(kLight.value),
+                    backgroundColor: Color(kBlack2.value),
                     radius: 18,
                     child: Icon(
                       Ionicons.chevron_forward,
-                      color: Color(kOrange.value),
+                      color: Color(kGreen.value),
                     ),
                   ),
                 ],
@@ -101,7 +105,7 @@ class VerticalTileWidget extends StatelessWidget {
                       text: job!.salary,
                       style: appstyle(
                         22,
-                        Color(kDark.value),
+                        Color(kWhite2.value),
                         FontWeight.w600,
                       ),
                     ),

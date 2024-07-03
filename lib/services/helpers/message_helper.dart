@@ -30,10 +30,8 @@ class MessageHelper {
           ReceivedMessage.fromJson(jsonDecode(response.body));
 
       Map<String, dynamic> responseMap = jsonDecode(response.body);
-      print("Berhasil send message ${response.body}");
       return [true, message, responseMap];
     } else {
-      print("Gagal send message ${response.body}");
       return [false];
     }
   }

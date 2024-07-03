@@ -121,7 +121,7 @@ class _JobPageState extends State<JobPage> {
                 final jobById = snapshot.data;
 
                 return Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  padding: EdgeInsets.only(right: 14.w, left: 12.w),
                   child: Stack(
                     children: [
                       ListView(
@@ -137,6 +137,10 @@ class _JobPageState extends State<JobPage> {
                             decoration: BoxDecoration(
                               color: Color(kLightGrey.value),
                               borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: Color(kWhite.value),
+                                width: 0.3,
+                              ),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -148,8 +152,8 @@ class _JobPageState extends State<JobPage> {
                                 HeightSpacer(size: 10),
                                 ReusableText(
                                   text: jobById.title,
-                                  style: appstyle(
-                                      22, Color(kDark.value), FontWeight.w600),
+                                  style: appstyle(22, Color(kWhite2.value),
+                                      FontWeight.w600),
                                 ),
                                 HeightSpacer(size: 5),
                                 ReusableText(
@@ -172,9 +176,9 @@ class _JobPageState extends State<JobPage> {
                                       CustomSmallButton(
                                         width: width * 0.26,
                                         height: height * 0.04,
-                                        color2: Color(kLight.value),
+                                        color2: Color(kBlack2.value),
                                         text: jobById.contract,
-                                        color: Color(kOrange.value),
+                                        color: Color(kGreen.value),
                                       ),
                                       WidthSpacer(width: 10),
                                       Row(
@@ -183,7 +187,7 @@ class _JobPageState extends State<JobPage> {
                                             text: jobById.salary,
                                             style: appstyle(
                                               17,
-                                              Color(kDark.value),
+                                              Color(kWhite2.value),
                                               FontWeight.w600,
                                             ),
                                           ),
@@ -193,7 +197,7 @@ class _JobPageState extends State<JobPage> {
                                               text: "/${jobById.period}",
                                               style: appstyle(
                                                 17,
-                                                Color(kDark.value),
+                                                Color(kWhite2.value),
                                                 FontWeight.w600,
                                               ),
                                             ),
@@ -210,7 +214,7 @@ class _JobPageState extends State<JobPage> {
                           ReusableText(
                             text: "Deskripsi",
                             style: appstyle(
-                                22, Color(kDark.value), FontWeight.w600),
+                                22, Color(kWhite2.value), FontWeight.w600),
                           ),
                           HeightSpacer(size: 10),
                           Text(
@@ -224,7 +228,7 @@ class _JobPageState extends State<JobPage> {
                           ReusableText(
                             text: "Persyaratan",
                             style: appstyle(
-                                22, Color(kDark.value), FontWeight.w600),
+                                22, Color(kWhite2.value), FontWeight.w600),
                           ),
                           HeightSpacer(size: 10),
                           SizedBox(
@@ -256,11 +260,11 @@ class _JobPageState extends State<JobPage> {
                               ? LoadingOutlineButton(
                                   onTap: () {},
                                   color2: token != null
-                                      ? Color(kOrange.value)
+                                      ? Color(kGreen.value)
                                       : Color(kDarkGrey.value),
                                   width: width,
                                   height: height * 0.06,
-                                  color: Color(kLight.value),
+                                  color: Color(kWhite.value),
                                 )
                               : CustomOutlineBtn(
                                   onTap: token != null
@@ -276,12 +280,12 @@ class _JobPageState extends State<JobPage> {
                                         }
                                       : null,
                                   color2: token != null
-                                      ? Color(kOrange.value)
+                                      ? Color(kGreen.value)
                                       : Color(kDarkGrey.value),
                                   width: width,
                                   height: height * 0.06,
                                   text: "Lamar",
-                                  color: Color(kLight.value),
+                                  color: Color(kWhite.value),
                                 ),
                         ),
                       ),

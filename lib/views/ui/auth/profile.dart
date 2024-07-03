@@ -65,7 +65,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Container(
                         width: width,
                         height: height * 0.12,
-                        color: Color(kLight.value),
+                        color: Color(kBlack2.value),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -87,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   children: [
                                     ReusableText(
                                       text: profileSnapshot.username,
-                                      style: appstyle(20, Color(kDark.value),
+                                      style: appstyle(20, Color(kWhite2.value),
                                           FontWeight.w600),
                                     ),
                                     Row(
@@ -163,7 +163,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(10),
-                                            color: Color(kLight.value),
+                                            color: Color(kBlack2.value),
                                           ),
                                           child: Icon(
                                             FontAwesome5Regular.file_pdf,
@@ -175,7 +175,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                           text: "CV Kamu",
                                           style: appstyle(
                                               18,
-                                              Color(kDark.value),
+                                              Color(kWhite2.value),
                                               FontWeight.w500),
                                         ),
                                         WidthSpacer(width: 1),
@@ -200,7 +200,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: ReusableText(
                             text: profileSnapshot.email,
                             style: appstyle(
-                                16, Color(kDark.value), FontWeight.w600),
+                                16, Color(kWhite2.value), FontWeight.w600),
                           ),
                         ),
                       ),
@@ -226,7 +226,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               ReusableText(
                                 text: profileSnapshot.phone,
                                 style: appstyle(
-                                    16, Color(kDark.value), FontWeight.w600),
+                                    16, Color(kWhite2.value), FontWeight.w600),
                               ),
                             ],
                           ),
@@ -249,7 +249,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                     ? "Skills"
                                     : "Bidang Perusahaan",
                                 style: appstyle(
-                                    16, Color(kDark.value), FontWeight.w600),
+                                    16, Color(kWhite2.value), FontWeight.w600),
                               ),
                             ),
                             HeightSpacer(size: 3),
@@ -270,14 +270,14 @@ class _ProfilePageState extends State<ProfilePage> {
                                             horizontal: 10.w),
                                         width: width,
                                         height: height * 0.06,
-                                        color: Color(kLight.value),
+                                        color: Color(kBlack2.value),
                                         child: Row(
                                           children: [
                                             ReusableText(
                                               text: skill,
                                               style: appstyle(
                                                   16,
-                                                  Color(kDark.value),
+                                                  Color(kWhite2.value),
                                                   FontWeight.normal),
                                             ),
                                           ],
@@ -299,7 +299,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: TextButton(
                               style: ButtonStyle(
                                 overlayColor: MaterialStateProperty.all(
-                                    Color(kOrange.value).withOpacity(0.2)),
+                                    Color(kGreen.value).withOpacity(0.2)),
                               ),
                               onPressed: () {
                                 onBoardProvider.isLastPage = false;
@@ -311,8 +311,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 alignment: Alignment.bottomCenter,
                                 child: ReusableText(
                                   text: "Keluar",
-                                  style: appstyle(16, Color(kOrange.value),
-                                      FontWeight.w600),
+                                  style: appstyle(
+                                      16, Color(kGreen.value), FontWeight.w600),
                                 ),
                               ),
                             ),

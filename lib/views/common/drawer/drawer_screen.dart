@@ -32,7 +32,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             ZoomDrawer.of(context)!.toggle();
           },
           child: Scaffold(
-            backgroundColor: Color(kLightBlue.value),
+            backgroundColor: Color(kGreen2.value),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -41,7 +41,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   "Beranda",
                   0,
                   zoomProvider.currentIndex == 0
-                      ? Color(kLight.value)
+                      ? Color(kWhite.value)
                       : Color(kLightGrey.value),
                 ),
                 drawerItem(
@@ -49,7 +49,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   "Chats",
                   1,
                   zoomProvider.currentIndex == 1
-                      ? Color(kLight.value)
+                      ? Color(kWhite.value)
                       : Color(kLightGrey.value),
                 ),
                 drawerItem(
@@ -57,7 +57,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   "Bookmarks",
                   2,
                   zoomProvider.currentIndex == 2
-                      ? Color(kLight.value)
+                      ? Color(kWhite.value)
                       : Color(kLightGrey.value),
                 ),
                 drawerItem(
@@ -65,7 +65,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   "Perangkat",
                   3,
                   zoomProvider.currentIndex == 3
-                      ? Color(kLight.value)
+                      ? Color(kWhite.value)
                       : Color(kLightGrey.value),
                 ),
                 drawerItem(
@@ -73,7 +73,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   "Profil",
                   4,
                   zoomProvider.currentIndex == 4
-                      ? Color(kLight.value)
+                      ? Color(kWhite.value)
                       : Color(kLightGrey.value),
                 ),
                 FutureBuilder<ProfileRes>(
@@ -92,7 +92,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               "Mitra",
                               5,
                               zoomProvider.currentIndex == 5
-                                  ? Color(kLight.value)
+                                  ? Color(kWhite.value)
                                   : Color(kLightGrey.value),
                             )
                           : SizedBox.shrink();

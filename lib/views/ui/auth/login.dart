@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                     text: "Login nanti",
                     style: appstyle(
                       12,
-                      Color(kDark.value),
+                      Color(kWhite2.value),
                       FontWeight.w500,
                     ),
                   ),
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                   HeightSpacer(size: 50),
                   ReusableText(
                     text: "Selamat Datang!",
-                    style: appstyle(30, Color(kDark.value), FontWeight.w600),
+                    style: appstyle(30, Color(kWhite2.value), FontWeight.w600),
                   ),
                   ReusableText(
                     text: "Isi kolom dibawah ini untuk login",
@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                         loginProvider.obscureText
                             ? Icons.visibility_off
                             : Icons.visibility,
-                        color: Color(kDark.value),
+                        color: Color(kWhite2.value),
                       ),
                     ),
                   ),
@@ -129,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: TextButton(
                       style: ButtonStyle(
                         overlayColor: MaterialStateProperty.all(
-                            Color(kDark.value).withOpacity(0.1)),
+                            Color(kWhite2.value).withOpacity(0.1)),
                       ),
                       onPressed: () {
                         Get.offAll(() => RegistrationPage());
@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: ReusableText(
                         text: "Daftar",
                         style:
-                            appstyle(14, Color(kDark.value), FontWeight.w500),
+                            appstyle(14, Color(kWhite2.value), FontWeight.w500),
                       ),
                     ),
                   ),
@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                               Get.snackbar(
                                 "Login Failed",
                                 "Please check your credentials",
-                                colorText: Color(kLight.value),
+                                colorText: Color(kBlack2.value),
                                 backgroundColor: Colors.red,
                                 icon: Icon(Icons.add_alert),
                               );

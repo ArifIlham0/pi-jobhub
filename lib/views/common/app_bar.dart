@@ -19,8 +19,8 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       iconTheme: IconThemeData(),
-      backgroundColor: Color(kLight.value),
-      elevation: 0,
+      backgroundColor: Color(kBlack2.value),
+      scrolledUnderElevation: 0.0,
       automaticallyImplyLeading: false,
       leadingWidth: 70.w,
       leading: child,
@@ -28,7 +28,7 @@ class CustomAppBar extends StatelessWidget {
       centerTitle: true,
       title: ReusableText(
         text: text ?? "",
-        style: appstyle(16, Color(kDark.value), FontWeight.w600),
+        style: appstyle(16, Color(kWhite2.value), FontWeight.w600),
       ),
     );
   }

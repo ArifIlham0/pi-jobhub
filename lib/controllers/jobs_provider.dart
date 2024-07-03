@@ -12,6 +12,7 @@ import 'package:jobhub/services/helpers/chat_helper.dart';
 import 'package:jobhub/services/helpers/jobs_helper.dart';
 import 'package:jobhub/services/helpers/message_helper.dart';
 import 'package:jobhub/views/ui/chat/chat_list.dart';
+import 'package:jobhub/views/ui/mainscreen.dart';
 
 class JobsProvider extends ChangeNotifier {
   late Future<List<JobsResponse>> jobsList;
@@ -38,27 +39,30 @@ class JobsProvider extends ChangeNotifier {
     jobById = JobsHelper.getJobById(id);
   }
 
-  createJob(CreateJobsRequest model) {
-    JobsHelper.createJob(model).then((response) {
+  Future<void> createJob(CreateJobsRequest model) async {
+    try {
+      final response = await JobsHelper.createJob(model);
       if (response) {
         Get.snackbar(
           "Berhasil menambahkan lowongan!",
-          "",
-          colorText: Color(kLight.value),
-          backgroundColor: Color(kLightBlue.value),
+          "Kunjungi beranda untuk melihat lowongan yang telah dibuat",
+          colorText: Color(kBlack2.value),
+          backgroundColor: Color(kGreen2.value),
           icon: Icon(Icons.work),
         );
-        Get.back();
+        Get.to(() => MainScreen());
       } else {
         Get.snackbar(
           "Gagal membuat lowongan",
           "Tolong periksa kembali data yang diinputkan",
-          colorText: Color(kLight.value),
+          colorText: Color(kBlack2.value),
           backgroundColor: Colors.red,
           icon: Icon(Icons.work),
         );
       }
-    });
+    } finally {
+      setIsLoading = false;
+    }
   }
 
   Future<void> applyJob(CreateChat model, String content, String receiver,

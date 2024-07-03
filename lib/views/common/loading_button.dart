@@ -15,10 +15,10 @@ class LoadingButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Color(kOrange.value)),
+        backgroundColor: MaterialStateProperty.all(Color(kGreen.value)),
         minimumSize: MaterialStateProperty.all(Size(width, height * 0.065)),
         overlayColor:
-            MaterialStateProperty.all(Color(kLight.value).withOpacity(0.2)),
+            MaterialStateProperty.all(Color(kBlack2.value).withOpacity(0.2)),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(7),
@@ -31,12 +31,12 @@ class LoadingButton extends StatelessWidget {
           SizedBox(
             height: 20.h,
             width: 20.w,
-            child: CircularProgressIndicator(color: Color(kLight.value)),
+            child: CircularProgressIndicator(color: Color(kWhite.value)),
           ),
           WidthSpacer(width: 10),
           ReusableText(
             text: "Loading..",
-            style: appstyle(16, color ?? Color(kLight.value), FontWeight.w600),
+            style: appstyle(16, color ?? Color(kWhite.value), FontWeight.w600),
           ),
         ],
       ),

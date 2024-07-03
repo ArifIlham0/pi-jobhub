@@ -18,20 +18,20 @@ class PageThree extends StatelessWidget {
       body: Container(
         width: width,
         height: height,
-        color: Color(kLightBlue.value),
+        color: Color(kGreen2.value),
         child: Column(
           children: [
             Image.asset("assets/images/page3.png"),
             HeightSpacer(size: 17),
             ReusableText(
               text: "Selamat Datang!",
-              style: appstyle(20, Color(kLight.value), FontWeight.w600),
+              style: appstyle(20, Color(kBlack2.value), FontWeight.w600),
             ),
             HeightSpacer(size: 10),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: Text("Temukan pekerjaan impianmu dengan mudah dan cepat!",
-                  style: appstyle(10, Color(kLight.value), FontWeight.normal),
+                  style: appstyle(10, Color(kBlack2.value), FontWeight.normal),
                   textAlign: TextAlign.center),
             ),
             HeightSpacer(size: 16),
@@ -49,16 +49,16 @@ class PageThree extends StatelessWidget {
                     width: width * 0.3,
                     height: height * 0.05,
                     decoration: BoxDecoration(
-                      color: Color(kLightBlue.value),
+                      color: Color(kGreen2.value),
                       borderRadius: BorderRadius.circular(7),
                       border:
-                          Border.all(color: Color(kLight.value), width: 2.w),
+                          Border.all(color: Color(kBlack2.value), width: 2.w),
                     ),
                     child: Center(
                       child: ReusableText(
                         text: "Login",
                         style:
-                            appstyle(16, Color(kLight.value), FontWeight.w600),
+                            appstyle(16, Color(kBlack2.value), FontWeight.w600),
                       ),
                     ),
                   ),
@@ -71,14 +71,14 @@ class PageThree extends StatelessWidget {
                     width: width * 0.3,
                     height: height * 0.05,
                     decoration: BoxDecoration(
-                      color: Color(kLight.value),
+                      color: Color(kBlack2.value),
                       borderRadius: BorderRadius.circular(7),
                     ),
                     child: Center(
                       child: ReusableText(
                         text: "Sign Up",
-                        style: appstyle(
-                            16, Color(kLightBlue.value), FontWeight.w600),
+                        style:
+                            appstyle(16, Color(kGreen2.value), FontWeight.w600),
                       ),
                     ),
                   ),
@@ -89,14 +89,14 @@ class PageThree extends StatelessWidget {
             TextButton(
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all(
-                    Color(kLight.value).withOpacity(0.1)),
+                    Color(kBlack2.value).withOpacity(0.1)),
               ),
               onPressed: () {
                 Get.to(() => MainScreen());
               },
               child: ReusableText(
                 text: "Lanjut tanpa login",
-                style: appstyle(12, Color(kLight.value), FontWeight.w400),
+                style: appstyle(12, Color(kBlack2.value), FontWeight.w400),
               ),
             )
           ],

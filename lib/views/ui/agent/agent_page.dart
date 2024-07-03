@@ -11,6 +11,7 @@ import 'package:jobhub/views/common/drawer/drawer_widget.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/heading_widget.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
+import 'package:jobhub/views/common/loading_button.dart';
 import 'package:jobhub/views/ui/jobs/job_list_agent.dart';
 import 'package:provider/provider.dart';
 
@@ -68,7 +69,7 @@ class _AgentPageState extends State<AgentPage> {
                         text: "Buat Lowongan",
                         style: appstyle(
                           35,
-                          Color(kDark.value),
+                          Color(kWhite2.value),
                           FontWeight.bold,
                         ),
                       ),
@@ -211,33 +212,40 @@ class _AgentPageState extends State<AgentPage> {
                                       },
                                     ),
                                     HeightSpacer(size: 15),
-                                    CustomButton(
-                                      onTap: () {
-                                        CreateJobsRequest model =
-                                            CreateJobsRequest(
-                                          title: title.text,
-                                          description: description.text,
-                                          salary: salary.text,
-                                          contract: contract.text,
-                                          period: "bulan",
-                                          agentId: profile.id,
-                                          company: profile.username,
-                                          hiring: true,
-                                          imageUrl: profile.profile,
-                                          location: profile.location,
-                                          requirements: [
-                                            requirement1.text,
-                                            requirement2.text,
-                                            requirement3.text,
-                                            requirement4.text,
-                                            requirement5.text,
-                                          ],
-                                        );
+                                    jobProvider.isLoading
+                                        ? LoadingButton(
+                                            onTap: () {},
+                                          )
+                                        : CustomButton(
+                                            onTap: () async {
+                                              jobProvider.setIsLoading = true;
+                                              CreateJobsRequest model =
+                                                  CreateJobsRequest(
+                                                title: title.text,
+                                                description: description.text,
+                                                salary: salary.text,
+                                                contract: contract.text,
+                                                period: "bulan",
+                                                agentId: profile.id,
+                                                company: profile.username,
+                                                hiring: true,
+                                                imageUrl: profile.profile,
+                                                location: profile.location,
+                                                requirements: [
+                                                  requirement1.text,
+                                                  requirement2.text,
+                                                  requirement3.text,
+                                                  requirement4.text,
+                                                  requirement5.text,
+                                                ],
+                                              );
 
-                                        jobProvider.createJob(model);
-                                      },
-                                      text: "Buat",
-                                    ),
+                                              await jobProvider
+                                                  .createJob(model);
+                                              jobProvider.setIsLoading = false;
+                                            },
+                                            text: "Buat",
+                                          ),
                                   ],
                                 );
                               },

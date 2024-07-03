@@ -28,10 +28,8 @@ class ChatHelper {
 
     if (response.statusCode == 200) {
       var first = initialChatFromJson(response.body).id;
-      print("Berhasil apply job ${response.body}");
       return [true, first];
     } else {
-      print("Gagal apply job ${response.body}");
       return [false];
     }
   }

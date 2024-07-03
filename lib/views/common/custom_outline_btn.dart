@@ -28,7 +28,7 @@ class CustomOutlineBtn extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(color2),
         minimumSize: MaterialStateProperty.all(Size(width ?? 0, height ?? 0)),
         overlayColor:
-            MaterialStateProperty.all(Color(kLight.value).withOpacity(0.2)),
+            MaterialStateProperty.all(Color(kBlack2.value).withOpacity(0.2)),
         maximumSize: MaterialStateProperty.all(
             Size(width ?? double.infinity, height ?? double.infinity)),
         shape: MaterialStateProperty.all(

@@ -27,7 +27,7 @@ class PageTwo extends StatelessWidget {
               children: [
                 Text(
                   "Temukan Pekerjaan\nSesuai Passionmu!",
-                  style: appstyle(20, Color(kLight.value), FontWeight.w500),
+                  style: appstyle(20, Color(kBlack2.value), FontWeight.w500),
                   textAlign: TextAlign.center,
                 ),
                 HeightSpacer(size: 10),
@@ -35,7 +35,8 @@ class PageTwo extends StatelessWidget {
                   padding: EdgeInsets.all(8.h),
                   child: Text(
                     "Kami membantu karir mu dengan memberikan informasi lowongan pekerjaan terbaik",
-                    style: appstyle(12, Color(kLight.value), FontWeight.normal),
+                    style:
+                        appstyle(12, Color(kBlack2.value), FontWeight.normal),
                     textAlign: TextAlign.center,
                   ),
                 )

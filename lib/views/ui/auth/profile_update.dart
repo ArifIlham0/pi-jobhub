@@ -67,7 +67,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                       text: "Detail Profil",
                       style: appstyle(
                         35,
-                        Color(kDark.value),
+                        Color(kWhite2.value),
                         FontWeight.bold,
                       ),
                     ),
@@ -83,7 +83,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                       imageUploaderProvider.pickImage();
                                     },
                                     icon: CircleAvatar(
-                                      backgroundColor: Color(kLightBlue.value),
+                                      backgroundColor: Color(kGreen2.value),
                                       child: Center(
                                         child: Icon(Icons.photo_filter_rounded),
                                       ),
@@ -95,7 +95,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                       setState(() {});
                                     },
                                     icon: CircleAvatar(
-                                      backgroundColor: Color(kLightBlue.value),
+                                      backgroundColor: Color(kGreen2.value),
                                       backgroundImage: FileImage(
                                         File(
                                             imageUploaderProvider.imageFile[0]),
@@ -108,7 +108,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                       imageUploaderProvider.pickPdf();
                                     },
                                     icon: CircleAvatar(
-                                      backgroundColor: Color(kOrange.value),
+                                      backgroundColor: Color(kGreen.value),
                                       child: Center(
                                         child: Icon(
                                             imageUploaderProvider.pdfUrl ==
@@ -164,7 +164,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                             : "Bidang Perusahaan",
                         style: appstyle(
                           28,
-                          Color(kDark.value),
+                          Color(kWhite2.value),
                           FontWeight.bold,
                         ),
                       ),
@@ -243,8 +243,8 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                 Get.snackbar(
                                   "Image missing",
                                   "Please upload an image to proceed",
-                                  colorText: Color(kLight.value),
-                                  backgroundColor: Color(kLightBlue.value),
+                                  colorText: Color(kBlack2.value),
+                                  backgroundColor: Color(kGreen2.value),
                                   icon: Icon(Icons.add_alert),
                                 );
                               } else {

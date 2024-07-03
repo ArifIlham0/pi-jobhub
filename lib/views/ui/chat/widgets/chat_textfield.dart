@@ -28,12 +28,12 @@ class ChatTextField extends StatelessWidget {
       controller: messageController,
       keyboardType: TextInputType.multiline,
       maxLines: null,
-      style: appstyle(16, Color(kDark.value), FontWeight.w500),
+      style: appstyle(16, Color(kWhite2.value), FontWeight.w500),
       decoration: InputDecoration(
         isDense: true,
         contentPadding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 15.w),
         filled: true,
-        fillColor: Color(kLight.value),
+        fillColor: Color(kBlack2.value),
         suffixIcon: customSuffixIcon,
         hintText: "Kirim pesan",
         hintStyle: appstyle(

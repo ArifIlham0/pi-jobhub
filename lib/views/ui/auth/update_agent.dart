@@ -8,6 +8,7 @@ import 'package:jobhub/views/common/custom_btn.dart';
 import 'package:jobhub/views/common/custom_textfield.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
+import 'package:jobhub/views/common/loading_button.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,7 +49,7 @@ class _UpdateAgentState extends State<UpdateAgent> {
                         text: "Detail Perusahaan",
                         style: appstyle(
                           28,
-                          Color(kDark.value),
+                          Color(kWhite2.value),
                           FontWeight.bold,
                         ),
                       ),
@@ -67,8 +68,7 @@ class _UpdateAgentState extends State<UpdateAgent> {
                                         imageUploaderProvider.pickImage();
                                       },
                                       icon: CircleAvatar(
-                                        backgroundColor:
-                                            Color(kLightBlue.value),
+                                        backgroundColor: Color(kGreen2.value),
                                         child: Center(
                                           child:
                                               Icon(Icons.photo_filter_rounded),
@@ -81,41 +81,13 @@ class _UpdateAgentState extends State<UpdateAgent> {
                                         setState(() {});
                                       },
                                       icon: CircleAvatar(
-                                        backgroundColor:
-                                            Color(kLightBlue.value),
+                                        backgroundColor: Color(kGreen2.value),
                                         backgroundImage: FileImage(
                                           File(imageUploaderProvider
                                               .imageFile[0]),
                                         ),
                                       ),
                                     ),
-                              // HeightSpacer(size: 10),
-                              // imageUploaderProvider.pdfUrl == null ||
-                              //         imageUploaderProvider.pdfUrl!.isEmpty
-                              //     ? GestureDetector(
-                              //         onTap: () async {
-                              //           await imageUploaderProvider.pickPdf();
-                              //           setState(() {});
-                              //         },
-                              //         child: CircleAvatar(
-                              //           backgroundColor: Color(kOrange.value),
-                              //           child: Center(
-                              //             child: Icon(Icons.picture_as_pdf),
-                              //           ),
-                              //         ),
-                              //       )
-                              //     : GestureDetector(
-                              //         onTap: () async {
-                              //           await imageUploaderProvider.pickPdf();
-                              //           setState(() {});
-                              //         },
-                              //         child: CircleAvatar(
-                              //           backgroundColor: Color(kOrange.value),
-                              //           child: Center(
-                              //             child: Icon(Icons.done),
-                              //           ),
-                              //         ),
-                              //       )
                             ],
                           );
                         },
@@ -124,7 +96,7 @@ class _UpdateAgentState extends State<UpdateAgent> {
                         text: "Upload Logo Perusahaan",
                         style: appstyle(
                           10,
-                          Color(kDark.value),
+                          Color(kWhite2.value),
                           FontWeight.normal,
                         ),
                       ),
@@ -165,7 +137,7 @@ class _UpdateAgentState extends State<UpdateAgent> {
                           text: "Bidang Perusahaan",
                           style: appstyle(
                             30,
-                            Color(kDark.value),
+                            Color(kWhite2.value),
                             FontWeight.bold,
                           ),
                         ),
@@ -237,40 +209,50 @@ class _UpdateAgentState extends State<UpdateAgent> {
                         HeightSpacer(size: 20),
                         Consumer<ImageUploader>(
                             builder: (context, imageUploaderProvider, child) {
-                          return CustomButton(
-                            onTap: () async {
-                              if (imageUploaderProvider.imageFile.isEmpty &&
-                                  imageUploaderProvider.imageUrl == null) {
-                                Get.snackbar(
-                                  "Belum upload gambar atau cv!",
-                                  "Tolong upload terlebih dahulu",
-                                  colorText: Color(kLight.value),
-                                  backgroundColor: Color(kLightBlue.value),
-                                  icon: Icon(Icons.add_alert),
+                          return loginProvider.isLoading
+                              ? LoadingButton(
+                                  onTap: () {},
+                                )
+                              : CustomButton(
+                                  onTap: () async {
+                                    if (imageUploaderProvider
+                                            .imageFile.isEmpty &&
+                                        imageUploaderProvider.imageUrl ==
+                                            null) {
+                                      Get.snackbar(
+                                        "Belum upload gambar atau cv!",
+                                        "Tolong upload terlebih dahulu",
+                                        colorText: Color(kBlack2.value),
+                                        backgroundColor: Color(kGreen2.value),
+                                        icon: Icon(Icons.add_alert),
+                                      );
+                                    } else {
+                                      loginProvider.setIsLoading = true;
+                                      ProfileUpdateReq model = ProfileUpdateReq(
+                                        location: location.text,
+                                        phone: phone.text,
+                                        profile: imageUploaderProvider.imageUrl
+                                            .toString(),
+                                        cv: imageUploaderProvider.pdfUrl
+                                            .toString(),
+                                        skills: [
+                                          skill0.text,
+                                          skill1.text,
+                                          skill2.text,
+                                          skill3.text,
+                                          skill4.text,
+                                        ],
+                                      );
+                                      final SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      await prefs.setBool('agent', false);
+                                      await loginProvider.updateAgent(model);
+                                      loginProvider.setIsLoading = false;
+                                      imageUploaderProvider.imageFile.clear();
+                                    }
+                                  },
+                                  text: "Lanjut",
                                 );
-                              } else {
-                                ProfileUpdateReq model = ProfileUpdateReq(
-                                  location: location.text,
-                                  phone: phone.text,
-                                  profile:
-                                      imageUploaderProvider.imageUrl.toString(),
-                                  cv: imageUploaderProvider.pdfUrl.toString(),
-                                  skills: [
-                                    skill0.text,
-                                    skill1.text,
-                                    skill2.text,
-                                    skill3.text,
-                                    skill4.text,
-                                  ],
-                                );
-                                final SharedPreferences prefs =
-                                    await SharedPreferences.getInstance();
-                                await prefs.setBool('agent', false);
-                                loginProvider.updateAgent(model);
-                              }
-                            },
-                            text: "Lanjut",
-                          );
                         })
                       ],
                     ),

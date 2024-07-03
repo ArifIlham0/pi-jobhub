@@ -64,8 +64,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Dbestech JobHub',
           theme: ThemeData(
-            scaffoldBackgroundColor: Color(kLight.value),
-            iconTheme: IconThemeData(color: Color(kDark.value)),
+            scaffoldBackgroundColor: Color(kBlack2.value),
+            iconTheme: IconThemeData(color: Color(kWhite2.value)),
             primarySwatch: Colors.grey,
           ),
           home: defaultHome,

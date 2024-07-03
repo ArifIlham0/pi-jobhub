@@ -79,7 +79,7 @@ class _DeviceManagementState extends State<DeviceManagement> {
               HeightSpacer(size: 50),
               Text(
                 "Kamu masuk dari perangkat berikut ini",
-                style: appstyle(15, Color(kDark.value), FontWeight.normal),
+                style: appstyle(15, Color(kWhite2.value), FontWeight.normal),
               ),
               HeightSpacer(size: 50),
               DeviceInfo(

@@ -21,13 +21,13 @@ class HeadingWidget extends StatelessWidget {
       children: [
         ReusableText(
           text: text!,
-          style: appstyle(18, Color(kDark.value), FontWeight.w600),
+          style: appstyle(18, Color(kWhite2.value), FontWeight.w600),
         ),
         InkWell(
           onTap: onTap! as void Function()?,
           child: ReusableText(
             text: isAgent == null ? "Lihat Semua" : "Lihat Lowongan Saya",
-            style: appstyle(isAgent == null ? 18 : 14, Color(kOrange.value),
+            style: appstyle(isAgent == null ? 18 : 14, Color(kGreen.value),
                 FontWeight.w500),
           ),
         ),

@@ -17,7 +17,7 @@ class VerticalShimmer extends StatelessWidget {
             duration: const Duration(seconds: 7),
             colors: [
               Color(kLightGrey.value),
-              Color(kLightBlue.value),
+              Color(kGreen2.value),
               Color(kLightGrey.value),
             ]),
       ],
