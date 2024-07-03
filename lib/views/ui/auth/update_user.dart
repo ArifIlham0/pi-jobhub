@@ -52,54 +52,91 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           FontWeight.bold,
                         ),
                       ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Consumer<ImageUploader>(
                         builder: (context, imageUploaderProvider, child) {
-                          return Column(
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              imageUploaderProvider.imageFile.isEmpty
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        imageUploaderProvider.pickImage();
-                                      },
-                                      child: CircleAvatar(
-                                        backgroundColor:
-                                            Color(kLightBlue.value),
-                                        child: Center(
-                                          child:
-                                              Icon(Icons.photo_filter_rounded),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  imageUploaderProvider.imageFile.isEmpty
+                                      ? IconButton(
+                                          onPressed: () {
+                                            imageUploaderProvider.pickImage();
+                                          },
+                                          icon: CircleAvatar(
+                                            backgroundColor:
+                                                Color(kLightBlue.value),
+                                            child: Center(
+                                              child: Icon(
+                                                  Icons.photo_filter_rounded),
+                                            ),
+                                          ),
+                                        )
+                                      : IconButton(
+                                          onPressed: () {
+                                            imageUploaderProvider.imageFile
+                                                .clear();
+                                            setState(() {});
+                                          },
+                                          icon: CircleAvatar(
+                                            backgroundColor:
+                                                Color(kLightBlue.value),
+                                            backgroundImage: FileImage(
+                                              File(imageUploaderProvider
+                                                  .imageFile[0]),
+                                            ),
+                                          ),
                                         ),
-                                      ),
-                                    )
-                                  : GestureDetector(
-                                      onTap: () {
-                                        imageUploaderProvider.imageFile.clear();
-                                        setState(() {});
-                                      },
-                                      child: CircleAvatar(
-                                        backgroundColor:
-                                            Color(kLightBlue.value),
-                                        backgroundImage: FileImage(
-                                          File(imageUploaderProvider
-                                              .imageFile[0]),
-                                        ),
+                                  ReusableText(
+                                    text: "Upload gambar profil",
+                                    style: appstyle(
+                                      10,
+                                      Color(kDark.value),
+                                      FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                    onPressed: () async {
+                                      await imageUploaderProvider.pickPdf();
+                                      setState(() {
+                                        imageUploaderProvider.pdfUrl =
+                                            imageUploaderProvider.pdfUrl;
+                                      });
+                                    },
+                                    icon: CircleAvatar(
+                                      backgroundColor: Color(kOrange.value),
+                                      child: Center(
+                                        child: Icon(
+                                            imageUploaderProvider.pdfUrl ==
+                                                        null ||
+                                                    imageUploaderProvider
+                                                        .pdfUrl!.isEmpty
+                                                ? Icons.picture_as_pdf
+                                                : Icons.done),
                                       ),
                                     ),
-                              HeightSpacer(size: 10),
-                              GestureDetector(
-                                onTap: () {
-                                  imageUploaderProvider.pickPdf();
-                                },
-                                child: CircleAvatar(
-                                  backgroundColor: Color(kOrange.value),
-                                  child: Center(
-                                    child: Icon(
-                                        imageUploaderProvider.pdfUrl == null ||
-                                                imageUploaderProvider
-                                                    .pdfUrl!.isEmpty
-                                            ? Icons.picture_as_pdf
-                                            : Icons.done),
                                   ),
-                                ),
+                                  ReusableText(
+                                    text: "Upload Cv",
+                                    style: appstyle(
+                                      10,
+                                      Color(kDark.value),
+                                      FontWeight.normal,
+                                    ),
+                                  ),
+                                ],
                               )
                             ],
                           );
@@ -107,7 +144,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                       )
                     ],
                   ),
-                  HeightSpacer(size: 20),
+                  HeightSpacer(size: 10),
                   Form(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -242,6 +279,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                                 );
 
                                 loginProvider.updateProfile(model);
+                                imageUploaderProvider.imageFile.clear();
                               }
                             },
                             text: "Update Profile",

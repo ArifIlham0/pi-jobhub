@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -53,16 +52,21 @@ class _UpdateAgentState extends State<UpdateAgent> {
                           FontWeight.bold,
                         ),
                       ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Consumer<ImageUploader>(
                         builder: (context, imageUploaderProvider, child) {
                           return Column(
                             children: [
                               imageUploaderProvider.imageFile.isEmpty
-                                  ? GestureDetector(
-                                      onTap: () {
+                                  ? IconButton(
+                                      onPressed: () {
                                         imageUploaderProvider.pickImage();
                                       },
-                                      child: CircleAvatar(
+                                      icon: CircleAvatar(
                                         backgroundColor:
                                             Color(kLightBlue.value),
                                         child: Center(
@@ -71,12 +75,12 @@ class _UpdateAgentState extends State<UpdateAgent> {
                                         ),
                                       ),
                                     )
-                                  : GestureDetector(
-                                      onTap: () {
+                                  : IconButton(
+                                      onPressed: () {
                                         imageUploaderProvider.imageFile.clear();
                                         setState(() {});
                                       },
-                                      child: CircleAvatar(
+                                      icon: CircleAvatar(
                                         backgroundColor:
                                             Color(kLightBlue.value),
                                         backgroundImage: FileImage(
@@ -85,37 +89,45 @@ class _UpdateAgentState extends State<UpdateAgent> {
                                         ),
                                       ),
                                     ),
-                              HeightSpacer(size: 10),
-                              imageUploaderProvider.pdfUrl == null ||
-                                      imageUploaderProvider.pdfUrl!.isEmpty
-                                  ? GestureDetector(
-                                      onTap: () async {
-                                        await imageUploaderProvider.pickPdf();
-                                        setState(() {});
-                                      },
-                                      child: CircleAvatar(
-                                        backgroundColor: Color(kOrange.value),
-                                        child: Center(
-                                          child: Icon(Icons.picture_as_pdf),
-                                        ),
-                                      ),
-                                    )
-                                  : GestureDetector(
-                                      onTap: () async {
-                                        await imageUploaderProvider.pickPdf();
-                                        setState(() {});
-                                      },
-                                      child: CircleAvatar(
-                                        backgroundColor: Color(kOrange.value),
-                                        child: Center(
-                                          child: Icon(Icons.done),
-                                        ),
-                                      ),
-                                    )
+                              // HeightSpacer(size: 10),
+                              // imageUploaderProvider.pdfUrl == null ||
+                              //         imageUploaderProvider.pdfUrl!.isEmpty
+                              //     ? GestureDetector(
+                              //         onTap: () async {
+                              //           await imageUploaderProvider.pickPdf();
+                              //           setState(() {});
+                              //         },
+                              //         child: CircleAvatar(
+                              //           backgroundColor: Color(kOrange.value),
+                              //           child: Center(
+                              //             child: Icon(Icons.picture_as_pdf),
+                              //           ),
+                              //         ),
+                              //       )
+                              //     : GestureDetector(
+                              //         onTap: () async {
+                              //           await imageUploaderProvider.pickPdf();
+                              //           setState(() {});
+                              //         },
+                              //         child: CircleAvatar(
+                              //           backgroundColor: Color(kOrange.value),
+                              //           child: Center(
+                              //             child: Icon(Icons.done),
+                              //           ),
+                              //         ),
+                              //       )
                             ],
                           );
                         },
-                      )
+                      ),
+                      ReusableText(
+                        text: "Upload Logo Perusahaan",
+                        style: appstyle(
+                          10,
+                          Color(kDark.value),
+                          FontWeight.normal,
+                        ),
+                      ),
                     ],
                   ),
                   HeightSpacer(size: 20),

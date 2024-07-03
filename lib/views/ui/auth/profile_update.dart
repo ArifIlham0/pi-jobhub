@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -74,26 +73,28 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                     ),
                     Consumer<ImageUploader>(
                       builder: (context, imageUploaderProvider, child) {
+                        imageUploaderProvider.imageFile.clear();
+
                         return Column(
                           children: [
                             imageUploaderProvider.imageFile.isEmpty
-                                ? GestureDetector(
-                                    onTap: () {
+                                ? IconButton(
+                                    onPressed: () {
                                       imageUploaderProvider.pickImage();
                                     },
-                                    child: CircleAvatar(
+                                    icon: CircleAvatar(
                                       backgroundColor: Color(kLightBlue.value),
                                       child: Center(
                                         child: Icon(Icons.photo_filter_rounded),
                                       ),
                                     ),
                                   )
-                                : GestureDetector(
-                                    onTap: () {
+                                : IconButton(
+                                    onPressed: () {
                                       imageUploaderProvider.imageFile.clear();
                                       setState(() {});
                                     },
-                                    child: CircleAvatar(
+                                    icon: CircleAvatar(
                                       backgroundColor: Color(kLightBlue.value),
                                       backgroundImage: FileImage(
                                         File(
@@ -101,22 +102,25 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                                       ),
                                     ),
                                   ),
-                            HeightSpacer(size: 10),
-                            GestureDetector(
-                              onTap: () {
-                                imageUploaderProvider.pickPdf();
-                              },
-                              child: CircleAvatar(
-                                backgroundColor: Color(kOrange.value),
-                                child: Center(
-                                  child: Icon(imageUploaderProvider.pdfUrl ==
-                                              null ||
-                                          imageUploaderProvider.pdfUrl!.isEmpty
-                                      ? Icons.picture_as_pdf
-                                      : Icons.done),
-                                ),
-                              ),
-                            )
+                            widget.isAgent != true
+                                ? IconButton(
+                                    onPressed: () {
+                                      imageUploaderProvider.pickPdf();
+                                    },
+                                    icon: CircleAvatar(
+                                      backgroundColor: Color(kOrange.value),
+                                      child: Center(
+                                        child: Icon(
+                                            imageUploaderProvider.pdfUrl ==
+                                                        null ||
+                                                    imageUploaderProvider
+                                                        .pdfUrl!.isEmpty
+                                                ? Icons.picture_as_pdf
+                                                : Icons.done),
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox.shrink(),
                           ],
                         );
                       },

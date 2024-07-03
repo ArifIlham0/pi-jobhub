@@ -6,7 +6,6 @@ import 'package:jobhub/models/request/jobs/create_job.dart';
 import 'package:jobhub/models/response/jobs/get_job.dart';
 import 'package:jobhub/models/response/jobs/jobs_response.dart';
 import 'package:jobhub/services/helpers/jobs_helper.dart';
-import 'package:jobhub/views/ui/mainscreen.dart';
 
 class JobsProvider extends ChangeNotifier {
   late Future<List<JobsResponse>> jobsList;
@@ -35,7 +34,7 @@ class JobsProvider extends ChangeNotifier {
           backgroundColor: Color(kLightBlue.value),
           icon: Icon(Icons.work),
         );
-        Get.off(() => MainScreen());
+        Get.back();
       } else {
         Get.snackbar(
           "Gagal membuat lowongan",

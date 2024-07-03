@@ -13,7 +13,7 @@ class PDFViewerPage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: ReusableText(
-          text: "CV Kamu",
+          text: "CV",
           style: appstyle(
             16,
             Color(kDark.value),

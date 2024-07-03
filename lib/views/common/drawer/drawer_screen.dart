@@ -86,7 +86,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     } else {
                       ProfileRes profile = snapshot.data!;
 
-                      return profile.isAgent == true
+                      return profile.isAgent || profile.isAdmin == true
                           ? drawerItem(
                               Icons.admin_panel_settings,
                               "Mitra",

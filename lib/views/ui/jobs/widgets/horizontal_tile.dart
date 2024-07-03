@@ -69,7 +69,7 @@ class JobHorizontalTile extends StatelessWidget {
                       ReusableText(
                         text: "/${job!.period}",
                         style: appstyle(
-                            23, Color(kDarkGrey.value), FontWeight.w600),
+                            20, Color(kDarkGrey.value), FontWeight.w600),
                       ),
                     ],
                   ),

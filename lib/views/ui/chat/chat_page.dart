@@ -13,7 +13,6 @@ import 'package:jobhub/services/helpers/message_helper.dart';
 import 'package:jobhub/views/common/app_bar.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
-import 'package:jobhub/views/common/loader.dart';
 import 'package:jobhub/views/common/pdf_viewer.dart.dart';
 import 'package:jobhub/views/ui/chat/widgets/chat_textfield.dart';
 import 'package:jobhub/views/ui/mainscreen.dart';
@@ -41,7 +40,7 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   int offset = 1;
   IO.Socket? socket;
-  late Future<List<ReceivedMessage>> messageList;
+  Future<List<ReceivedMessage>>? messageList;
   List<ReceivedMessage> messages = [];
   TextEditingController messageController = TextEditingController();
   String receiver = '';
@@ -56,7 +55,11 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void getMessage(int? offset) {
-    messageList = MessageHelper.getMessages(widget.id, offset);
+    MessageHelper.getMessages(widget.id, offset).then((newMessages) {
+      setState(() {
+        messages.addAll(newMessages);
+      });
+    });
   }
 
   void handleNext() {
@@ -197,97 +200,75 @@ class _ChatPageState extends State<ChatPage> {
               child: Column(
                 children: [
                   Expanded(
-                    child: FutureBuilder<List<ReceivedMessage>>(
-                      future: messageList,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
-                        } else if (snapshot.hasError) {
-                          return Center(
-                              child: Text('Error: ${snapshot.error}'));
-                        } else if (snapshot.data!.isEmpty) {
-                          return NoData(title: "No Messages Available");
-                        } else {
-                          final messageList = snapshot.data;
-                          messages = messages + messageList!;
+                    child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 0),
+                      itemCount: messages.length,
+                      controller: _scrollController,
+                      reverse: true,
+                      itemBuilder: (context, index) {
+                        final data = messages[index];
 
-                          return ListView.builder(
-                            physics: BouncingScrollPhysics(),
-                            padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 0),
-                            itemCount: messages.length,
-                            controller: _scrollController,
-                            reverse: true,
-                            itemBuilder: (context, index) {
-                              final data = messages[index];
-
-                              return Padding(
-                                padding:
-                                    EdgeInsets.only(top: 8.h, bottom: 12.h),
-                                child: Column(
-                                  children: [
-                                    ReusableText(
-                                      text: chatProvider.messageTime(
-                                          data.chat?.updatedAt.toString()),
-                                      style: appstyle(
-                                        12,
-                                        Color(kDark.value),
-                                        FontWeight.normal,
-                                      ),
-                                    ),
-                                    HeightSpacer(size: 15),
-                                    ChatBubble(
-                                      alignment:
-                                          data.sender?.id == chatProvider.userId
-                                              ? Alignment.centerRight
-                                              : Alignment.centerLeft,
-                                      backGroundColor:
-                                          data.sender?.id == chatProvider.userId
-                                              ? Color(kOrange.value)
-                                              : Color(kLightBlue.value),
-                                      elevation: 0.0,
-                                      clipper: ChatBubbleClipper4(
-                                        radius: 8,
-                                        type: data.sender?.id ==
-                                                chatProvider.userId
-                                            ? BubbleType.sendBubble
-                                            : BubbleType.receiverBubble,
-                                      ),
-                                      child: Container(
-                                        constraints: BoxConstraints(
-                                          maxWidth: width * 0.8,
-                                        ),
-                                        child: Linkify(
-                                          onOpen: (link) async {
-                                            File file = await profileProvider
-                                                .downloadFile(
-                                                    link.url, 'document.pdf');
-                                            Get.to(
-                                              () =>
-                                                  PDFViewerPage(url: file.path),
-                                              transition:
-                                                  Transition.rightToLeft,
-                                              duration:
-                                                  Duration(milliseconds: 100),
-                                            );
-                                          },
-                                          text: data.content!,
-                                          style: appstyle(
-                                            14,
-                                            Color(kLight.value),
-                                            FontWeight.normal,
-                                          ),
-                                          linkStyle: TextStyle(
-                                              color: Color(kDark.value)),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                        return Padding(
+                          padding: EdgeInsets.only(top: 8.h, bottom: 12.h),
+                          child: Column(
+                            children: [
+                              ReusableText(
+                                text: chatProvider.messageTime(
+                                    data.chat?.updatedAt.toString()),
+                                style: appstyle(
+                                  12,
+                                  Color(kDark.value),
+                                  FontWeight.normal,
                                 ),
-                              );
-                            },
-                          );
-                        }
+                              ),
+                              HeightSpacer(size: 15),
+                              ChatBubble(
+                                alignment:
+                                    data.sender?.id == chatProvider.userId
+                                        ? Alignment.centerRight
+                                        : Alignment.centerLeft,
+                                backGroundColor:
+                                    data.sender?.id == chatProvider.userId
+                                        ? Color(kOrange.value)
+                                        : Color(kLightBlue.value),
+                                elevation: 0.0,
+                                clipper: ChatBubbleClipper4(
+                                  radius: 8,
+                                  type: data.sender?.id == chatProvider.userId
+                                      ? BubbleType.sendBubble
+                                      : BubbleType.receiverBubble,
+                                ),
+                                child: Container(
+                                  constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width * 0.8,
+                                  ),
+                                  child: Linkify(
+                                    onOpen: (link) async {
+                                      File file =
+                                          await profileProvider.downloadFile(
+                                              link.url, 'document.pdf');
+                                      Get.to(
+                                        () => PDFViewerPage(url: file.path),
+                                        transition: Transition.rightToLeft,
+                                        duration: Duration(milliseconds: 100),
+                                      );
+                                    },
+                                    text: data.content!,
+                                    style: appstyle(
+                                      14,
+                                      Color(kLight.value),
+                                      FontWeight.normal,
+                                    ),
+                                    linkStyle:
+                                        TextStyle(color: Color(kDark.value)),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       },
                     ),
                   ),

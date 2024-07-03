@@ -15,6 +15,7 @@ import 'package:jobhub/views/common/custom_outline_btn.dart';
 import 'package:jobhub/views/common/custom_small_btn.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
+import 'package:jobhub/views/common/width_spacer.dart';
 import 'package:jobhub/views/ui/chat/chat_list.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,24 +79,26 @@ class _JobPageState extends State<JobPage> {
                         } else {
                           final jobById = snapshot.data;
 
-                          return IconButton(
-                            onPressed: () async {
-                              if (jobById?.isBookmark == true) {
-                                await bookmarkProvider
-                                    .deleteBookmark(widget.id);
-                                setState(() {});
-                              } else {
-                                BookmarkReqResModel model =
-                                    BookmarkReqResModel(job: widget.id);
-                                await bookmarkProvider.addBookmark(
-                                    model, widget.id);
-                                setState(() {});
-                              }
-                            },
-                            icon: jobById?.isBookmark == true
-                                ? Icon(Fontisto.bookmark_alt)
-                                : Icon(Fontisto.bookmark),
-                          );
+                          return token != null
+                              ? IconButton(
+                                  onPressed: () async {
+                                    if (jobById?.isBookmark == true) {
+                                      await bookmarkProvider
+                                          .deleteBookmark(widget.id);
+                                      setState(() {});
+                                    } else {
+                                      BookmarkReqResModel model =
+                                          BookmarkReqResModel(job: widget.id);
+                                      await bookmarkProvider.addBookmark(
+                                          model, widget.id);
+                                      setState(() {});
+                                    }
+                                  },
+                                  icon: jobById?.isBookmark == true
+                                      ? Icon(Fontisto.bookmark_alt)
+                                      : Icon(Fontisto.bookmark),
+                                )
+                              : SizedBox.shrink();
                         }
                       },
                     );
@@ -131,7 +134,9 @@ class _JobPageState extends State<JobPage> {
                           HeightSpacer(size: 30),
                           Container(
                             width: width,
-                            height: height * 0.27,
+                            height: height * 0.29,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 25.w, vertical: 15.h),
                             decoration: BoxDecoration(
                               color: Color(kLightGrey.value),
                               borderRadius: BorderRadius.circular(10),
@@ -158,9 +163,9 @@ class _JobPageState extends State<JobPage> {
                                     FontWeight.normal,
                                   ),
                                 ),
-                                HeightSpacer(size: 15),
                                 Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 30),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 2.w),
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
@@ -174,6 +179,7 @@ class _JobPageState extends State<JobPage> {
                                         text: jobById.contract,
                                         color: Color(kOrange.value),
                                       ),
+                                      WidthSpacer(width: 10),
                                       Row(
                                         children: [
                                           ReusableText(

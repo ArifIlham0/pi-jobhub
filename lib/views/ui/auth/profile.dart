@@ -133,52 +133,57 @@ class _ProfilePageState extends State<ProfilePage> {
                       HeightSpacer(size: 20),
                       Stack(
                         children: [
-                          InkWell(
-                            onTap: () async {
-                              final String pdfUrl = profileSnapshot.cv;
-                              File file = await profileProvider.downloadFile(
-                                  pdfUrl, 'document.pdf');
-                              Get.to(
-                                () => PDFViewerPage(url: file.path),
-                                transition: Transition.rightToLeft,
-                                duration: Duration(milliseconds: 100),
-                              );
-                            },
-                            child: Container(
-                              width: width,
-                              height: height * 0.12,
-                              decoration: BoxDecoration(
-                                color: Color(kLightGrey.value),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    margin: EdgeInsets.only(left: 12.w),
-                                    width: 60.w,
-                                    height: 70.h,
+                          profileSnapshot.isAgent != true
+                              ? InkWell(
+                                  onTap: () async {
+                                    final String pdfUrl = profileSnapshot.cv;
+                                    File file = await profileProvider
+                                        .downloadFile(pdfUrl, 'document.pdf');
+                                    Get.to(
+                                      () => PDFViewerPage(url: file.path),
+                                      transition: Transition.rightToLeft,
+                                      duration: Duration(milliseconds: 100),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: width,
+                                    height: height * 0.12,
                                     decoration: BoxDecoration(
+                                      color: Color(kLightGrey.value),
                                       borderRadius: BorderRadius.circular(10),
-                                      color: Color(kLight.value),
                                     ),
-                                    child: Icon(
-                                      FontAwesome5Regular.file_pdf,
-                                      color: Colors.red,
-                                      size: 40,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(left: 12.w),
+                                          width: 60.w,
+                                          height: 70.h,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Color(kLight.value),
+                                          ),
+                                          child: Icon(
+                                            FontAwesome5Regular.file_pdf,
+                                            color: Colors.red,
+                                            size: 40,
+                                          ),
+                                        ),
+                                        ReusableText(
+                                          text: "CV Kamu",
+                                          style: appstyle(
+                                              18,
+                                              Color(kDark.value),
+                                              FontWeight.w500),
+                                        ),
+                                        WidthSpacer(width: 1),
+                                      ],
                                     ),
                                   ),
-                                  ReusableText(
-                                    text: "CV Kamu",
-                                    style: appstyle(18, Color(kDark.value),
-                                        FontWeight.w500),
-                                  ),
-                                  WidthSpacer(width: 1),
-                                ],
-                              ),
-                            ),
-                          ),
+                                )
+                              : SizedBox.shrink(),
                         ],
                       ),
                       HeightSpacer(size: 20),
