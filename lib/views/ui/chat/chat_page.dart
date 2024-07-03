@@ -39,6 +39,7 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   int offset = 1;
+  bool isLoading = false;
   IO.Socket? socket;
   Future<List<ReceivedMessage>>? messageList;
   List<ReceivedMessage> messages = [];
@@ -117,6 +118,9 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void sendMessage(String? content, String? chatId, String? receiver) {
+    setState(() {
+      isLoading = true;
+    });
     SendMessage model =
         SendMessage(content: content, chatId: chatId, receiver: receiver);
     MessageHelper.sendMessage(model).then((response) {
@@ -126,6 +130,7 @@ class _ChatPageState extends State<ChatPage> {
       setState(() {
         messageController.clear();
         messages.insert(0, response[1]);
+        isLoading = false;
       });
     });
   }
@@ -278,15 +283,25 @@ class _ChatPageState extends State<ChatPage> {
                     child: ChatTextField(
                       messageController: messageController,
                       customSuffixIcon: IconButton(
-                        onPressed: () {
-                          String messageContent = messageController.text;
-                          sendMessage(messageContent, widget.id, receiver);
-                        },
-                        icon: Icon(
-                          Icons.send,
-                          size: 24,
-                          color: Color(kLightBlue.value),
-                        ),
+                        onPressed: isLoading
+                            ? null
+                            : () {
+                                String messageContent = messageController.text;
+                                sendMessage(
+                                    messageContent, widget.id, receiver);
+                              },
+                        icon: isLoading
+                            ? SizedBox(
+                                width: 20.w,
+                                height: 20.h,
+                                child: CircularProgressIndicator(
+                                    color: Color(kLightBlue.value)),
+                              )
+                            : Icon(
+                                Icons.send,
+                                size: 24,
+                                color: Color(kLightBlue.value),
+                              ),
                       ),
                       onTapOutside: (_) {
                         sendStopTypingEvent(widget.id!);

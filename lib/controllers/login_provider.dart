@@ -16,11 +16,13 @@ class LoginProvider extends ChangeNotifier {
   bool _firstTime = true;
   bool? _entrypoint;
   bool? _loggedIn;
+  bool _isLoading = false;
 
   bool get obscureText => _obscureText;
   bool get firstTime => _firstTime;
   bool get entrypoint => _entrypoint ?? false;
   bool get loggedIn => _loggedIn ?? false;
+  bool get isLoading => _isLoading;
 
   set obscureText(bool value) {
     _obscureText = value;
@@ -39,6 +41,11 @@ class LoginProvider extends ChangeNotifier {
 
   set loggedIn(bool value) {
     _loggedIn = value;
+    notifyListeners();
+  }
+
+  set setIsLoading(bool value) {
+    _isLoading = value;
     notifyListeners();
   }
 
@@ -73,11 +80,13 @@ class LoginProvider extends ChangeNotifier {
   }
 
   userLogin(LoginModel model) async {
+    setIsLoading = true;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     bool? firstTimes = await prefs.getBool('firstTime');
     bool? agent = await prefs.getBool('agent');
     AuthHelper.login(model).then((response) {
+      setIsLoading = false;
       if (response && firstTimes == true && agent != true) {
         Get.off(() => PersonalDetails());
       } else if (response && !firstTime) {

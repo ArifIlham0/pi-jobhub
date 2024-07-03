@@ -7,16 +7,13 @@ import 'package:jobhub/constants/app_constants.dart';
 import 'package:jobhub/controllers/exports.dart';
 import 'package:jobhub/models/request/bookmarks/bookmarks_model.dart';
 import 'package:jobhub/models/request/chats/create_chat.dart';
-import 'package:jobhub/models/request/messages/send_message.dart';
-import 'package:jobhub/services/helpers/chat_helper.dart';
-import 'package:jobhub/services/helpers/message_helper.dart';
 import 'package:jobhub/views/common/app_bar.dart';
 import 'package:jobhub/views/common/custom_outline_btn.dart';
 import 'package:jobhub/views/common/custom_small_btn.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
+import 'package:jobhub/views/common/loading_outline_button.dart';
 import 'package:jobhub/views/common/width_spacer.dart';
-import 'package:jobhub/views/ui/chat/chat_list.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -255,43 +252,37 @@ class _JobPageState extends State<JobPage> {
                         alignment: Alignment.bottomCenter,
                         child: Padding(
                           padding: EdgeInsets.only(bottom: 20.h),
-                          child: CustomOutlineBtn(
-                            onTap: token != null
-                                ? () {
-                                    CreateChat model =
-                                        CreateChat(userId: jobById.agentId);
-                                    ChatHelper.applyJob(model).then(
-                                      (response) {
-                                        if (response[0]) {
-                                          SendMessage models = SendMessage(
-                                            chatId: response[1],
-                                            content:
-                                                "Halo, Saya tertarik bekerja di ${jobById.company} pada posisi ${jobById.title}, berikut CV saya ${profileProvider.cvUrl}",
-                                            receiver: jobById.agentId,
+                          child: jobsProvider.isLoading
+                              ? LoadingOutlineButton(
+                                  onTap: () {},
+                                  color2: token != null
+                                      ? Color(kOrange.value)
+                                      : Color(kDarkGrey.value),
+                                  width: width,
+                                  height: height * 0.06,
+                                  color: Color(kLight.value),
+                                )
+                              : CustomOutlineBtn(
+                                  onTap: token != null
+                                      ? () {
+                                          CreateChat model = CreateChat(
+                                              userId: jobById.agentId);
+                                          jobsProvider.applyJob(
+                                            model,
+                                            "Halo, Saya tertarik bekerja di ${jobById.company} pada posisi ${jobById.title}, berikut CV saya ${profileProvider.cvUrl}",
+                                            jobById.agentId,
+                                            profileProvider,
                                           );
-                                          MessageHelper.sendMessage(models)
-                                              .whenComplete(() {
-                                            Get.to(
-                                              () => ChatList(),
-                                              transition:
-                                                  Transition.rightToLeft,
-                                              duration:
-                                                  Duration(milliseconds: 100),
-                                            );
-                                          });
                                         }
-                                      },
-                                    );
-                                  }
-                                : null,
-                            color2: token != null
-                                ? Color(kOrange.value)
-                                : Color(kDarkGrey.value),
-                            width: width,
-                            height: height * 0.06,
-                            text: "Lamar",
-                            color: Color(kLight.value),
-                          ),
+                                      : null,
+                                  color2: token != null
+                                      ? Color(kOrange.value)
+                                      : Color(kDarkGrey.value),
+                                  width: width,
+                                  height: height * 0.06,
+                                  text: "Lamar",
+                                  color: Color(kLight.value),
+                                ),
                         ),
                       ),
                     ],

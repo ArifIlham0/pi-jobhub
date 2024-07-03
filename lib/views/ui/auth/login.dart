@@ -9,6 +9,7 @@ import 'package:jobhub/views/common/custom_btn.dart';
 import 'package:jobhub/views/common/custom_textfield.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
+import 'package:jobhub/views/common/loading_button.dart';
 import 'package:jobhub/views/ui/auth/signup.dart';
 import 'package:jobhub/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
@@ -141,28 +142,30 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   HeightSpacer(size: 50),
-                  CustomButton(
-                    onTap: () {
-                      print("Berhasil");
-                      if (loginProvider.validateAndSave()) {
-                        LoginModel model = LoginModel(
-                          email: email.text,
-                          password: password.text,
-                        );
-                        loginProvider.userLogin(model);
-                      } else {
-                        print("Gagal");
-                        Get.snackbar(
-                          "Login Failed",
-                          "Please check your credentials",
-                          colorText: Color(kLight.value),
-                          backgroundColor: Colors.red,
-                          icon: Icon(Icons.add_alert),
-                        );
-                      }
-                    },
-                    text: "Masuk",
-                  ),
+                  loginProvider.isLoading
+                      ? LoadingButton(onTap: () {})
+                      : CustomButton(
+                          onTap: () {
+                            print("Berhasil");
+                            if (loginProvider.validateAndSave()) {
+                              LoginModel model = LoginModel(
+                                email: email.text,
+                                password: password.text,
+                              );
+                              loginProvider.userLogin(model);
+                            } else {
+                              print("Gagal");
+                              Get.snackbar(
+                                "Login Failed",
+                                "Please check your credentials",
+                                colorText: Color(kLight.value),
+                                backgroundColor: Colors.red,
+                                icon: Icon(Icons.add_alert),
+                              );
+                            }
+                          },
+                          text: "Masuk",
+                        ),
                 ],
               ),
             ),
