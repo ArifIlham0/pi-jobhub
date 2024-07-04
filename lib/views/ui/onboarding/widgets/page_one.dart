@@ -13,25 +13,28 @@ class PageOne extends StatelessWidget {
       body: Container(
         width: width,
         height: height,
-        color: Color(kDarkPurple.value),
+        color: Color(kBlack2.value),
         child: Column(
           children: [
             HeightSpacer(size: 50),
-            Image.asset("assets/images/page1.png"),
+            Image.asset(
+              "assets/images/page1.png",
+              width: 400.w,
+              height: 400.h,
+            ),
             HeightSpacer(size: 40),
             Column(
               children: [
                 ReusableText(
                   text: "Temukan Pekerjaan Impianmu!",
-                  style: appstyle(20, Color(kBlack2.value), FontWeight.w500),
+                  style: appstyle(20, Color(kWhite.value), FontWeight.w500),
                 ),
                 HeightSpacer(size: 10),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
                   child: Text(
                     "Kami membantu karir mu dengan memberikan informasi lowongan pekerjaan terbaik",
-                    style:
-                        appstyle(11, Color(kBlack2.value), FontWeight.normal),
+                    style: appstyle(11, Color(kWhite.value), FontWeight.normal),
                     textAlign: TextAlign.center,
                   ),
                 ),

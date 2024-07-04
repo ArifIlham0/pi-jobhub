@@ -21,8 +21,13 @@ class PageThree extends StatelessWidget {
         color: Color(kGreen2.value),
         child: Column(
           children: [
-            Image.asset("assets/images/page3.png"),
-            HeightSpacer(size: 17),
+            HeightSpacer(size: 30),
+            Image.asset(
+              "assets/images/page3.png",
+              width: 400.w,
+              height: 400.h,
+            ),
+            HeightSpacer(size: 30),
             ReusableText(
               text: "Selamat Datang!",
               style: appstyle(20, Color(kBlack2.value), FontWeight.w600),
@@ -31,10 +36,10 @@ class PageThree extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.w),
               child: Text("Temukan pekerjaan impianmu dengan mudah dan cepat!",
-                  style: appstyle(10, Color(kBlack2.value), FontWeight.normal),
+                  style: appstyle(12, Color(kBlack2.value), FontWeight.normal),
                   textAlign: TextAlign.center),
             ),
-            HeightSpacer(size: 16),
+            HeightSpacer(size: 70),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -64,7 +69,10 @@ class PageThree extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {
+                  onTap: () async {
+                    final SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    await prefs.setBool('entrypoint', true);
                     Get.to(() => RegistrationPage());
                   },
                   child: Container(
@@ -91,7 +99,10 @@ class PageThree extends StatelessWidget {
                 overlayColor: MaterialStateProperty.all(
                     Color(kBlack2.value).withOpacity(0.1)),
               ),
-              onPressed: () {
+              onPressed: () async {
+                final SharedPreferences prefs =
+                    await SharedPreferences.getInstance();
+                await prefs.setBool('entrypoint', true);
                 Get.to(() => MainScreen());
               },
               child: ReusableText(

@@ -60,7 +60,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               dotWidth: 9,
                               spacing: 10,
                               dotColor: Color(kDarkGrey.value).withOpacity(0.5),
-                              activeDotColor: Color(kBlack2.value),
+                              activeDotColor: Color(kGreen.value),
                             ),
                           ),
                         ),
@@ -82,7 +82,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                   },
                                   child: ReusableText(
                                     text: "Skip",
-                                    style: appstyle(14, Color(kBlack2.value),
+                                    style: appstyle(14, Color(kWhite.value),
                                         FontWeight.w500),
                                   ),
                                 ),
@@ -95,7 +95,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                   },
                                   child: ReusableText(
                                     text: "Next",
-                                    style: appstyle(14, Color(kBlack2.value),
+                                    style: appstyle(14, Color(kWhite.value),
                                         FontWeight.w500),
                                   ),
                                 ),
