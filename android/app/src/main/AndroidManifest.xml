@@ -2,7 +2,7 @@
     package="com.dbestech.jobhub">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="jobhub"
+        android:label="JobHunt"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
