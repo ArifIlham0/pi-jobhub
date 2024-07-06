@@ -24,46 +24,42 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(kLightGrey.value),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: TextFormField(
-        keyboardType: keyboardType,
-        obscureText: obscureText ?? false,
-        maxLines: isAgent != null ? 3 : 1,
-        decoration: InputDecoration(
-          hintText: hintText,
-          suffixIcon: suffixIcon,
-          hintStyle: appstyle(14, Color(kDarkGrey.value), FontWeight.w500),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.zero,
-            borderSide: BorderSide(color: Colors.red, width: 0.5),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.zero,
-            borderSide: BorderSide(color: Colors.transparent, width: 0),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.zero,
-            borderSide: BorderSide(color: Colors.red, width: 0.5),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.zero,
-            borderSide: BorderSide(color: Color(kDarkGrey.value), width: 0.5),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.zero,
-            borderSide: BorderSide(color: Colors.transparent, width: 0.5),
-          ),
-          border: InputBorder.none,
+    return TextFormField(
+      keyboardType: keyboardType,
+      obscureText: obscureText ?? false,
+      maxLines: isAgent != null ? 3 : 1,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: Color(kLightGrey.value),
+        hintText: hintText,
+        suffixIcon: suffixIcon,
+        hintStyle: appstyle(14, Color(kDarkGrey.value), FontWeight.w500),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.red, width: 0.5),
         ),
-        controller: controller,
-        cursorHeight: 25,
-        style: appstyle(14, Color(kWhite2.value), FontWeight.w500),
-        validator: validator,
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.transparent, width: 0),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.red, width: 0.5),
+        ),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Color(kDarkGrey.value), width: 0.5),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(color: Colors.transparent, width: 0.5),
+        ),
+        border: InputBorder.none,
       ),
+      controller: controller,
+      cursorHeight: 25,
+      style: appstyle(14, Color(kWhite2.value), FontWeight.w500),
+      validator: validator,
     );
   }
 }

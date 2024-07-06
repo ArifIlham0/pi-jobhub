@@ -12,6 +12,7 @@ import 'package:jobhub/views/common/custom_outline_btn.dart';
 import 'package:jobhub/views/common/custom_small_btn.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
+import 'package:jobhub/views/common/loading_indicator.dart';
 import 'package:jobhub/views/common/loading_outline_button.dart';
 import 'package:jobhub/views/common/width_spacer.dart';
 import 'package:provider/provider.dart';
@@ -112,9 +113,7 @@ class _JobPageState extends State<JobPage> {
             future: jobsProvider.jobById,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return LoadingIndicator();
               } else if (snapshot.hasError) {
                 return Text("Error ${snapshot.error}");
               } else {
@@ -265,6 +264,7 @@ class _JobPageState extends State<JobPage> {
                                   width: width,
                                   height: height * 0.06,
                                   color: Color(kWhite.value),
+                                  isButton: true,
                                 )
                               : CustomOutlineBtn(
                                   onTap: token != null

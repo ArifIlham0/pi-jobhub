@@ -87,7 +87,7 @@ class _AgentState extends State<Agent> {
                     hintText: "Email",
                     validator: (email) {
                       if (email!.isEmpty || !email.contains('@')) {
-                        return "Please enter a valid email";
+                        return "Tolong masukkan format email yang benar";
                       } else {
                         return null;
                       }
@@ -101,7 +101,7 @@ class _AgentState extends State<Agent> {
                     obscureText: signUpProvider.obscureText,
                     validator: (password) {
                       if (password!.isEmpty || password.length < 8) {
-                        return "Password at least one uppercase, one digit, special character, and length 8";
+                        return "Password minimal ada huruf besar, angka, simbol,\ndan lebih dari 8";
                       }
                       return null;
                     },
@@ -137,11 +137,12 @@ class _AgentState extends State<Agent> {
                         signUpProvider.registerAgent(model);
                       } else {
                         Get.snackbar(
-                          "Register failed",
-                          "Please check your email or password",
+                          "Gagal",
+                          "Tolong cek kembali inputan anda",
                           colorText: Color(kBlack2.value),
                           backgroundColor: Colors.red,
                           icon: Icon(Icons.add_alert),
+                          duration: Duration(milliseconds: 1500),
                         );
                       }
                     },

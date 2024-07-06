@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:jobhub/controllers/exports.dart';
 import 'package:jobhub/models/response/jobs/jobs_response.dart';
 import 'package:jobhub/views/common/app_bar.dart';
+import 'package:jobhub/views/common/vertical_shimmer.dart';
 import 'package:jobhub/views/ui/jobs/widgets/job_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -30,9 +31,7 @@ class JobListPage extends StatelessWidget {
         future: jobList.jobsList,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return VerticalShimmer();
           } else if (snapshot.hasError) {
             return Text("Error ${snapshot.error}");
           } else {

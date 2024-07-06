@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jobhub/views/common/exports.dart';
-import 'package:jobhub/views/common/width_spacer.dart';
+import 'package:jobhub/views/common/loading_indicator.dart';
 
 class LoadingOutlineButton extends StatelessWidget {
   const LoadingOutlineButton({
@@ -13,6 +12,7 @@ class LoadingOutlineButton extends StatelessWidget {
     this.onTap,
     this.color,
     this.color2,
+    this.isButton,
   });
 
   final double? width;
@@ -21,6 +21,7 @@ class LoadingOutlineButton extends StatelessWidget {
   final void Function()? onTap;
   final Color? color;
   final Color? color2;
+  final bool? isButton;
 
   @override
   Widget build(BuildContext context) {
@@ -39,21 +40,7 @@ class LoadingOutlineButton extends StatelessWidget {
           ),
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 20.h,
-            width: 20.w,
-            child: CircularProgressIndicator(color: Color(kWhite.value)),
-          ),
-          WidthSpacer(width: 10),
-          ReusableText(
-            text: "Loading..",
-            style: appstyle(16, color ?? Color(kWhite.value), FontWeight.w600),
-          ),
-        ],
-      ),
+      child: LoadingIndicator(isButton: isButton),
     );
   }
 }

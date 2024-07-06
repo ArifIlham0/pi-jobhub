@@ -6,6 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 
 class ProfileProvider extends ChangeNotifier {
+  final jobFormKey = GlobalKey<FormState>();
   Future<ProfileRes>? profile;
   String? _cvUrl;
 
@@ -14,6 +15,17 @@ class ProfileProvider extends ChangeNotifier {
   set setCvUrl(String value) {
     _cvUrl = value;
     notifyListeners();
+  }
+
+  bool validateJob() {
+    final form = jobFormKey.currentState;
+
+    if (form != null && form.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
   }
 
   getProfile() async {

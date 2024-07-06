@@ -10,6 +10,7 @@ import 'package:jobhub/views/common/drawer/drawer_widget.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:jobhub/views/common/loader.dart';
+import 'package:jobhub/views/common/vertical_chat_shimmer.dart';
 import 'package:jobhub/views/ui/chat/chat_page.dart';
 import 'package:provider/provider.dart';
 
@@ -37,11 +38,25 @@ class ChatList extends StatelessWidget {
             future: chatProvider.chats,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      VerticalChatShimmer(),
+                      VerticalChatShimmer(),
+                      VerticalChatShimmer(),
+                      VerticalChatShimmer(),
+                      VerticalChatShimmer(),
+                      VerticalChatShimmer(),
+                    ],
+                  ),
+                );
               } else if (snapshot.hasError) {
                 return Center(child: Text('Error: ${snapshot.error}'));
               } else if (snapshot.data!.isEmpty) {
-                return NoData(title: "No Chats Available");
+                return NoData(title: "Tidak ada pesan");
               } else {
                 final chatSnapshot = snapshot.data;
                 return ListView.builder(

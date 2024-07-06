@@ -12,6 +12,7 @@ import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:jobhub/views/common/search.dart';
 import 'package:jobhub/views/common/vertical_shimmer.dart';
 import 'package:jobhub/views/common/vertical_tile.dart';
+import 'package:jobhub/views/common/width_spacer.dart';
 import 'package:jobhub/views/ui/auth/login.dart';
 import 'package:jobhub/views/ui/jobs/job_page.dart';
 import 'package:jobhub/views/ui/jobs/jobs_list.dart';
@@ -146,7 +147,18 @@ class _HomePageState extends State<HomePage> {
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return HorizontalShimmer();
+                            return SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              physics: NeverScrollableScrollPhysics(),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  HorizontalShimmer(),
+                                  WidthSpacer(width: 10),
+                                  HorizontalShimmer(),
+                                ],
+                              ),
+                            );
                           } else if (snapshot.hasError) {
                             return Text("Error ${snapshot.error}");
                           } else {

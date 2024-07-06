@@ -155,7 +155,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           keyboardType: TextInputType.text,
                           validator: (location) {
                             if (location!.isEmpty) {
-                              return "Please enter a valid location";
+                              return "Tolong masukkan lokasi";
                             } else {
                               return null;
                             }
@@ -168,7 +168,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           keyboardType: TextInputType.phone,
                           validator: (phone) {
                             if (phone!.isEmpty) {
-                              return "Please enter a valid number";
+                              return "Tolong masukkan nomor HP";
                             } else {
                               return null;
                             }
@@ -190,7 +190,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           keyboardType: TextInputType.text,
                           validator: (skill0) {
                             if (skill0!.isEmpty) {
-                              return "Please enter a valid number";
+                              return "Minimal masukkan 1 skill";
                             } else {
                               return null;
                             }
@@ -203,7 +203,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           keyboardType: TextInputType.text,
                           validator: (skill1) {
                             if (skill1!.isEmpty) {
-                              return "Please enter a valid number";
+                              return "Minimal masukkan 1 skill";
                             } else {
                               return null;
                             }
@@ -216,7 +216,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           keyboardType: TextInputType.text,
                           validator: (skill2) {
                             if (skill2!.isEmpty) {
-                              return "Please enter a valid number";
+                              return "Minimal masukkan 1 skill";
                             } else {
                               return null;
                             }
@@ -229,7 +229,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           keyboardType: TextInputType.text,
                           validator: (skill3) {
                             if (skill3!.isEmpty) {
-                              return "Please enter a valid number";
+                              return "Minimal masukkan 1 skill";
                             } else {
                               return null;
                             }
@@ -242,7 +242,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                           keyboardType: TextInputType.text,
                           validator: (skill4) {
                             if (skill4!.isEmpty) {
-                              return "Please enter a valid number";
+                              return "Minimal masukkan 1 skill";
                             } else {
                               return null;
                             }
@@ -267,6 +267,8 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                                           colorText: Color(kBlack2.value),
                                           backgroundColor: Color(kGreen2.value),
                                           icon: Icon(Icons.add_alert),
+                                          duration:
+                                              Duration(milliseconds: 1500),
                                         );
                                       } else {
                                         loginProvider.setIsLoading = true;

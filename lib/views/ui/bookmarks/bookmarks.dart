@@ -4,6 +4,9 @@ import 'package:jobhub/controllers/bookmark_provider.dart';
 import 'package:jobhub/models/response/bookmarks/all_bookmarks.dart';
 import 'package:jobhub/views/common/app_bar.dart';
 import 'package:jobhub/views/common/drawer/drawer_widget.dart';
+import 'package:jobhub/views/common/height_spacer.dart';
+import 'package:jobhub/views/common/loader.dart';
+import 'package:jobhub/views/common/vertical_shimmer.dart';
 import 'package:jobhub/views/ui/bookmarks/widgets/bookmark_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -36,13 +39,28 @@ class _BookMarkPageState extends State<BookMarkPage> {
             future: bookmarkProvider.bookmarks,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
+                return Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      VerticalShimmer(),
+                      HeightSpacer(size: 15),
+                      VerticalShimmer(),
+                      HeightSpacer(size: 15),
+                      VerticalShimmer(),
+                      HeightSpacer(size: 15),
+                      VerticalShimmer(),
+                    ],
+                  ),
                 );
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text("Error: ${snapshot.error}"),
                 );
+              } else if (snapshot.data == null || snapshot.data!.isEmpty) {
+                return NoData(title: "Tidak ada bookmark");
               } else {
                 final bookmarkSnapshot = snapshot.data;
 

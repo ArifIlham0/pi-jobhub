@@ -84,7 +84,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     hintText: "Email",
                     validator: (email) {
                       if (email!.isEmpty || !email.contains('@')) {
-                        return "Tolong masukkan email yang valid";
+                        return "Tolong masukkan format email yang benar";
                       } else {
                         return null;
                       }
@@ -98,7 +98,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     obscureText: signUpProvider.obscureText,
                     validator: (password) {
                       if (password!.isEmpty || password.length < 8) {
-                        return "Password minimal ada huruf besar, angka, simbol, dan panjang huruf 8";
+                        return "Password minimal ada huruf besar, angka, simbol,\ndan lebih dari 8";
                       }
                       return null;
                     },
@@ -178,11 +178,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         signUpProvider.register(model);
                       } else {
                         Get.snackbar(
-                          "Register failed",
-                          "Please check your email or password",
+                          "Gagal",
+                          "Tolong periksa kembali inputan anda",
                           colorText: Color(kBlack2.value),
                           backgroundColor: Colors.red,
                           icon: Icon(Icons.add_alert),
+                          duration: Duration(milliseconds: 1500),
                         );
                       }
                     },

@@ -138,7 +138,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                         keyboardType: TextInputType.text,
                         validator: (location) {
                           if (location!.isEmpty) {
-                            return "Please enter a valid location";
+                            return "Tolong masukkan lokasi";
                           } else {
                             return null;
                           }
@@ -151,7 +151,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                         keyboardType: TextInputType.phone,
                         validator: (phone) {
                           if (phone!.isEmpty) {
-                            return "Please enter a valid number";
+                            return "Tolong masukkan nomor HP";
                           } else {
                             return null;
                           }
@@ -160,7 +160,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                       HeightSpacer(size: 10),
                       ReusableText(
                         text: widget.isAgent != true
-                            ? "Profesional Skills"
+                            ? "Skill Profesional"
                             : "Bidang Perusahaan",
                         style: appstyle(
                           28,
@@ -175,7 +175,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                         keyboardType: TextInputType.text,
                         validator: (skill0) {
                           if (skill0!.isEmpty) {
-                            return "Please enter a valid number";
+                            return "Minimal masukkan 1 skill";
                           } else {
                             return null;
                           }
@@ -188,7 +188,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                         keyboardType: TextInputType.text,
                         validator: (skill1) {
                           if (skill1!.isEmpty) {
-                            return "Please enter a valid number";
+                            return "Minimal masukkan 1 skill";
                           } else {
                             return null;
                           }
@@ -201,7 +201,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                         keyboardType: TextInputType.text,
                         validator: (skill2) {
                           if (skill2!.isEmpty) {
-                            return "Please enter a valid number";
+                            return "Minimal masukkan 1 skill";
                           } else {
                             return null;
                           }
@@ -214,7 +214,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                         keyboardType: TextInputType.text,
                         validator: (skill3) {
                           if (skill3!.isEmpty) {
-                            return "Please enter a valid number";
+                            return "Minimal masukkan 1 skill";
                           } else {
                             return null;
                           }
@@ -227,7 +227,7 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                         keyboardType: TextInputType.text,
                         validator: (skill4) {
                           if (skill4!.isEmpty) {
-                            return "Please enter a valid number";
+                            return "Minimal masukkan 1 skill";
                           } else {
                             return null;
                           }
@@ -241,11 +241,12 @@ class _ProfileUpdateState extends State<ProfileUpdate> {
                               if (imageUploaderProvider.imageFile.isEmpty &&
                                   imageUploaderProvider.imageUrl == null) {
                                 Get.snackbar(
-                                  "Image missing",
-                                  "Please upload an image to proceed",
+                                  "Gagal",
+                                  "Tolong masukkan foto profil dan cv",
                                   colorText: Color(kBlack2.value),
                                   backgroundColor: Color(kGreen2.value),
                                   icon: Icon(Icons.add_alert),
+                                  duration: Duration(milliseconds: 1500),
                                 );
                               } else {
                                 ProfileUpdateReq model = ProfileUpdateReq(

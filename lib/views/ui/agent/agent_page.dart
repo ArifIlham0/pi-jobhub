@@ -12,6 +12,7 @@ import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/heading_widget.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:jobhub/views/common/loading_button.dart';
+import 'package:jobhub/views/common/loading_indicator.dart';
 import 'package:jobhub/views/ui/jobs/job_list_agent.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +53,7 @@ class _AgentPageState extends State<AgentPage> {
             future: profileProvider.profile,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
+                return LoadingIndicator();
               } else if (snapshot.hasError) {
                 return Text("Error ${snapshot.error}");
               } else {
@@ -75,6 +76,7 @@ class _AgentPageState extends State<AgentPage> {
                       ),
                       HeightSpacer(size: 20),
                       Form(
+                        key: profileProvider.jobFormKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -218,31 +220,46 @@ class _AgentPageState extends State<AgentPage> {
                                           )
                                         : CustomButton(
                                             onTap: () async {
-                                              jobProvider.setIsLoading = true;
-                                              CreateJobsRequest model =
-                                                  CreateJobsRequest(
-                                                title: title.text,
-                                                description: description.text,
-                                                salary: salary.text,
-                                                contract: contract.text,
-                                                period: "bulan",
-                                                agentId: profile.id,
-                                                company: profile.username,
-                                                hiring: true,
-                                                imageUrl: profile.profile,
-                                                location: profile.location,
-                                                requirements: [
-                                                  requirement1.text,
-                                                  requirement2.text,
-                                                  requirement3.text,
-                                                  requirement4.text,
-                                                  requirement5.text,
-                                                ],
-                                              );
+                                              if (profileProvider
+                                                  .validateJob()) {
+                                                jobProvider.setIsLoading = true;
+                                                CreateJobsRequest model =
+                                                    CreateJobsRequest(
+                                                  title: title.text,
+                                                  description: description.text,
+                                                  salary: salary.text,
+                                                  contract: contract.text,
+                                                  period: "bulan",
+                                                  agentId: profile.id,
+                                                  company: profile.username,
+                                                  hiring: true,
+                                                  imageUrl: profile.profile,
+                                                  location: profile.location,
+                                                  requirements: [
+                                                    requirement1.text,
+                                                    requirement2.text,
+                                                    requirement3.text,
+                                                    requirement4.text,
+                                                    requirement5.text,
+                                                  ],
+                                                );
 
-                                              await jobProvider
-                                                  .createJob(model);
-                                              jobProvider.setIsLoading = false;
+                                                await jobProvider
+                                                    .createJob(model);
+                                                jobProvider.setIsLoading =
+                                                    false;
+                                              } else {
+                                                Get.snackbar(
+                                                  "Gagal membuat lowongan",
+                                                  "Tolong cek kembali inputan anda",
+                                                  colorText:
+                                                      Color(kBlack2.value),
+                                                  backgroundColor: Colors.red,
+                                                  icon: Icon(Icons.add_alert),
+                                                  duration: Duration(
+                                                      milliseconds: 1500),
+                                                );
+                                              }
                                             },
                                             text: "Buat",
                                           ),

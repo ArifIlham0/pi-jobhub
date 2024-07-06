@@ -148,7 +148,7 @@ class _UpdateAgentState extends State<UpdateAgent> {
                           keyboardType: TextInputType.text,
                           validator: (skill0) {
                             if (skill0!.isEmpty) {
-                              return "";
+                              return "Minimal masukkan 1 skill";
                             } else {
                               return null;
                             }
@@ -161,7 +161,7 @@ class _UpdateAgentState extends State<UpdateAgent> {
                           keyboardType: TextInputType.text,
                           validator: (skill1) {
                             if (skill1!.isEmpty) {
-                              return "";
+                              return "Minimal masukkan 1 skill";
                             } else {
                               return null;
                             }
@@ -174,7 +174,7 @@ class _UpdateAgentState extends State<UpdateAgent> {
                           keyboardType: TextInputType.text,
                           validator: (skill2) {
                             if (skill2!.isEmpty) {
-                              return "";
+                              return "Minimal masukkan 1 skill";
                             } else {
                               return null;
                             }
@@ -187,7 +187,7 @@ class _UpdateAgentState extends State<UpdateAgent> {
                           keyboardType: TextInputType.text,
                           validator: (skill3) {
                             if (skill3!.isEmpty) {
-                              return "";
+                              return "Minimal masukkan 1 skill";
                             } else {
                               return null;
                             }
@@ -200,7 +200,7 @@ class _UpdateAgentState extends State<UpdateAgent> {
                           keyboardType: TextInputType.text,
                           validator: (skill4) {
                             if (skill4!.isEmpty) {
-                              return "";
+                              return "Minimal masukkan 1 skill";
                             } else {
                               return null;
                             }
@@ -208,52 +208,58 @@ class _UpdateAgentState extends State<UpdateAgent> {
                         ),
                         HeightSpacer(size: 20),
                         Consumer<ImageUploader>(
-                            builder: (context, imageUploaderProvider, child) {
-                          return loginProvider.isLoading
-                              ? LoadingButton(
-                                  onTap: () {},
-                                )
-                              : CustomButton(
-                                  onTap: () async {
-                                    if (imageUploaderProvider
-                                            .imageFile.isEmpty &&
-                                        imageUploaderProvider.imageUrl ==
-                                            null) {
-                                      Get.snackbar(
-                                        "Belum upload gambar atau cv!",
-                                        "Tolong upload terlebih dahulu",
-                                        colorText: Color(kBlack2.value),
-                                        backgroundColor: Color(kGreen2.value),
-                                        icon: Icon(Icons.add_alert),
-                                      );
-                                    } else {
-                                      loginProvider.setIsLoading = true;
-                                      ProfileUpdateReq model = ProfileUpdateReq(
-                                        location: location.text,
-                                        phone: phone.text,
-                                        profile: imageUploaderProvider.imageUrl
-                                            .toString(),
-                                        cv: imageUploaderProvider.pdfUrl
-                                            .toString(),
-                                        skills: [
-                                          skill0.text,
-                                          skill1.text,
-                                          skill2.text,
-                                          skill3.text,
-                                          skill4.text,
-                                        ],
-                                      );
-                                      final SharedPreferences prefs =
-                                          await SharedPreferences.getInstance();
-                                      await prefs.setBool('agent', false);
-                                      await loginProvider.updateAgent(model);
-                                      loginProvider.setIsLoading = false;
-                                      imageUploaderProvider.imageFile.clear();
-                                    }
-                                  },
-                                  text: "Lanjut",
-                                );
-                        })
+                          builder: (context, imageUploaderProvider, child) {
+                            return loginProvider.isLoading
+                                ? LoadingButton(
+                                    onTap: () {},
+                                  )
+                                : CustomButton(
+                                    onTap: () async {
+                                      if (imageUploaderProvider
+                                              .imageFile.isEmpty &&
+                                          imageUploaderProvider.imageUrl ==
+                                              null) {
+                                        Get.snackbar(
+                                          "Belum upload gambar atau cv!",
+                                          "Tolong upload terlebih dahulu",
+                                          colorText: Color(kBlack2.value),
+                                          backgroundColor: Color(kGreen2.value),
+                                          icon: Icon(Icons.add_alert),
+                                          duration:
+                                              Duration(milliseconds: 1500),
+                                        );
+                                      } else {
+                                        loginProvider.setIsLoading = true;
+                                        ProfileUpdateReq model =
+                                            ProfileUpdateReq(
+                                          location: location.text,
+                                          phone: phone.text,
+                                          profile: imageUploaderProvider
+                                              .imageUrl
+                                              .toString(),
+                                          cv: imageUploaderProvider.pdfUrl
+                                              .toString(),
+                                          skills: [
+                                            skill0.text,
+                                            skill1.text,
+                                            skill2.text,
+                                            skill3.text,
+                                            skill4.text,
+                                          ],
+                                        );
+                                        final SharedPreferences prefs =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        await prefs.setBool('agent', false);
+                                        await loginProvider.updateAgent(model);
+                                        loginProvider.setIsLoading = false;
+                                        imageUploaderProvider.imageFile.clear();
+                                      }
+                                    },
+                                    text: "Lanjut",
+                                  );
+                          },
+                        ),
                       ],
                     ),
                   ),

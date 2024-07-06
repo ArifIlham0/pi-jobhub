@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                     hintText: "Email",
                     validator: (email) {
                       if (email!.isEmpty || !email.contains('@')) {
-                        return "Please enter a valid email";
+                        return "Tolong masukkan format email yang benar";
                       } else {
                         return null;
                       }
@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                     obscureText: loginProvider.obscureText,
                     validator: (password) {
                       if (password!.isEmpty || password.length < 7) {
-                        return "Please enter a valid password";
+                        return "Password tidak boleh kosong dan lebih dari 7";
                       } else {
                         return null;
                       }
@@ -143,7 +143,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   HeightSpacer(size: 50),
                   loginProvider.isLoading
-                      ? LoadingButton(onTap: () {})
+                      ? LoadingButton(
+                          onTap: () {},
+                          isButton: true,
+                        )
                       : CustomButton(
                           onTap: () {
                             print("Berhasil");
@@ -156,11 +159,12 @@ class _LoginPageState extends State<LoginPage> {
                             } else {
                               print("Gagal");
                               Get.snackbar(
-                                "Login Failed",
-                                "Please check your credentials",
+                                "Gagal Login",
+                                "Tolong cek kembali inputan anda",
                                 colorText: Color(kBlack2.value),
                                 backgroundColor: Colors.red,
                                 icon: Icon(Icons.add_alert),
+                                duration: Duration(milliseconds: 1500),
                               );
                             }
                           },

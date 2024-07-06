@@ -23,11 +23,16 @@ class HeadingWidget extends StatelessWidget {
           text: text!,
           style: appstyle(18, Color(kWhite2.value), FontWeight.w600),
         ),
-        InkWell(
-          onTap: onTap! as void Function()?,
+        TextButton(
+          onPressed: onTap! as void Function()?,
+          style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all(
+              Color(kWhite.value).withOpacity(0.1),
+            ),
+          ),
           child: ReusableText(
             text: isAgent == null ? "Lihat Semua" : "Lihat Lowongan Saya",
-            style: appstyle(isAgent == null ? 18 : 14, Color(kGreen.value),
+            style: appstyle(isAgent == null ? 14 : 12, Color(kGreen.value),
                 FontWeight.w500),
           ),
         ),

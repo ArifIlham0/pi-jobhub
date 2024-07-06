@@ -49,17 +49,10 @@ class BookMarkProvider extends ChangeNotifier {
       (response) {
         if (response[0]) {
           addJob(jobId);
-          Get.snackbar(
-            "Bookmark successfully added",
-            "Please check your bookmarks",
-            colorText: Color(kBlack2.value),
-            backgroundColor: Color(kGreen2.value),
-            icon: Icon(Icons.bookmark_add),
-          );
         } else {
           Get.snackbar(
-            "Failed to add bookmarks",
-            "Please check your bookmarks",
+            "Terjadi kesalahan",
+            "Gagal menambahkan ke bookmark",
             colorText: Color(kBlack2.value),
             backgroundColor: Colors.red,
             icon: Icon(Icons.bookmark_add),
@@ -74,13 +67,6 @@ class BookMarkProvider extends ChangeNotifier {
       (response) {
         if (response) {
           deleteJob(jobId);
-          Get.snackbar(
-            "Bookmark successfully deleted",
-            "Please check your bookmarks",
-            colorText: Color(kBlack2.value),
-            backgroundColor: Color(kGreen.value),
-            icon: Icon(Icons.bookmark_remove_outlined),
-          );
         }
       },
     );

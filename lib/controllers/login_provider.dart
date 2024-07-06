@@ -85,6 +85,7 @@ class LoginProvider extends ChangeNotifier {
 
     bool? firstTimes = await prefs.getBool('firstTime');
     bool? agent = await prefs.getBool('agent');
+    print("Ini first time ${firstTimes}");
     AuthHelper.login(model).then((response) {
       setIsLoading = false;
       if (response && firstTimes == true && agent != true) {
@@ -93,13 +94,16 @@ class LoginProvider extends ChangeNotifier {
         Get.off(() => MainScreen());
       } else if (response && agent == true) {
         Get.off(() => UpdateAgent());
+      } else if (response && firstTimes == null) {
+        Get.off(() => MainScreen());
       } else if (!response) {
         Get.snackbar(
-          "Login Failed",
-          "Please check your credentials",
+          "Gagal login",
+          "Tolong cek kembali inputan anda",
           colorText: Color(kBlack2.value),
           backgroundColor: Colors.red,
           icon: Icon(Icons.add_alert),
+          duration: Duration(milliseconds: 1500),
         );
       }
     });
@@ -128,17 +132,19 @@ class LoginProvider extends ChangeNotifier {
             colorText: Color(kBlack2.value),
             backgroundColor: Color(kGreen2.value),
             icon: Icon(Icons.add_alert),
+            duration: Duration(milliseconds: 1500),
           );
           Future.delayed(Duration(seconds: 2)).then(
             (value) => Get.offAll(() => MainScreen()),
           );
         } else {
           Get.snackbar(
-            "Update Failed",
-            "Please check again",
+            "Gagal",
+            "Tolong periksa kembali inputan anda",
             colorText: Color(kBlack2.value),
             backgroundColor: Color(kGreen.value),
             icon: Icon(Icons.add_alert),
+            duration: Duration(milliseconds: 1500),
           );
         }
       });
@@ -157,22 +163,24 @@ class LoginProvider extends ChangeNotifier {
       AuthHelper.updateProfile(model, userId ?? "").then((response) {
         if (response) {
           Get.snackbar(
-            "Profile Update",
+            "Berhasil perbarui profil",
             "Temukan kandidat terbaikmu!",
             colorText: Color(kBlack2.value),
             backgroundColor: Color(kGreen2.value),
             icon: Icon(Icons.add_alert),
+            duration: Duration(milliseconds: 1500),
           );
-          Future.delayed(Duration(seconds: 2)).then(
+          Future.delayed(Duration(seconds: 1)).then(
             (value) => Get.offAll(() => MainScreen()),
           );
         } else {
           Get.snackbar(
-            "Update Failed",
-            "Please check again",
+            "Gagal",
+            "Tolong periksa kembali inputan anda",
             colorText: Color(kBlack2.value),
             backgroundColor: Color(kGreen.value),
             icon: Icon(Icons.add_alert),
+            duration: Duration(milliseconds: 1500),
           );
         }
       });

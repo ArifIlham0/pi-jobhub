@@ -10,6 +10,7 @@ import 'package:jobhub/views/common/drawer/drawer_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
+import 'package:jobhub/views/common/loading_indicator.dart';
 import 'package:jobhub/views/common/pdf_viewer.dart.dart';
 import 'package:jobhub/views/common/width_spacer.dart';
 import 'package:jobhub/views/ui/auth/login.dart';
@@ -48,9 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
             future: profileProvider.profile,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
+                return LoadingIndicator();
               } else if (snapshot.hasError) {
                 print(snapshot.error);
                 return Text("Error: ${snapshot.error}");
