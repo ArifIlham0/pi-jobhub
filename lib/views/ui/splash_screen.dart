@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     final entrypoint = prefs.getBool('entrypoint') ?? false;
     final loggedIn = prefs.getBool('loggedIn') ?? false;
 
-    await Future.delayed(Duration(seconds: 2), () {
+    await Future.delayed(Duration(seconds: 1), () {
       if (entrypoint & !loggedIn) {
         Get.offAll(() => LoginPage());
       } else if (entrypoint && loggedIn) {
