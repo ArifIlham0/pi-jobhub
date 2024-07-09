@@ -83,12 +83,14 @@ class Sender {
   final String? username;
   final String? email;
   final String? profile;
+  final String? location;
 
   Sender({
     this.id,
     this.username,
     this.email,
     this.profile,
+    this.location,
   });
 
   factory Sender.fromJson(Map<String, dynamic> json) => Sender(
@@ -96,6 +98,7 @@ class Sender {
         username: json["username"],
         email: json["email"],
         profile: json["profile"],
+        location: json["location"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -103,5 +106,6 @@ class Sender {
         "username": username,
         "email": email,
         "profile": profile,
+        "location": location,
       };
 }

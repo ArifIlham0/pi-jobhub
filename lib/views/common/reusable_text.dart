@@ -6,11 +6,13 @@ class ReusableText extends StatelessWidget {
     required this.text,
     required this.style,
     this.maxLine,
+    this.isCentre,
   });
 
   final String text;
   final TextStyle style;
   final bool? maxLine;
+  final bool? isCentre;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class ReusableText extends StatelessWidget {
       text,
       maxLines: maxLine != null ? (maxLine == true ? 2 : 1) : null,
       softWrap: true,
-      textAlign: TextAlign.left,
+      textAlign: isCentre == null ? TextAlign.left : TextAlign.center,
       overflow: TextOverflow.fade,
       style: style,
     );

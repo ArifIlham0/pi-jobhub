@@ -67,6 +67,7 @@ class _SearchPageState extends State<SearchPage> {
                   } else if (snapshot.data!.isEmpty) {
                     return NoData(
                       title: "Tidak menemukan lowongan",
+                      isCentre: true,
                     );
                   } else {
                     final searchJobs = snapshot.data;

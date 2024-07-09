@@ -8,7 +8,7 @@ import 'package:jobhub/views/ui/agent/agent_page.dart';
 import 'package:jobhub/views/ui/auth/profile.dart';
 import 'package:jobhub/views/ui/bookmarks/bookmarks.dart';
 import 'package:jobhub/views/ui/chat/chat_list.dart';
-import 'package:jobhub/views/ui/device_mgt/devices_info.dart';
+import 'package:jobhub/views/ui/history/history_page.dart';
 import 'package:jobhub/views/ui/homepage.dart';
 import 'package:provider/provider.dart';
 
@@ -51,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
       case 2:
         return BookMarkPage();
       case 3:
-        return DeviceManagement();
+        return HistoryList();
       case 4:
         return ProfilePage();
       case 5:

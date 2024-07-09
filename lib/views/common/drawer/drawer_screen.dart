@@ -27,79 +27,81 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
     return Consumer<ZoomProvider>(
       builder: (context, zoomProvider, child) {
-        return GestureDetector(
-          onTap: () {
-            ZoomDrawer.of(context)!.toggle();
-          },
-          child: Scaffold(
-            backgroundColor: Color(kGreen2.value),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                drawerItem(
-                  AntDesign.home,
-                  "Beranda",
-                  0,
-                  zoomProvider.currentIndex == 0
-                      ? Color(kWhite.value)
-                      : Color(kLightGrey.value),
-                ),
-                drawerItem(
-                  Ionicons.chatbubble_outline,
-                  "Chats",
-                  1,
-                  zoomProvider.currentIndex == 1
-                      ? Color(kWhite.value)
-                      : Color(kLightGrey.value),
-                ),
-                drawerItem(
-                  Fontisto.bookmark,
-                  "Bookmarks",
-                  2,
-                  zoomProvider.currentIndex == 2
-                      ? Color(kWhite.value)
-                      : Color(kLightGrey.value),
-                ),
-                drawerItem(
-                  MaterialCommunityIcons.devices,
-                  "Perangkat",
-                  3,
-                  zoomProvider.currentIndex == 3
-                      ? Color(kWhite.value)
-                      : Color(kLightGrey.value),
-                ),
-                drawerItem(
-                  FontAwesome5Regular.user_circle,
-                  "Profil",
-                  4,
-                  zoomProvider.currentIndex == 4
-                      ? Color(kWhite.value)
-                      : Color(kLightGrey.value),
-                ),
-                FutureBuilder<ProfileRes>(
-                  future: profileProvider.profile,
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SizedBox();
-                    } else if (snapshot.hasError) {
-                      return Text("Error ${snapshot.error}");
-                    } else {
-                      ProfileRes profile = snapshot.data!;
+        return Container(
+          child: GestureDetector(
+            onTap: () {
+              ZoomDrawer.of(context)!.toggle();
+            },
+            child: Scaffold(
+              backgroundColor: Color(kGreen2.value),
+              body: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  drawerItem(
+                    AntDesign.home,
+                    "Beranda",
+                    0,
+                    zoomProvider.currentIndex == 0
+                        ? Color(kWhite.value)
+                        : Color(kLightGrey.value),
+                  ),
+                  drawerItem(
+                    Ionicons.chatbubble_outline,
+                    "Chats",
+                    1,
+                    zoomProvider.currentIndex == 1
+                        ? Color(kWhite.value)
+                        : Color(kLightGrey.value),
+                  ),
+                  drawerItem(
+                    Fontisto.bookmark,
+                    "Bookmarks",
+                    2,
+                    zoomProvider.currentIndex == 2
+                        ? Color(kWhite.value)
+                        : Color(kLightGrey.value),
+                  ),
+                  drawerItem(
+                    MaterialCommunityIcons.history,
+                    "Riwayat",
+                    3,
+                    zoomProvider.currentIndex == 3
+                        ? Color(kWhite.value)
+                        : Color(kLightGrey.value),
+                  ),
+                  drawerItem(
+                    FontAwesome5Regular.user_circle,
+                    "Profil",
+                    4,
+                    zoomProvider.currentIndex == 4
+                        ? Color(kWhite.value)
+                        : Color(kLightGrey.value),
+                  ),
+                  FutureBuilder<ProfileRes>(
+                    future: profileProvider.profile,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return SizedBox();
+                      } else if (snapshot.hasError) {
+                        return Text("Error ${snapshot.error}");
+                      } else {
+                        ProfileRes profile = snapshot.data!;
 
-                      return profile.isAgent || profile.isAdmin == true
-                          ? drawerItem(
-                              Icons.admin_panel_settings,
-                              "Mitra",
-                              5,
-                              zoomProvider.currentIndex == 5
-                                  ? Color(kWhite.value)
-                                  : Color(kLightGrey.value),
-                            )
-                          : SizedBox.shrink();
-                    }
-                  },
-                ),
-              ],
+                        return profile.isAgent || profile.isAdmin == true
+                            ? drawerItem(
+                                Icons.admin_panel_settings,
+                                "Mitra",
+                                5,
+                                zoomProvider.currentIndex == 5
+                                    ? Color(kWhite.value)
+                                    : Color(kLightGrey.value),
+                              )
+                            : SizedBox.shrink();
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         );

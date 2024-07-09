@@ -10,7 +10,7 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         ZoomDrawer.of(context)!.toggle();
       },

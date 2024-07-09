@@ -6,9 +6,11 @@ class NoData extends StatelessWidget {
   const NoData({
     super.key,
     this.title,
+    this.isCentre,
   });
 
   final String? title;
+  final bool? isCentre;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class NoData extends StatelessWidget {
           Image.asset("assets/images/optimized_search.png"),
           ReusableText(
             text: title!,
+            isCentre: isCentre,
             style: appstyle(24, Color(kWhite2.value), FontWeight.bold),
           ),
         ],
