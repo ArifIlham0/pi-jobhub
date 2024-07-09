@@ -100,6 +100,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       }
                     },
                   ),
+                  drawerItem(
+                    MaterialCommunityIcons.logout,
+                    "Keluar",
+                    6,
+                    zoomProvider.currentIndex == 4
+                        ? Color(kWhite.value)
+                        : Color(kLightGrey.value),
+                  ),
                 ],
               ),
             ),

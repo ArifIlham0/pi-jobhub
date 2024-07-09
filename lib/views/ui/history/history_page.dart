@@ -231,15 +231,27 @@ class _HistoryListState extends State<HistoryList> {
                                                       ),
                                                     ),
                                                     HeightSpacer(size: 5),
-                                                    ReusableText(
-                                                      maxLine: false,
-                                                      text:
-                                                          user.first.location!,
-                                                      style: appstyle(
-                                                        16,
-                                                        Color(kDarkGrey.value),
-                                                        FontWeight.normal,
-                                                      ),
+                                                    Row(
+                                                      children: [
+                                                        Icon(
+                                                          MaterialIcons
+                                                              .location_pin,
+                                                          color: Color(
+                                                              kDarkGrey.value),
+                                                          size: 20,
+                                                        ),
+                                                        ReusableText(
+                                                          maxLine: false,
+                                                          text: user
+                                                              .first.location!,
+                                                          style: appstyle(
+                                                            16,
+                                                            Color(kDarkGrey
+                                                                .value),
+                                                            FontWeight.normal,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),

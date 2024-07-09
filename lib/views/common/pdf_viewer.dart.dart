@@ -15,14 +15,6 @@ class PDFViewerPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(kBlack2.value),
         centerTitle: true,
-        title: ReusableText(
-          text: "CV",
-          style: appstyle(
-            16,
-            Color(kWhite.value),
-            FontWeight.bold,
-          ),
-        ),
         leading: IconButton(
           color: Color(kWhite.value),
           icon: Icon(Icons.arrow_back_ios),

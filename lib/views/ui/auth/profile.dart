@@ -13,7 +13,6 @@ import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:jobhub/views/common/loading_indicator.dart';
 import 'package:jobhub/views/common/pdf_viewer.dart.dart';
 import 'package:jobhub/views/common/width_spacer.dart';
-import 'package:jobhub/views/ui/auth/login.dart';
 import 'package:jobhub/views/ui/auth/profile_update.dart';
 import 'package:provider/provider.dart';
 
@@ -27,9 +26,6 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    var zoomProvider = Provider.of<ZoomProvider>(context);
-    var onBoardProvider = Provider.of<OnBoardProvider>(context);
-
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.h),
@@ -289,34 +285,6 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ],
                         ),
-                      ),
-                      Consumer<LoginProvider>(
-                        builder: (context, loginProvider, child) {
-                          return Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 8.h, horizontal: 90.w),
-                            child: TextButton(
-                              style: ButtonStyle(
-                                overlayColor: MaterialStateProperty.all(
-                                    Color(kGreen.value).withOpacity(0.2)),
-                              ),
-                              onPressed: () {
-                                onBoardProvider.isLastPage = false;
-                                zoomProvider.currentIndex = 0;
-                                loginProvider.logout();
-                                Get.to(() => LoginPage());
-                              },
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: ReusableText(
-                                  text: "Keluar",
-                                  style: appstyle(
-                                      16, Color(kGreen.value), FontWeight.w600),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
                       ),
                     ],
                   ),

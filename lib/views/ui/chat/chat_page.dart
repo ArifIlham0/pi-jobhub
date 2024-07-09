@@ -186,15 +186,15 @@ class _ChatPageState extends State<ChatPage> {
               ],
               child: Padding(
                 padding: EdgeInsets.all(12.0.h),
-                child: InkWell(
-                  onTap: () {
+                child: IconButton(
+                  onPressed: () {
                     Get.to(
                       () => MainScreen(),
                       transition: Transition.leftToRight,
                       duration: Duration(milliseconds: 100),
                     );
                   },
-                  child: Icon(MaterialCommunityIcons.arrow_left),
+                  icon: Icon(MaterialCommunityIcons.arrow_left),
                 ),
               ),
             ),

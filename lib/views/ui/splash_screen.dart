@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:jobhub/views/ui/auth/login.dart';
 import 'package:jobhub/views/ui/mainscreen.dart';
 import 'package:jobhub/views/ui/onboarding/onboarding_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     await Future.delayed(Duration(seconds: 1), () {
       if (entrypoint & !loggedIn) {
-        Get.offAll(() => LoginPage());
+        Get.offAll(() => OnBoardingScreen());
       } else if (entrypoint && loggedIn) {
         Get.offAll(() => MainScreen());
       } else {
