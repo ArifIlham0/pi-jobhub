@@ -10,7 +10,6 @@ import 'package:jobhub/views/common/custom_textfield.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Agent extends StatefulWidget {
   const Agent({super.key});
@@ -23,14 +22,8 @@ class _AgentState extends State<Agent> {
   final TextEditingController name = TextEditingController();
   final TextEditingController email = TextEditingController();
   final TextEditingController password = TextEditingController();
-
-  @override
-  void dispose() {
-    name.dispose();
-    email.dispose();
-    password.dispose();
-    super.dispose();
-  }
+  final TextEditingController address = TextEditingController();
+  final TextEditingController website = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +35,14 @@ class _AgentState extends State<Agent> {
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(50),
             child: CustomAppBar(
-                text: "Daftar",
-                child: GestureDetector(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Icon(CupertinoIcons.arrow_left),
-                )),
+              text: "Daftar",
+              child: GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(CupertinoIcons.arrow_left),
+              ),
+            ),
           ),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -57,7 +51,7 @@ class _AgentState extends State<Agent> {
               child: ListView(
                 padding: EdgeInsets.zero,
                 children: [
-                  HeightSpacer(size: 50),
+                  HeightSpacer(size: 15),
                   ReusableText(
                     text: "Halo, Cari karyawranmu!",
                     style: appstyle(22, Color(kWhite2.value), FontWeight.w600),
@@ -118,6 +112,30 @@ class _AgentState extends State<Agent> {
                       ),
                     ),
                   ),
+                  HeightSpacer(size: 20),
+                  CustomTextField(
+                    controller: address,
+                    keyboardType: TextInputType.text,
+                    hintText: "Alamat Perusahaan",
+                    validator: (address) {
+                      if (address!.isEmpty) {
+                        return "Masukkan alamat perusahaan";
+                      }
+                      return null;
+                    },
+                  ),
+                  HeightSpacer(size: 20),
+                  CustomTextField(
+                    controller: website,
+                    keyboardType: TextInputType.text,
+                    hintText: "Website Perusahaan",
+                    validator: (website) {
+                      if (website!.isEmpty) {
+                        return "Masukkan website perusahaan";
+                      }
+                      return null;
+                    },
+                  ),
                   HeightSpacer(size: 50),
                   CustomButton(
                     onTap: () async {
@@ -129,11 +147,10 @@ class _AgentState extends State<Agent> {
                           email: email.text,
                           password: password.text,
                           isAgent: true,
+                          isPending: true,
+                          address: address.text,
+                          website: website.text,
                         );
-                        final SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        await prefs.setBool('firstTime', true);
-                        await prefs.setBool('agent', true);
                         signUpProvider.registerAgent(model);
                       } else {
                         Get.snackbar(
@@ -155,5 +172,15 @@ class _AgentState extends State<Agent> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    name.dispose();
+    email.dispose();
+    password.dispose();
+    address.dispose();
+    website.dispose();
+    super.dispose();
   }
 }

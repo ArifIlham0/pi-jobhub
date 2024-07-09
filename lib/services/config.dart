@@ -10,4 +10,6 @@ class Config {
   static const String bookmarkUrl = "/api/bookmarks";
   static const String chatUrl = "/api/chats";
   static const String messageUrl = "/api/messages";
+  static const String pendingUser = "/api/pending";
+  static const String movePending = "/api/move";
 }

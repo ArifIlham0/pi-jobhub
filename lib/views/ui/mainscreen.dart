@@ -10,6 +10,7 @@ import 'package:jobhub/views/ui/auth/login.dart';
 import 'package:jobhub/views/ui/auth/profile.dart';
 import 'package:jobhub/views/ui/bookmarks/bookmarks.dart';
 import 'package:jobhub/views/ui/chat/chat_list.dart';
+import 'package:jobhub/views/ui/admin/admin_page.dart';
 import 'package:jobhub/views/ui/history/history_page.dart';
 import 'package:jobhub/views/ui/homepage.dart';
 import 'package:provider/provider.dart';
@@ -104,6 +105,8 @@ class _MainScreenState extends State<MainScreen> {
           );
         });
         return HomePage();
+      case 7:
+        return AdminPage();
       default:
         return HomePage();
     }

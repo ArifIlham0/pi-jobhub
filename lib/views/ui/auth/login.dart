@@ -10,6 +10,7 @@ import 'package:jobhub/views/common/custom_textfield.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:jobhub/views/common/loading_button.dart';
+import 'package:jobhub/views/ui/auth/agent.dart';
 import 'package:jobhub/views/ui/auth/signup.dart';
 import 'package:jobhub/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
@@ -132,10 +133,56 @@ class _LoginPageState extends State<LoginPage> {
                             Color(kWhite2.value).withOpacity(0.1)),
                       ),
                       onPressed: () {
-                        Get.offAll(() => RegistrationPage());
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor: Color(kLightGrey.value),
+                              title: Text(
+                                'Ingin daftar sebagai apa?',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Color(kDarkGrey.value),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              actions: [
+                                TextButton(
+                                  child: ReusableText(
+                                    text: "Pengguna",
+                                    style: appstyle(13, Color(kGreen.value),
+                                        FontWeight.w600),
+                                  ),
+                                  style: ButtonStyle(
+                                    overlayColor: MaterialStateProperty.all(
+                                        Color(kWhite.value).withOpacity(0.1)),
+                                  ),
+                                  onPressed: () {
+                                    Get.offAll(() => RegistrationPage());
+                                  },
+                                ),
+                                TextButton(
+                                  child: ReusableText(
+                                    text: "Mitra",
+                                    style: appstyle(13, Color(kGreen.value),
+                                        FontWeight.w600),
+                                  ),
+                                  style: ButtonStyle(
+                                    overlayColor: MaterialStateProperty.all(
+                                        Color(kWhite.value).withOpacity(0.1)),
+                                  ),
+                                  onPressed: () {
+                                    Get.offAll(() => Agent());
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                       child: ReusableText(
-                        text: "Daftar",
+                        text: "Daftar Pengguna/Mitra",
                         style:
                             appstyle(14, Color(kWhite2.value), FontWeight.w500),
                       ),

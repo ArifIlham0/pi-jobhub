@@ -4,6 +4,7 @@ import 'package:jobhub/constants/app_constants.dart';
 import 'package:jobhub/models/request/auth/signup_agent_model.dart';
 import 'package:jobhub/models/request/auth/signup_model.dart';
 import 'package:jobhub/services/helpers/auth_helper.dart';
+import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/ui/auth/login.dart';
 
 class SignUpProvider extends ChangeNotifier {
@@ -80,8 +81,39 @@ class SignUpProvider extends ChangeNotifier {
   registerAgent(SignUpAgent model) {
     AuthHelper.registerAgent(model).then((response) {
       if (response) {
-        Get.off(() => LoginPage(),
-            transition: Transition.fade, duration: Duration(seconds: 2));
+        Get.dialog(
+          AlertDialog(
+            backgroundColor: Color(kLightGrey.value),
+            title: ReusableText(
+              text: "Berhasil!",
+              isCentre: true,
+              style: appstyle(15, Color(kDarkGrey.value), FontWeight.w700),
+            ),
+            content: ReusableText(
+              text:
+                  "Perusahaan anda akan kami cek terlebih dahulu sebelum bisa daftar sebagai mitra, informasi lebih lanjut akan kami kirim melalui email",
+              style: appstyle(15, Color(kDarkGrey.value), FontWeight.normal),
+            ),
+            actions: [
+              TextButton(
+                child: ReusableText(
+                  text: "OK",
+                  style: appstyle(15, Color(kGreen.value), FontWeight.w700),
+                ),
+                style: ButtonStyle(
+                  overlayColor: MaterialStateProperty.all(
+                      Color(kWhite2.value).withOpacity(0.1)),
+                ),
+                onPressed: () {
+                  Get.off(() => LoginPage(),
+                      transition: Transition.fade,
+                      duration: Duration(seconds: 2));
+                },
+              ),
+            ],
+          ),
+          barrierDismissible: false,
+        );
       } else {
         Get.snackbar(
           "Register failed",

@@ -87,7 +87,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       } else {
                         ProfileRes profile = snapshot.data!;
 
-                        return profile.isAgent || profile.isAdmin == true
+                        return profile.isAgent == true
                             ? drawerItem(
                                 Icons.admin_panel_settings,
                                 "Mitra",
@@ -96,7 +96,16 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                     ? Color(kWhite.value)
                                     : Color(kLightGrey.value),
                               )
-                            : SizedBox.shrink();
+                            : profile.isAdmin == true
+                                ? drawerItem(
+                                    Icons.admin_panel_settings,
+                                    "Admin",
+                                    7,
+                                    zoomProvider.currentIndex == 7
+                                        ? Color(kWhite.value)
+                                        : Color(kLightGrey.value),
+                                  )
+                                : SizedBox.shrink();
                       }
                     },
                   ),
@@ -104,7 +113,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     MaterialCommunityIcons.logout,
                     "Keluar",
                     6,
-                    zoomProvider.currentIndex == 4
+                    zoomProvider.currentIndex == 6
                         ? Color(kWhite.value)
                         : Color(kLightGrey.value),
                   ),

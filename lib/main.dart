@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:jobhub/controllers/admin_provider.dart';
 import 'package:jobhub/controllers/chat_provider.dart';
 import 'package:jobhub/controllers/exports.dart';
 import 'package:jobhub/firebase_options.dart';
@@ -26,6 +27,7 @@ void main() async {
         ChangeNotifierProvider(create: (context) => ImageUploader()),
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
         ChangeNotifierProvider(create: (context) => ChatProvider()),
+        ChangeNotifierProvider(create: (context) => AdminProvider()),
       ],
       child: const MyApp(),
     ),

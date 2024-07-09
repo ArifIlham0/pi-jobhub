@@ -9,11 +9,9 @@ import 'package:jobhub/views/common/custom_btn.dart';
 import 'package:jobhub/views/common/custom_textfield.dart';
 import 'package:jobhub/views/common/drawer/drawer_widget.dart';
 import 'package:jobhub/views/common/exports.dart';
-import 'package:jobhub/views/common/heading_widget.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:jobhub/views/common/loading_button.dart';
 import 'package:jobhub/views/common/loading_indicator.dart';
-import 'package:jobhub/views/ui/jobs/job_list_agent.dart';
 import 'package:provider/provider.dart';
 
 class AgentPage extends StatefulWidget {
@@ -202,17 +200,6 @@ class _AgentPageState extends State<AgentPage> {
                               builder: (context, jobProvider, child) {
                                 return Column(
                                   children: [
-                                    HeadingWidget(
-                                      text: "",
-                                      isAgent: true,
-                                      onTap: () {
-                                        Get.to(
-                                          () => JobListAgent(),
-                                          transition: Transition.rightToLeft,
-                                          duration: Duration(milliseconds: 100),
-                                        );
-                                      },
-                                    ),
                                     HeightSpacer(size: 15),
                                     jobProvider.isLoading
                                         ? LoadingButton(

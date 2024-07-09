@@ -6,6 +6,7 @@ import 'package:jobhub/models/request/auth/profile_update_model.dart';
 import 'package:jobhub/models/request/auth/signup_agent_model.dart';
 import 'package:jobhub/models/request/auth/signup_model.dart';
 import 'package:jobhub/models/response/auth/login_res_model.dart';
+import 'package:jobhub/models/response/auth/pending_user_res_model.dart';
 import 'package:jobhub/models/response/auth/profile_model.dart';
 import 'package:jobhub/services/config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -134,6 +135,55 @@ class AuthHelper {
       return profile;
     } else {
       throw Exception("Gagal ambil profil ${jsonDecode(response.body)}");
+    }
+  }
+
+  static Future<List<PendingUserResponse>> getPendingUsers() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+    print("Token: $token");
+    if (token == null) {
+      throw Exception("Token is null");
+    }
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'token': '$token'
+    };
+
+    var url = Uri.https(Config.apiUrl, Config.pendingUser);
+    var response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      var pendingUser = pendingUserResponseFromJson(response.body);
+      return pendingUser;
+    } else {
+      throw Exception("Gagal get pending user");
+    }
+  }
+
+  static Future<bool> moveUser(String? userId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'token': '$token',
+    };
+
+    var url = Uri.https(Config.apiUrl, "${Config.movePending}/$userId");
+    var response = await client.put(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

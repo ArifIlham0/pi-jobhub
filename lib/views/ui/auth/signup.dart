@@ -9,7 +9,6 @@ import 'package:jobhub/views/common/custom_btn.dart';
 import 'package:jobhub/views/common/custom_textfield.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
-import 'package:jobhub/views/ui/auth/agent.dart';
 import 'package:jobhub/views/ui/auth/login.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -133,35 +132,35 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                   HeightSpacer(size: 10),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: TextButton(
-                      style: ButtonStyle(
-                        overlayColor: MaterialStateProperty.all(
-                            Color(kWhite2.value).withOpacity(0.1)),
-                      ),
-                      onPressed: () {
-                        Get.to(
-                          () => Agent(),
-                          transition: Transition.rightToLeft,
-                          duration: Duration(milliseconds: 100),
-                        );
-                      },
-                      child: RichText(
-                          text: TextSpan(
-                        text: "Ingin mencari kandidat? ",
-                        style: appstyle(
-                            12, Color(kDarkGrey.value), FontWeight.w500),
-                        children: [
-                          TextSpan(
-                            text: "Daftar sebagai mitra",
-                            style: appstyle(
-                                12, Color(kWhite2.value), FontWeight.w500),
-                          ),
-                        ],
-                      )),
-                    ),
-                  ),
+                  // Align(
+                  //   alignment: Alignment.bottomCenter,
+                  //   child: TextButton(
+                  //     style: ButtonStyle(
+                  //       overlayColor: MaterialStateProperty.all(
+                  //           Color(kWhite2.value).withOpacity(0.1)),
+                  //     ),
+                  //     onPressed: () {
+                  //       Get.to(
+                  //         () => Agent(),
+                  //         transition: Transition.rightToLeft,
+                  //         duration: Duration(milliseconds: 100),
+                  //       );
+                  //     },
+                  //     child: RichText(
+                  //         text: TextSpan(
+                  //       text: "Ingin mencari kandidat? ",
+                  //       style: appstyle(
+                  //           12, Color(kDarkGrey.value), FontWeight.w500),
+                  //       children: [
+                  //         TextSpan(
+                  //           text: "Daftar sebagai mitra",
+                  //           style: appstyle(
+                  //               12, Color(kWhite2.value), FontWeight.w500),
+                  //         ),
+                  //       ],
+                  //     )),
+                  //   ),
+                  // ),
                   CustomButton(
                     onTap: () async {
                       loginProvider.firstTime = !loginProvider.firstTime;
