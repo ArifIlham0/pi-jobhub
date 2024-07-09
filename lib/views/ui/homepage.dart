@@ -14,6 +14,7 @@ import 'package:jobhub/views/common/vertical_shimmer.dart';
 import 'package:jobhub/views/common/vertical_tile.dart';
 import 'package:jobhub/views/common/width_spacer.dart';
 import 'package:jobhub/views/ui/auth/login.dart';
+import 'package:jobhub/views/ui/auth/update_agent.dart';
 import 'package:jobhub/views/ui/jobs/job_page.dart';
 import 'package:jobhub/views/ui/jobs/jobs_list.dart';
 import 'package:jobhub/views/ui/jobs/widgets/horizontal_shimmer.dart';
@@ -65,6 +66,9 @@ class _HomePageState extends State<HomePage> {
                         return Text("Error ${snapshot.error}");
                       } else {
                         ProfileRes profile = snapshot.data!;
+                        if (profile.isPending == true) {
+                          Get.offAll((UpdateAgent()));
+                        }
                         profileProvider.setCvUrl = profile.cv;
                         return Padding(
                           padding: EdgeInsets.all(12.h),

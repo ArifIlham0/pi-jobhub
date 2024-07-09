@@ -13,11 +13,11 @@ class ProfileRes {
     required this.isAdmin,
     required this.isAgent,
     required this.skills,
-    // required this.updatedAt,
     required this.location,
     required this.phone,
     required this.profile,
     required this.cv,
+    required this.isPending,
   });
 
   final String id;
@@ -26,11 +26,11 @@ class ProfileRes {
   final bool isAdmin;
   final bool isAgent;
   final List<String> skills;
-  // final DateTime updatedAt;
   final String location;
   final String phone;
   final String profile;
   final String cv;
+  final bool isPending;
 
   factory ProfileRes.fromJson(Map<String, dynamic> json) => ProfileRes(
         id: json["_id"] ?? "",
@@ -41,11 +41,11 @@ class ProfileRes {
         skills: json["skills"] == null
             ? []
             : List<String>.from(json["skills"].map((x) => x)),
-        // updatedAt: DateTime.parse(json["updatedAt"]) ?? DateTime.now(),
         location: json["location"] ?? "",
         phone: json["phone"] ?? "",
         profile: json["profile"] ?? "",
         cv: json["cv"] ?? "",
+        isPending: json["isPending"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,10 +55,10 @@ class ProfileRes {
         "isAdmin": isAdmin,
         "isAgent": isAgent,
         "skills": List<dynamic>.from(skills.map((x) => x)),
-        // "updatedAt": updatedAt.toIso8601String(),
         "location": location,
         "phone": phone,
         "profile": profile,
         "cv": cv,
+        "isPending": isPending,
       };
 }
