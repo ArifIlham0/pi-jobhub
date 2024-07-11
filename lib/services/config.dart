@@ -12,4 +12,5 @@ class Config {
   static const String messageUrl = "/api/messages";
   static const String pendingUser = "/api/pending";
   static const String movePending = "/api/move";
+  static const String deletePending = "/api/delete";
 }

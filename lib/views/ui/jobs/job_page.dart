@@ -267,7 +267,8 @@ class _JobPageState extends State<JobPage> {
                                   isButton: true,
                                 )
                               : CustomOutlineBtn(
-                                  onTap: token != null
+                                  onTap: token != null &&
+                                          profileProvider.agentRole != true
                                       ? () {
                                           CreateChat model = CreateChat(
                                               userId: jobById.agentId);
@@ -279,7 +280,8 @@ class _JobPageState extends State<JobPage> {
                                           );
                                         }
                                       : null,
-                                  color2: token != null
+                                  color2: token != null &&
+                                          profileProvider.agentRole != true
                                       ? Color(kGreen.value)
                                       : Color(kDarkGrey.value),
                                   width: width,

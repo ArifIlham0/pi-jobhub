@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jobhub/models/response/auth/pending_user_res_model.dart';
 import 'package:jobhub/views/common/custom_outline_btn.dart';
 import 'package:jobhub/views/common/exports.dart';
+import 'package:jobhub/views/common/width_spacer.dart';
 
 class AdminTile extends StatefulWidget {
   const AdminTile({
@@ -11,11 +12,13 @@ class AdminTile extends StatefulWidget {
     this.pendingUser,
     this.onTap,
     this.onTapSheet,
+    this.onTapReject,
   });
 
   final PendingUserResponse? pendingUser;
   final Function()? onTap;
   final Function()? onTapSheet;
+  final Function()? onTapReject;
 
   @override
   State<AdminTile> createState() => _AdminTileState();
@@ -54,31 +57,40 @@ class _AdminTileState extends State<AdminTile> {
         onTapDown: _onTapDown,
         child: Padding(
           padding: EdgeInsets.only(bottom: 20.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              ReusableText(
+                text: widget.pendingUser!.username!,
+                style: appstyle(16, Color(kDarkGrey.value), FontWeight.w400),
+              ),
+              ReusableText(
+                text: widget.pendingUser!.address!,
+                style: appstyle(16, Color(kDarkGrey.value), FontWeight.w400),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ReusableText(
-                    text: widget.pendingUser!.username!,
-                    style:
-                        appstyle(16, Color(kDarkGrey.value), FontWeight.w400),
+                  CustomOutlineBtn(
+                    onTap: widget.onTap,
+                    text: "Setujui",
+                    smallText: true,
+                    color: Color(kWhite.value),
+                    color2: Color(kGreen.value),
+                    height: height * 0.04,
+                    width: width * 0.25,
                   ),
-                  ReusableText(
-                    text: widget.pendingUser!.address!,
-                    style:
-                        appstyle(16, Color(kDarkGrey.value), FontWeight.w400),
+                  WidthSpacer(width: 10.w),
+                  CustomOutlineBtn(
+                    onTap: widget.onTapReject,
+                    text: "Tolak",
+                    smallText: true,
+                    color: Color(kWhite.value),
+                    color2: Color(kRed.value),
+                    height: height * 0.04,
+                    width: width * 0.25,
                   ),
                 ],
-              ),
-              CustomOutlineBtn(
-                onTap: widget.onTap,
-                text: "Setujui",
-                color: Color(kWhite.value),
-                color2: Color(kGreen.value),
-                height: height * 0.05,
-                width: width * 0.3,
               ),
             ],
           ),

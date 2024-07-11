@@ -174,6 +174,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         final SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         await prefs.setBool('firstTime', true);
+                        await prefs.setBool('agent', false);
                         signUpProvider.register(model);
                       } else {
                         Get.snackbar(

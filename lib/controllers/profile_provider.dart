@@ -9,11 +9,18 @@ class ProfileProvider extends ChangeNotifier {
   final jobFormKey = GlobalKey<FormState>();
   Future<ProfileRes>? profile;
   String? _cvUrl;
+  bool? _agentRole;
 
   String get cvUrl => _cvUrl!;
+  bool get agentRole => _agentRole!;
 
   set setCvUrl(String value) {
     _cvUrl = value;
+    notifyListeners();
+  }
+
+  set setAgentRole(bool value) {
+    _agentRole = value;
     notifyListeners();
   }
 

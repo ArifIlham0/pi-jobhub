@@ -38,7 +38,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                 physics: BouncingScrollPhysics(),
                 padding: EdgeInsets.symmetric(
                   horizontal: 20.w,
-                  vertical: 60.h,
+                  vertical: 30.h,
                 ),
                 children: [
                   Row(

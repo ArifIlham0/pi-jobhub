@@ -12,6 +12,7 @@ import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:jobhub/views/common/loader.dart';
 import 'package:jobhub/views/common/loading_indicator.dart';
+import 'package:jobhub/views/common/width_spacer.dart';
 import 'package:jobhub/views/ui/admin/widgets/admin_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -80,6 +81,11 @@ class _AdminPageState extends State<AdminPage> {
                                       .moveUser(pendingUserLists?.id);
                                   setState(() {});
                                 },
+                                onTapReject: () async {
+                                  await adminProvider
+                                      .deleteUser(pendingUserLists?.id);
+                                  setState(() {});
+                                },
                                 onTapSheet: () {
                                   pendingSheet(pendingUserLists);
                                 },
@@ -142,6 +148,19 @@ class _AdminPageState extends State<AdminPage> {
                     text: "Setujui",
                     color: Color(kWhite.value),
                     color2: Color(kGreen.value),
+                    height: height * 0.05,
+                    width: width * 0.3,
+                  ),
+                  WidthSpacer(width: 15.w),
+                  CustomOutlineBtn(
+                    onTap: () async {
+                      await adminProviders.deleteUser(pendingUserLists?.id);
+                      Get.back();
+                      setState(() {});
+                    },
+                    text: "Tolak",
+                    color: Color(kWhite.value),
+                    color2: Color(kRed.value),
                     height: height * 0.05,
                     width: width * 0.3,
                   ),

@@ -186,4 +186,26 @@ class AuthHelper {
       return false;
     }
   }
+
+  static Future<bool> deletePendingUser(String? userId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'token': '$token',
+    };
+
+    var url = Uri.https(Config.apiUrl, "${Config.deletePending}/$userId");
+    var response = await client.delete(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

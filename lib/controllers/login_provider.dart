@@ -86,6 +86,7 @@ class LoginProvider extends ChangeNotifier {
     bool? firstTimes = await prefs.getBool('firstTime');
     bool? agent = await prefs.getBool('agent');
     print("Ini first time ${firstTimes}");
+    print("Ini agent ${agent}");
     AuthHelper.login(model).then((response) {
       setIsLoading = false;
       if (response && firstTimes == true && agent != true) {

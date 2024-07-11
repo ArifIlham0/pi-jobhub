@@ -70,6 +70,7 @@ class _HomePageState extends State<HomePage> {
                           Get.offAll((UpdateAgent()));
                         }
                         profileProvider.setCvUrl = profile.cv;
+                        profileProvider.setAgentRole = profile.isAgent;
                         return Padding(
                           padding: EdgeInsets.all(12.h),
                           child: CircleAvatar(

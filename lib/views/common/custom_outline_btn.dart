@@ -11,6 +11,7 @@ class CustomOutlineBtn extends StatelessWidget {
     this.onTap,
     this.color,
     this.color2,
+    this.smallText,
   });
 
   final double? width;
@@ -19,6 +20,7 @@ class CustomOutlineBtn extends StatelessWidget {
   final void Function()? onTap;
   final Color? color;
   final Color? color2;
+  final bool? smallText;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class CustomOutlineBtn extends StatelessWidget {
       child: Center(
         child: ReusableText(
           text: text!,
-          style: appstyle(16, color!, FontWeight.w600),
+          style: appstyle(smallText == null ? 16 : 12, color!, FontWeight.w600),
         ),
       ),
     );

@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   children: [
                                     ReusableText(
                                       text: profileSnapshot.username,
-                                      style: appstyle(20, Color(kWhite2.value),
+                                      style: appstyle(19, Color(kWhite2.value),
                                           FontWeight.w600),
                                     ),
                                     Row(
@@ -99,28 +99,35 @@ class _ProfilePageState extends State<ProfilePage> {
                                               Color(kDarkGrey.value),
                                               FontWeight.w600),
                                         ),
+                                        WidthSpacer(width: 70),
+                                        IconButton(
+                                          onPressed: () {
+                                            profileSkills =
+                                                profileSnapshot.skills;
+                                            locationConstant =
+                                                profileSnapshot.location;
+                                            phoneConstant =
+                                                profileSnapshot.phone;
+                                            Get.to(
+                                              () => ProfileUpdate(
+                                                  isAgent:
+                                                      profileSnapshot.isAgent),
+                                              transition:
+                                                  Transition.rightToLeft,
+                                              duration:
+                                                  Duration(milliseconds: 100),
+                                            );
+                                          },
+                                          icon: Icon(
+                                            Feather.edit,
+                                            size: 18,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],
                                 ),
                               ],
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                profileSkills = profileSnapshot.skills;
-                                locationConstant = profileSnapshot.location;
-                                phoneConstant = profileSnapshot.phone;
-                                Get.to(
-                                  () => ProfileUpdate(
-                                      isAgent: profileSnapshot.isAgent),
-                                  transition: Transition.rightToLeft,
-                                  duration: Duration(milliseconds: 100),
-                                );
-                              },
-                              icon: Icon(
-                                Feather.edit,
-                                size: 18,
-                              ),
                             ),
                           ],
                         ),

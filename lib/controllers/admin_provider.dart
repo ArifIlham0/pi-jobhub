@@ -20,4 +20,8 @@ class AdminProvider extends ChangeNotifier {
   Future<void> moveUser(String? userId) async {
     await AuthHelper.moveUser(userId);
   }
+
+  Future<void> deleteUser(String? userId) async {
+    await AuthHelper.deletePendingUser(userId);
+  }
 }
