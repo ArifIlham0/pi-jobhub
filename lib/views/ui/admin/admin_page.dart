@@ -109,7 +109,7 @@ class _AdminPageState extends State<AdminPage> {
     var adminProviders = Provider.of<AdminProvider>(context, listen: false);
     return Get.bottomSheet(
       Container(
-        height: 180.h,
+        height: 230.h,
         width: double.infinity,
         decoration: BoxDecoration(
           color: Color(kLightGrey.value),
@@ -121,6 +121,7 @@ class _AdminPageState extends State<AdminPage> {
         child: Padding(
           padding: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 5.h),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ReusableText(

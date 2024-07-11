@@ -16,7 +16,7 @@ class BookMarkHelper {
 
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
-      'token': '$token',
+      'Authorization': 'Bearer $token',
     };
 
     var url = Uri.https(Config.apiUrl, Config.bookmarkUrl);
@@ -40,7 +40,7 @@ class BookMarkHelper {
 
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
-      'token': '$token',
+      'Authorization': 'Bearer $token',
     };
 
     var url = Uri.https(Config.apiUrl, "${Config.bookmarkUrl}/$jobId");
@@ -62,7 +62,7 @@ class BookMarkHelper {
 
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
-      'token': '$token',
+      'Authorization': 'Bearer $token',
     };
 
     var url = Uri.https(Config.apiUrl, Config.bookmarkUrl);

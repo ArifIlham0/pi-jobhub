@@ -16,7 +16,7 @@ class JobsHelper {
 
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
-      'token': '$token'
+      'Authorization': 'Bearer $token'
     };
 
     var url = Uri.https(Config.apiUrl, Config.jobs);
@@ -81,7 +81,7 @@ class JobsHelper {
 
     Map<String, String> requestHeadersToken = {
       'Content-type': 'application/json',
-      'token': '$token',
+      'Authorization': 'Bearer $token',
     };
 
     Map<String, String> requestHeaders = {

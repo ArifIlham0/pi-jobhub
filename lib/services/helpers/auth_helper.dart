@@ -93,7 +93,7 @@ class AuthHelper {
     print("Token: $token");
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
-      'token': '$token'
+      'Authorization': 'Bearer $token'
     };
 
     var url = Uri.https(Config.apiUrl, Config.profileUrl);
@@ -120,7 +120,7 @@ class AuthHelper {
 
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
-      'token': '$token'
+      'Authorization': 'Bearer $token'
     };
 
     var url = Uri.https(Config.apiUrl, Config.profileUrl);
@@ -148,7 +148,7 @@ class AuthHelper {
 
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
-      'token': '$token'
+      'Authorization': 'Bearer $token'
     };
 
     var url = Uri.https(Config.apiUrl, Config.pendingUser);
@@ -171,7 +171,7 @@ class AuthHelper {
 
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
-      'token': '$token',
+      'Authorization': 'Bearer $token',
     };
 
     var url = Uri.https(Config.apiUrl, "${Config.movePending}/$userId");
@@ -193,7 +193,7 @@ class AuthHelper {
 
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
-      'token': '$token',
+      'Authorization': 'Bearer $token',
     };
 
     var url = Uri.https(Config.apiUrl, "${Config.deletePending}/$userId");

@@ -16,7 +16,7 @@ class ChatHelper {
 
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
-      'token': '$token',
+      'Authorization': 'Bearer $token',
     };
 
     var url = Uri.https(Config.apiUrl, Config.chatUrl);
@@ -40,7 +40,7 @@ class ChatHelper {
 
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
-      'token': '$token',
+      'Authorization': 'Bearer $token',
     };
 
     var url = Uri.https(Config.apiUrl, Config.chatUrl);
