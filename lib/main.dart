@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'Dbestech JobHub',
+          title: 'JobHunt',
           theme: ThemeData(
             scaffoldBackgroundColor: Color(kBlack2.value),
             iconTheme: IconThemeData(color: Color(kWhite2.value)),
