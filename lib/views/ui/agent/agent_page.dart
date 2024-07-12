@@ -25,12 +25,26 @@ class _AgentPageState extends State<AgentPage> {
   TextEditingController title = TextEditingController();
   TextEditingController description = TextEditingController();
   TextEditingController salary = TextEditingController();
-  TextEditingController contract = TextEditingController();
   TextEditingController requirement1 = TextEditingController();
   TextEditingController requirement2 = TextEditingController();
   TextEditingController requirement3 = TextEditingController();
   TextEditingController requirement4 = TextEditingController();
   TextEditingController requirement5 = TextEditingController();
+  String dropdownValue = 'Teknologi';
+  String contractType = 'Full-Time';
+
+  @override
+  void dispose() {
+    title.dispose();
+    description.dispose();
+    salary.dispose();
+    requirement1.dispose();
+    requirement2.dispose();
+    requirement3.dispose();
+    requirement4.dispose();
+    requirement5.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,6 +105,36 @@ class _AgentPageState extends State<AgentPage> {
                               },
                             ),
                             HeightSpacer(size: 10),
+                            Container(
+                              width: double.infinity,
+                              child: DropdownButton(
+                                value: dropdownValue,
+                                iconSize: 24,
+                                elevation: 0,
+                                style: TextStyle(color: Color(kGreen.value)),
+                                underline: Container(
+                                  height: 2,
+                                  color: Color(kGreen.value),
+                                ),
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    dropdownValue = newValue!;
+                                  });
+                                },
+                                items: [
+                                  'Teknologi',
+                                  'Bisnis',
+                                  'Engineering',
+                                  'Multimedia'
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                            HeightSpacer(size: 10),
                             CustomTextField(
                               controller: description,
                               hintText: "Deskripsi",
@@ -118,17 +162,49 @@ class _AgentPageState extends State<AgentPage> {
                               },
                             ),
                             HeightSpacer(size: 10),
-                            CustomTextField(
-                              controller: contract,
-                              hintText: "Full-Time / Part-Time",
-                              keyboardType: TextInputType.text,
-                              validator: (contract) {
-                                if (contract!.isEmpty) {
-                                  return "Tolong masukkan periode kerja";
-                                } else {
-                                  return null;
-                                }
-                              },
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ListTile(
+                                    title: ReusableText(
+                                      text: "Full-Time",
+                                      style: appstyle(12, Color(kWhite.value),
+                                          FontWeight.normal),
+                                    ),
+                                    leading: Radio(
+                                      fillColor: MaterialStateProperty.all(
+                                          Color(kGreen.value)),
+                                      value: 'Full-Time',
+                                      groupValue: contractType,
+                                      onChanged: (String? value) {
+                                        setState(() {
+                                          contractType = value!;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: ListTile(
+                                    title: ReusableText(
+                                      text: "Part-Time",
+                                      style: appstyle(12, Color(kWhite.value),
+                                          FontWeight.normal),
+                                    ),
+                                    leading: Radio(
+                                      fillColor: MaterialStateProperty.all(
+                                          Color(kGreen.value)),
+                                      value: 'Part-Time',
+                                      groupValue: contractType,
+                                      onChanged: (String? value) {
+                                        setState(() {
+                                          contractType = value!;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             HeightSpacer(size: 10),
                             CustomTextField(
@@ -213,9 +289,10 @@ class _AgentPageState extends State<AgentPage> {
                                                 CreateJobsRequest model =
                                                     CreateJobsRequest(
                                                   title: title.text,
+                                                  category: dropdownValue,
                                                   description: description.text,
                                                   salary: salary.text,
-                                                  contract: contract.text,
+                                                  contract: contractType,
                                                   period: "bulan",
                                                   agentId: profile.id,
                                                   company: profile.username,
@@ -267,19 +344,5 @@ class _AgentPageState extends State<AgentPage> {
         },
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    title.dispose();
-    description.dispose();
-    salary.dispose();
-    contract.dispose();
-    requirement1.dispose();
-    requirement2.dispose();
-    requirement3.dispose();
-    requirement4.dispose();
-    requirement5.dispose();
-    super.dispose();
   }
 }

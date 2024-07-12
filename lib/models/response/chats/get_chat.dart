@@ -14,6 +14,7 @@ class GetChats {
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final LatestMessage? latestMessage;
+  final List<String>? deletedBy;
 
   GetChats({
     this.id,
@@ -23,6 +24,7 @@ class GetChats {
     this.createdAt,
     this.updatedAt,
     this.latestMessage,
+    this.deletedBy,
   });
 
   factory GetChats.fromJson(Map<String, dynamic> json) => GetChats(
@@ -33,6 +35,7 @@ class GetChats {
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         latestMessage: LatestMessage.fromJson(json["latestMessage"]),
+        deletedBy: List<String>.from(json["deletedBy"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -43,6 +46,7 @@ class GetChats {
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
         "latestMessage": latestMessage?.toJson(),
+        "deletedBy": List<dynamic>.from(deletedBy!.map((x) => x)),
       };
 }
 

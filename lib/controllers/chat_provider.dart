@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:jobhub/models/request/chats/delete_chat_req.dart';
 import 'package:jobhub/models/response/chats/get_chat.dart';
 import 'package:jobhub/services/helpers/chat_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatProvider extends ChangeNotifier {
   late Future<List<GetChats>> chats;
+  List<String> selectedChats = [];
   List<String>? _online = [];
   bool? _typing = false;
   String? userId;
@@ -31,6 +33,22 @@ class ChatProvider extends ChangeNotifier {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     userId = prefs.getString('userId');
     print("user id? ${userId}");
+  }
+
+  void toggleChatSelection(String chatId) {
+    if (selectedChats.contains(chatId)) {
+      selectedChats.remove(chatId);
+    } else {
+      selectedChats.add(chatId);
+    }
+    notifyListeners();
+  }
+
+  Future<void> deleteSelectedChats() async {
+    print("Ini id chat? ${selectedChats}");
+    await ChatHelper.deleteChat(DeleteChatReq(chatIds: selectedChats));
+    selectedChats.clear();
+    getChat();
   }
 
   String messageTime(String? timestamp) {

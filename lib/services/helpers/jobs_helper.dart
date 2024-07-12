@@ -122,4 +122,23 @@ class JobsHelper {
       throw Exception('Failed to search jobs');
     }
   }
+
+  static Future<List<JobsResponse>> searchJobCategory(String? category) async {
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+    };
+
+    var url = Uri.https(Config.apiUrl, "${Config.searchCategory}/$category");
+    var response = await client.get(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      var jobList = jobsResponseFromJson(response.body);
+      return jobList;
+    } else {
+      throw Exception('Failed to search jobs category');
+    }
+  }
 }

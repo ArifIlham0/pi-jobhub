@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as https;
 import 'package:jobhub/models/request/chats/create_chat.dart';
+import 'package:jobhub/models/request/chats/delete_chat_req.dart';
 import 'package:jobhub/models/response/chats/get_chat.dart';
 import 'package:jobhub/models/response/chats/initial_chat.dart';
 import 'package:jobhub/services/config.dart';
@@ -54,6 +55,29 @@ class ChatHelper {
       return chats;
     } else {
       throw Exception('Failed to load chats');
+    }
+  }
+
+  static Future<bool> deleteChat(DeleteChatReq model) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    var url = Uri.https(Config.apiUrl, Config.chatUrl);
+    var response = await client.delete(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(model),
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

@@ -1,35 +1,38 @@
 import 'dart:convert';
 
-String createJobsRequestToJson(CreateJobsRequest data) => json.encode(data.toJson());
+String createJobsRequestToJson(CreateJobsRequest data) =>
+    json.encode(data.toJson());
 
 class CreateJobsRequest {
-    CreateJobsRequest({
-        required this.title,
-        required this.location,
-        required this.company,
-        required this.hiring,
-        required this.description,
-        required this.salary,
-        required this.period,
-        required this.contract,
-        required this.imageUrl,
-        required this.agentId,
-        required this.requirements,
-    });
+  CreateJobsRequest({
+    required this.title,
+    required this.location,
+    required this.company,
+    required this.hiring,
+    required this.description,
+    required this.salary,
+    required this.period,
+    required this.contract,
+    required this.imageUrl,
+    required this.agentId,
+    required this.requirements,
+    required this.category,
+  });
 
-    final String title;
-    final String location;
-    final String company;
-    final bool hiring;
-    final String description;
-    final String salary;
-    final String period;
-    final String contract;
-    final String imageUrl;
-    final String agentId;
-    final List<String> requirements;
+  final String title;
+  final String location;
+  final String company;
+  final bool hiring;
+  final String description;
+  final String salary;
+  final String period;
+  final String contract;
+  final String imageUrl;
+  final String agentId;
+  final List<String> requirements;
+  final String category;
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "title": title,
         "location": location,
         "company": company,
@@ -40,6 +43,7 @@ class CreateJobsRequest {
         "contract": contract,
         "imageUrl": imageUrl,
         "agentId": agentId,
+        "category": category,
         "requirements": List<dynamic>.from(requirements.map((x) => x)),
-    };
+      };
 }

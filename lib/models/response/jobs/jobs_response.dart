@@ -20,6 +20,7 @@ class JobsResponse {
     required this.createdAt,
     required this.updatedAt,
     this.isBookmark,
+    this.category,
   });
 
   final String id;
@@ -37,6 +38,7 @@ class JobsResponse {
   final DateTime createdAt;
   final DateTime updatedAt;
   final bool? isBookmark;
+  final String? category;
 
   factory JobsResponse.fromJson(Map<String, dynamic> json) => JobsResponse(
         id: json["_id"],
@@ -54,5 +56,6 @@ class JobsResponse {
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         isBookmark: json["isBookmark"],
+        category: json["category"],
       );
 }
