@@ -33,6 +33,29 @@ class JobsHelper {
     }
   }
 
+  static Future<bool> editJob(String jobId, CreateJobsRequest model) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    var url = Uri.https(Config.apiUrl, "${Config.jobs}/$jobId");
+    var response = await client.put(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(model),
+    );
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   static Future<List<JobsResponse>> getJobs() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString("token");
@@ -139,6 +162,30 @@ class JobsHelper {
       return jobList;
     } else {
       throw Exception('Failed to search jobs category');
+    }
+  }
+
+  static Future<bool> deleteJob(String? jobId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+
+    var url = Uri.https(Config.apiUrl, "${Config.jobs}/$jobId");
+    var response = await client.delete(
+      url,
+      headers: requestHeaders,
+    );
+
+    if (response.statusCode == 200) {
+      print("Berhasil hapus lowongan ${response.body}");
+      return true;
+    } else {
+      print("Gagal hapus lowongan ${response.body}");
+      return false;
     }
   }
 }

@@ -3,10 +3,17 @@ import 'package:jobhub/constants/app_constants.dart';
 import 'package:jobhub/views/common/exports.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key, this.text, this.color, this.onTap});
+  const CustomButton({
+    super.key,
+    this.text,
+    this.color,
+    this.onTap,
+    this.color2,
+  });
 
   final String? text;
   final Color? color;
+  final Color? color2;
   final void Function()? onTap;
 
   @override
@@ -14,7 +21,8 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Color(kGreen.value)),
+        backgroundColor: MaterialStateProperty.all(
+            color2 == null ? Color(kGreen.value) : color2),
         minimumSize: MaterialStateProperty.all(Size(width, height * 0.065)),
         overlayColor:
             MaterialStateProperty.all(Color(kBlack2.value).withOpacity(0.2)),

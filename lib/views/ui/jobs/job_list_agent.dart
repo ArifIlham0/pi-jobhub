@@ -59,6 +59,7 @@ class JobListAgent extends StatelessWidget {
 
                   return VerticalTileWidget(
                     job: jobLists,
+                    isAgent: true,
                   );
                 },
               ),

@@ -9,9 +9,11 @@ class LoadingButton extends StatelessWidget {
     this.color,
     this.onTap,
     this.isButton,
+    this.color2,
   });
 
   final Color? color;
+  final Color? color2;
   final void Function()? onTap;
   final bool? isButton;
 
@@ -20,7 +22,8 @@ class LoadingButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onTap,
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Color(kGreen.value)),
+        backgroundColor: MaterialStateProperty.all(
+            color2 == null ? Color(kGreen.value) : color2),
         minimumSize: MaterialStateProperty.all(Size(width, height * 0.065)),
         overlayColor:
             MaterialStateProperty.all(Color(kBlack2.value).withOpacity(0.2)),

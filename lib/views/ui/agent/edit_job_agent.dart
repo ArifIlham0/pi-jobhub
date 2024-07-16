@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,31 +8,34 @@ import 'package:jobhub/models/response/auth/profile_model.dart';
 import 'package:jobhub/views/common/app_bar.dart';
 import 'package:jobhub/views/common/custom_btn.dart';
 import 'package:jobhub/views/common/custom_textfield.dart';
-import 'package:jobhub/views/common/drawer/drawer_widget.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:jobhub/views/common/loading_button.dart';
 import 'package:jobhub/views/common/loading_indicator.dart';
-import 'package:jobhub/views/common/heading_widget.dart';
-import 'package:jobhub/views/ui/jobs/job_list_agent.dart';
 import 'package:provider/provider.dart';
 
-class AgentPage extends StatefulWidget {
-  const AgentPage({super.key});
+class EditJobPage extends StatefulWidget {
+  const EditJobPage({super.key});
 
   @override
-  State<AgentPage> createState() => _AgentPageState();
+  State<EditJobPage> createState() => _EditJobPageState();
 }
 
-class _AgentPageState extends State<AgentPage> {
-  TextEditingController title = TextEditingController();
-  TextEditingController description = TextEditingController();
-  TextEditingController salary = TextEditingController();
-  TextEditingController requirement1 = TextEditingController();
-  TextEditingController requirement2 = TextEditingController();
-  TextEditingController requirement3 = TextEditingController();
-  TextEditingController requirement4 = TextEditingController();
-  TextEditingController requirement5 = TextEditingController();
+class _EditJobPageState extends State<EditJobPage> {
+  TextEditingController title = TextEditingController(text: positionConstant);
+  TextEditingController description =
+      TextEditingController(text: descriptionConstant);
+  TextEditingController salary = TextEditingController(text: salaryConstant);
+  TextEditingController requirement1 =
+      TextEditingController(text: requirementConstant[0]);
+  TextEditingController requirement2 =
+      TextEditingController(text: requirementConstant[1]);
+  TextEditingController requirement3 =
+      TextEditingController(text: requirementConstant[2]);
+  TextEditingController requirement4 =
+      TextEditingController(text: requirementConstant[3]);
+  TextEditingController requirement5 =
+      TextEditingController(text: requirementConstant[4]);
   String dropdownValue = 'Teknologi';
   String contractType = 'Full-Time';
 
@@ -55,9 +59,9 @@ class _AgentPageState extends State<AgentPage> {
         preferredSize: Size.fromHeight(50.h),
         child: CustomAppBar(
           text: "Mitra",
-          child: Padding(
-            padding: EdgeInsets.all(12.0.h),
-            child: DrawerWidget(),
+          child: GestureDetector(
+            onTap: () => Get.back(),
+            child: Icon(CupertinoIcons.arrow_left),
           ),
         ),
       ),
@@ -81,16 +85,16 @@ class _AgentPageState extends State<AgentPage> {
                     ),
                     children: [
                       ReusableText(
-                        text: "Buat Lowongan",
+                        text: "Perbarui Lowongan",
                         style: appstyle(
-                          35,
+                          31,
                           Color(kWhite2.value),
                           FontWeight.bold,
                         ),
                       ),
                       HeightSpacer(size: 20),
                       Form(
-                        key: profileProvider.jobFormKey,
+                        key: profileProvider.editJobFormKey,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -226,41 +230,58 @@ class _AgentPageState extends State<AgentPage> {
                               controller: requirement2,
                               hintText: "Persyaratan",
                               keyboardType: TextInputType.text,
+                              validator: (requirement2) {
+                                if (requirement2!.isEmpty) {
+                                  return "Minimal isi 1 persyaratan";
+                                } else {
+                                  return null;
+                                }
+                              },
                             ),
                             HeightSpacer(size: 10),
                             CustomTextField(
                               controller: requirement3,
                               hintText: "Persyaratan",
                               keyboardType: TextInputType.text,
+                              validator: (requirement3) {
+                                if (requirement3!.isEmpty) {
+                                  return "Minimal isi 1 persyaratan";
+                                } else {
+                                  return null;
+                                }
+                              },
                             ),
                             HeightSpacer(size: 10),
                             CustomTextField(
                               controller: requirement4,
                               hintText: "Persyaratan",
                               keyboardType: TextInputType.text,
+                              validator: (requirement4) {
+                                if (requirement4!.isEmpty) {
+                                  return "Minimal isi 1 persyaratan";
+                                } else {
+                                  return null;
+                                }
+                              },
                             ),
                             HeightSpacer(size: 10),
                             CustomTextField(
                               controller: requirement5,
                               hintText: "Persyaratan",
                               keyboardType: TextInputType.text,
+                              validator: (requirement5) {
+                                if (requirement5!.isEmpty) {
+                                  return "Minimal isi 1 persyaratan";
+                                } else {
+                                  return null;
+                                }
+                              },
                             ),
                             HeightSpacer(size: 20),
                             Consumer<JobsProvider>(
                               builder: (context, jobProvider, child) {
                                 return Column(
                                   children: [
-                                    HeadingWidget(
-                                      text: "",
-                                      isAgent: true,
-                                      onTap: () {
-                                        Get.to(
-                                          () => JobListAgent(),
-                                          transition: Transition.rightToLeft,
-                                          duration: Duration(milliseconds: 100),
-                                        );
-                                      },
-                                    ),
                                     HeightSpacer(size: 15),
                                     jobProvider.isLoading
                                         ? LoadingButton(
@@ -269,7 +290,7 @@ class _AgentPageState extends State<AgentPage> {
                                         : CustomButton(
                                             onTap: () async {
                                               if (profileProvider
-                                                  .validateJob()) {
+                                                  .validateEditJob()) {
                                                 jobProvider.setIsLoading = true;
                                                 CreateJobsRequest model =
                                                     CreateJobsRequest(
@@ -293,8 +314,8 @@ class _AgentPageState extends State<AgentPage> {
                                                   ],
                                                 );
 
-                                                await jobProvider
-                                                    .createJob(model);
+                                                await jobProvider.editJob(
+                                                    jobIdConstant, model);
                                                 jobProvider.setIsLoading =
                                                     false;
                                               } else {
@@ -310,13 +331,28 @@ class _AgentPageState extends State<AgentPage> {
                                                 );
                                               }
                                             },
-                                            text: "Buat",
+                                            text: "Perbarui",
+                                          ),
+                                    HeightSpacer(size: 15),
+                                    jobProvider.isLoading
+                                        ? LoadingButton(
+                                            color2: Color(kRed.value),
+                                            onTap: () {},
+                                          )
+                                        : CustomButton(
+                                            color2: Color(kRed.value),
+                                            onTap: () async {
+                                              await jobProvider
+                                                  .deleteJob(jobIdConstant);
+                                              jobProvider.setIsLoading = false;
+                                            },
+                                            text: "Hapus",
                                           ),
                                   ],
                                 );
                               },
                             ),
-                            HeightSpacer(size: 35),
+                            HeightSpacer(size: 25),
                           ],
                         ),
                       ),

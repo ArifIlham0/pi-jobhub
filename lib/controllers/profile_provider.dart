@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 
 class ProfileProvider extends ChangeNotifier {
   final jobFormKey = GlobalKey<FormState>();
+  final editJobFormKey = GlobalKey<FormState>();
   Future<ProfileRes>? profile;
   String? _cvUrl;
   bool? _agentRole;
@@ -26,6 +27,17 @@ class ProfileProvider extends ChangeNotifier {
 
   bool validateJob() {
     final form = jobFormKey.currentState;
+
+    if (form != null && form.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool validateEditJob() {
+    final form = editJobFormKey.currentState;
 
     if (form != null && form.validate()) {
       form.save();

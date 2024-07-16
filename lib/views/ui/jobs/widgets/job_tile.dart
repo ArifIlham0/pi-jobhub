@@ -6,15 +6,14 @@ import 'package:jobhub/constants/app_constants.dart';
 import 'package:jobhub/models/response/jobs/jobs_response.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/width_spacer.dart';
+import 'package:jobhub/views/ui/agent/edit_job_agent.dart';
 import 'package:jobhub/views/ui/jobs/job_page.dart';
 
 class VerticalTileWidget extends StatefulWidget {
-  const VerticalTileWidget({
-    super.key,
-    this.job,
-  });
+  const VerticalTileWidget({super.key, this.job, this.isAgent});
 
   final JobsResponse? job;
+  final bool? isAgent;
 
   @override
   State<VerticalTileWidget> createState() => _VerticalTileWidgetState();
@@ -46,17 +45,31 @@ class _VerticalTileWidgetState extends State<VerticalTileWidget> {
           onTapCancel: _onTapCancel,
           onTapDown: _onTapDown,
           onTap: () {
+            jobIdConstant = widget.job!.id;
+            positionConstant = widget.job!.title;
+            categoryConstant = widget.job!.category!;
+            descriptionConstant = widget.job!.description;
+            salaryConstant = widget.job!.salary;
+            periodConstant = widget.job!.period;
+            requirementConstant = widget.job!.requirements;
             setState(() {
               _isPressed = false;
             });
-            Get.to(
-              () => JobPage(
-                title: widget.job!.company,
-                id: widget.job!.id,
-              ),
-              transition: Transition.rightToLeft,
-              duration: Duration(milliseconds: 100),
-            );
+
+            widget.isAgent != true
+                ? Get.to(
+                    () => JobPage(
+                      title: widget.job!.company,
+                      id: widget.job!.id,
+                    ),
+                    transition: Transition.rightToLeft,
+                    duration: Duration(milliseconds: 100),
+                  )
+                : Get.to(
+                    () => EditJobPage(),
+                    transition: Transition.rightToLeft,
+                    duration: Duration(milliseconds: 100),
+                  );
           },
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),

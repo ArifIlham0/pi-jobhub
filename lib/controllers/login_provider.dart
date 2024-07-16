@@ -115,6 +115,7 @@ class LoginProvider extends ChangeNotifier {
     await prefs.setBool('loggedIn', false);
     await prefs.setBool('firstTime', false);
     await prefs.remove('token');
+    await prefs.remove("tokenTime");
     _firstTime = false;
   }
 

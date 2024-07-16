@@ -33,7 +33,10 @@ class AuthHelper {
       String? userId = loginResponseModelFromJson(response.body).id;
       String? profile = loginResponseModelFromJson(response.body).profile;
 
+      DateTime now = DateTime.now();
       await prefs.setString("token", token!);
+      await prefs.setString("tokenTime", now.toIso8601String());
+
       await prefs.setString("userId", userId!);
       await prefs.setString("profile", profile!);
       await prefs.setBool("loggedIn", true);
@@ -44,6 +47,25 @@ class AuthHelper {
       print("Gagal login ${jsonDecode(response.body)}");
       return false;
     }
+  }
+
+  static Future<String?> getToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+    String? tokenTime = prefs.getString("tokenTime");
+
+    if (token != null && tokenTime != null) {
+      DateTime storedTime = DateTime.parse(tokenTime);
+      DateTime now = DateTime.now();
+
+      if (now.difference(storedTime).inDays > 19) {
+        await prefs.remove("token");
+        await prefs.remove("tokenTime");
+        token = null;
+      }
+    }
+
+    return token;
   }
 
   static Future<bool> register(SignupModel model) async {

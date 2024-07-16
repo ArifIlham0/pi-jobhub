@@ -65,6 +65,32 @@ class JobsProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> editJob(String jobId, CreateJobsRequest model) async {
+    try {
+      final response = await JobsHelper.editJob(jobId, model);
+      if (response) {
+        Get.snackbar(
+          "Berhasil memperbarui lowongan!",
+          "Kunjungi beranda untuk melihat lowongan yang telah diperbarui",
+          colorText: Color(kBlack2.value),
+          backgroundColor: Color(kGreen2.value),
+          icon: Icon(Icons.work),
+        );
+        Get.to(() => MainScreen());
+      } else {
+        Get.snackbar(
+          "Gagal memperbarui lowongan",
+          "Tolong periksa kembali data yang diinputkan",
+          colorText: Color(kBlack2.value),
+          backgroundColor: Colors.red,
+          icon: Icon(Icons.work),
+        );
+      }
+    } finally {
+      setIsLoading = false;
+    }
+  }
+
   Future<void> applyJob(CreateChat model, String content, String receiver,
       ProfileProvider profileProvider) async {
     setIsLoading = true;
@@ -81,6 +107,32 @@ class JobsProvider extends ChangeNotifier {
           () => ChatList(),
           transition: Transition.rightToLeft,
           duration: Duration(milliseconds: 100),
+        );
+      }
+    } finally {
+      setIsLoading = false;
+    }
+  }
+
+  Future<void> deleteJob(String jobId) async {
+    try {
+      final response = await JobsHelper.deleteJob(jobId);
+      if (response) {
+        Get.snackbar(
+          "Berhasil",
+          "Lowongan berhasil dihapus",
+          colorText: Color(kBlack2.value),
+          backgroundColor: Color(kGreen2.value),
+          icon: Icon(Icons.work),
+        );
+        Get.to(() => MainScreen());
+      } else {
+        Get.snackbar(
+          "Gagal menghapus lowongan",
+          "Tolong periksa kembali data yang diinputkan",
+          colorText: Color(kBlack2.value),
+          backgroundColor: Colors.red,
+          icon: Icon(Icons.work),
         );
       }
     } finally {
