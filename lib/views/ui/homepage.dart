@@ -67,7 +67,9 @@ class _HomePageState extends State<HomePage> {
                       } else {
                         ProfileRes profile = snapshot.data!;
                         if (profile.isPending == true) {
-                          Get.offAll((UpdateAgent()));
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            Get.offAll(() => UpdateAgent());
+                          });
                         }
                         profileProvider.setCvUrl = profile.cv;
                         profileProvider.setAgentRole = profile.isAgent;

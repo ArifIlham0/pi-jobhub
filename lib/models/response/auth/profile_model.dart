@@ -38,9 +38,10 @@ class ProfileRes {
         email: json["email"] ?? "",
         isAdmin: json["isAdmin"] ?? false,
         isAgent: json["isAgent"] ?? false,
-        skills: json["skills"] == null
-            ? []
-            : List<String>.from(json["skills"].map((x) => x)),
+        skills: json["skills"] is List
+            ? List<String>.from(
+                json["skills"].map((x) => x is String ? x : x.toString()))
+            : [],
         location: json["location"] ?? "",
         phone: json["phone"] ?? "",
         profile: json["profile"] ?? "",
