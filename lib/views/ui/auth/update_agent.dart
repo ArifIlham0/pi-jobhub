@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:jobhub/controllers/exports.dart';
-import 'package:jobhub/models/request/auth/profile_update_model.dart';
+import 'package:jobhub/models/request/auth/agent_update.dart';
 import 'package:jobhub/views/common/custom_btn.dart';
 import 'package:jobhub/views/common/custom_textfield.dart';
 import 'package:jobhub/views/common/exports.dart';
@@ -230,10 +230,10 @@ class _UpdateAgentState extends State<UpdateAgent> {
                                         );
                                       } else {
                                         loginProvider.setIsLoading = true;
-                                        ProfileUpdateReq model =
-                                            ProfileUpdateReq(
+                                        UpdateAgentReq model = UpdateAgentReq(
                                           location: location.text,
                                           phone: phone.text,
+                                          isPending: false,
                                           profile: imageUploaderProvider
                                               .imageUrl
                                               .toString(),

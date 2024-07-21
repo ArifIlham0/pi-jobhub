@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobhub/constants/app_constants.dart';
+import 'package:jobhub/models/request/auth/agent_update.dart';
 import 'package:jobhub/models/request/auth/login_model.dart';
 import 'package:jobhub/models/request/auth/profile_update_model.dart';
 import 'package:jobhub/services/helpers/auth_helper.dart';
@@ -155,14 +156,14 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> updateAgent(ProfileUpdateReq model) async {
+  Future<void> updateAgent(UpdateAgentReq model) async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
 
       String? userId = await prefs.getString('userId');
       print(userId);
 
-      AuthHelper.updateProfile(model, userId ?? "").then((response) {
+      AuthHelper.updateAgent(model, userId ?? "").then((response) {
         if (response) {
           Get.snackbar(
             "Berhasil perbarui profil",
