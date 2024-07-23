@@ -128,12 +128,24 @@ class _AdminPageState extends State<AdminPage> {
                 text: "Nama Perusahaan :    ${pendingUserLists?.username}",
                 style: appstyle(13, Color(kWhite.value), FontWeight.normal),
               ),
-              ReusableText(
-                text: "Alamat :    ${pendingUserLists?.address}",
-                style: appstyle(13, Color(kWhite.value), FontWeight.normal),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ReusableText(
+                    text: "Alamat :    ",
+                    style: appstyle(13, Color(kWhite.value), FontWeight.normal),
+                  ),
+                  Flexible(
+                    child: ReusableText(
+                      text: pendingUserLists!.address!,
+                      style:
+                          appstyle(13, Color(kWhite.value), FontWeight.normal),
+                    ),
+                  )
+                ],
               ),
               ReusableText(
-                text: "Website :    ${pendingUserLists?.website}",
+                text: "Website :   ${pendingUserLists.website}",
                 style: appstyle(13, Color(kWhite.value), FontWeight.normal),
               ),
               HeightSpacer(size: 15),
@@ -142,7 +154,7 @@ class _AdminPageState extends State<AdminPage> {
                 children: [
                   CustomOutlineBtn(
                     onTap: () async {
-                      await adminProviders.moveUser(pendingUserLists?.id);
+                      await adminProviders.moveUser(pendingUserLists.id);
                       Get.back();
                       setState(() {});
                     },
@@ -155,7 +167,7 @@ class _AdminPageState extends State<AdminPage> {
                   WidthSpacer(width: 15.w),
                   CustomOutlineBtn(
                     onTap: () async {
-                      await adminProviders.deleteUser(pendingUserLists?.id);
+                      await adminProviders.deleteUser(pendingUserLists.id);
                       Get.back();
                       setState(() {});
                     },

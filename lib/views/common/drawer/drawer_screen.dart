@@ -133,16 +133,20 @@ class _DrawerScreenState extends State<DrawerScreen> {
         ZoomDrawer.of(context)!.close();
       },
       child: Container(
+        color: Colors.transparent,
         margin: EdgeInsets.only(left: 20.w, bottom: 20.h),
-        child: Row(
-          children: [
-            Icon(icon, color: color),
-            WidthSpacer(width: 12),
-            ReusableText(
-              text: text,
-              style: appstyle(12, color, FontWeight.bold),
-            ),
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+          child: Row(
+            children: [
+              Icon(icon, color: color),
+              WidthSpacer(width: 12),
+              ReusableText(
+                text: text,
+                style: appstyle(12, color, FontWeight.bold),
+              ),
+            ],
+          ),
         ),
       ),
     );

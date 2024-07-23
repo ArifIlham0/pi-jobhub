@@ -9,6 +9,7 @@ import 'package:jobhub/views/common/custom_btn.dart';
 import 'package:jobhub/views/common/custom_textfield.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
+import 'package:jobhub/views/ui/auth/login.dart';
 import 'package:provider/provider.dart';
 
 class Agent extends StatefulWidget {
@@ -152,6 +153,9 @@ class _AgentState extends State<Agent> {
                           website: website.text,
                         );
                         signUpProvider.registerAgent(model);
+                        Get.offAll(() => LoginPage(),
+                            transition: Transition.fade,
+                            duration: Duration(seconds: 2));
                       } else {
                         Get.snackbar(
                           "Gagal",

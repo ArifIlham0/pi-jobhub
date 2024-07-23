@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
@@ -237,13 +238,34 @@ class _JobPageState extends State<JobPage> {
                               physics: NeverScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
                                 final req = jobById.requirements[index];
-                                String bullet = "\u2022";
-                                return Text(
-                                  "$bullet $req\n",
-                                  maxLines: 4,
-                                  textAlign: TextAlign.justify,
-                                  style: appstyle(16, Color(kDarkGrey.value),
-                                      FontWeight.normal),
+                                return Padding(
+                                  padding: EdgeInsets.only(bottom: 10.h),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      req.isNotEmpty
+                                          ? Icon(
+                                              Icons
+                                                  .subdirectory_arrow_right_sharp,
+                                              size: 25,
+                                              color: Color(kDarkGrey.value),
+                                            )
+                                          : SizedBox.shrink(),
+                                      WidthSpacer(width: 10),
+                                      Flexible(
+                                        child: Text(
+                                          req,
+                                          maxLines: 4,
+                                          textAlign: TextAlign.justify,
+                                          style: appstyle(
+                                              16,
+                                              Color(kDarkGrey.value),
+                                              FontWeight.normal),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 );
                               },
                             ),

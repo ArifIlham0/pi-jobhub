@@ -173,7 +173,11 @@ class _LoginPageState extends State<LoginPage> {
                                         Color(kWhite.value).withOpacity(0.1)),
                                   ),
                                   onPressed: () {
-                                    Get.offAll(() => Agent());
+                                    Get.to(
+                                      () => Agent(),
+                                      transition: Transition.rightToLeft,
+                                      duration: Duration(milliseconds: 100),
+                                    );
                                   },
                                 ),
                               ],

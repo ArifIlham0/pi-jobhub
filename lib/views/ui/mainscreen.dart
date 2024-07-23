@@ -96,7 +96,7 @@ class _MainScreenState extends State<MainScreen> {
                       onBoardProvider.isLastPage = false;
                       zoomProvider.currentIndex = 0;
                       loginProvider.logout();
-                      Get.to(() => LoginPage());
+                      Get.offAll(() => LoginPage());
                     },
                   ),
                 ],
@@ -104,7 +104,7 @@ class _MainScreenState extends State<MainScreen> {
             },
           );
         });
-        return HomePage();
+        return ProfilePage();
       case 7:
         return AdminPage();
       default:

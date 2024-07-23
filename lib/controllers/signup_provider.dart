@@ -105,9 +105,7 @@ class SignUpProvider extends ChangeNotifier {
                       Color(kWhite2.value).withOpacity(0.1)),
                 ),
                 onPressed: () {
-                  Get.off(() => LoginPage(),
-                      transition: Transition.fade,
-                      duration: Duration(seconds: 2));
+                  Get.back();
                 },
               ),
             ],
