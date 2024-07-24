@@ -3,7 +3,10 @@ import 'dart:convert';
 import 'package:http/http.dart' as https;
 import 'package:jobhub/models/request/auth/agent_update.dart';
 import 'package:jobhub/models/request/auth/login_model.dart';
+import 'package:jobhub/models/request/auth/new_password_req.dart';
 import 'package:jobhub/models/request/auth/profile_update_model.dart';
+import 'package:jobhub/models/request/auth/reset_password_req.dart';
+import 'package:jobhub/models/response/auth/reset_password_res.dart';
 import 'package:jobhub/models/request/auth/signup_agent_model.dart';
 import 'package:jobhub/models/request/auth/signup_model.dart';
 import 'package:jobhub/models/response/auth/login_res_model.dart';
@@ -251,6 +254,49 @@ class AuthHelper {
     if (response.statusCode == 200) {
       return true;
     } else {
+      return false;
+    }
+  }
+
+  static Future<ResetPasswordRes> resetPassowrd(ResetPasswordReq model) async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+    };
+
+    var url = Uri.https(Config.apiUrl, Config.resetPassUrl);
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(model),
+    );
+
+    if (response.statusCode == 200) {
+      var resPass = resetPasswordResFromJson(response.body);
+      print("Berhasil reset password ${jsonDecode(response.body)}");
+      return resPass;
+    } else {
+      throw Exception("Gagal reset password ${jsonDecode(response.body)}");
+    }
+  }
+
+  static Future<bool> newPassword(
+      String tokenPass, NewPasswordReq model) async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+    };
+
+    var url = Uri.https(Config.apiUrl, "${Config.newPassUrl}/$tokenPass");
+    var response = await client.post(
+      url,
+      headers: requestHeaders,
+      body: jsonEncode(model),
+    );
+
+    if (response.statusCode == 200) {
+      print("Berhasil buat password ${jsonDecode(response.body)}");
+      return true;
+    } else {
+      print("Gagal buat password ${jsonDecode(response.body)}");
       return false;
     }
   }

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -9,10 +10,13 @@ import 'package:jobhub/views/common/app_style.dart';
 import 'package:jobhub/views/common/custom_outline_btn.dart';
 import 'package:jobhub/views/common/drawer/drawer_widget.dart';
 import 'package:jobhub/views/common/exports.dart';
+import 'package:jobhub/views/common/heading_widget_admin.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:jobhub/views/common/loader.dart';
 import 'package:jobhub/views/common/loading_indicator.dart';
 import 'package:jobhub/views/common/width_spacer.dart';
+import 'package:jobhub/views/ui/admin/all_agents_page.dart';
+import 'package:jobhub/views/ui/admin/all_users_page.dart';
 import 'package:jobhub/views/ui/admin/widgets/admin_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -40,65 +44,98 @@ class _AdminPageState extends State<AdminPage> {
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Consumer<AdminProvider>(
-            builder: (context, adminProvider, child) {
-              adminProvider.getPendingUser();
-
-              return FutureBuilder<List<PendingUserResponse>>(
-                future: adminProvider.pendingUserList,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return LoadingIndicator();
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text("Error ${snapshot.error}"));
-                  } else if (snapshot.data!.isEmpty || snapshot.data == null) {
-                    return NoData(title: "Tidak ada mitra");
-                  } else {
-                    final pendingUserSnapshot = snapshot.data;
-
-                    return Column(
-                      children: [
-                        HeightSpacer(size: 25),
-                        ReusableText(
-                          text: "Mitra ini belum disetujui",
-                          isCentre: true,
-                          style: appstyle(
-                              15, Color(kWhite2.value), FontWeight.normal),
-                        ),
-                        HeightSpacer(size: 35),
-                        Expanded(
-                          child: ListView.builder(
-                            itemCount: pendingUserSnapshot?.length,
-                            physics: BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              final pendingUserLists =
-                                  pendingUserSnapshot?[index];
-
-                              return AdminTile(
-                                pendingUser: pendingUserLists,
-                                onTap: () async {
-                                  await adminProvider
-                                      .moveUser(pendingUserLists?.id);
-                                  setState(() {});
-                                },
-                                onTapReject: () async {
-                                  await adminProvider
-                                      .deleteUser(pendingUserLists?.id);
-                                  setState(() {});
-                                },
-                                onTapSheet: () {
-                                  pendingSheet(pendingUserLists);
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    );
-                  }
+          child: Column(
+            children: [
+              HeightSpacer(size: 20),
+              HeadingWidgetAdmin(
+                text: "Semua Akun Mitra",
+                onTap: () {
+                  Get.to(
+                    () => AllAgentsPage(),
+                    transition: Transition.rightToLeft,
+                    duration: Duration(milliseconds: 100),
+                  );
                 },
-              );
-            },
+                onTap2: () {
+                  Get.to(
+                    () => AllUsersPage(),
+                    transition: Transition.rightToLeft,
+                    duration: Duration(milliseconds: 100),
+                  );
+                },
+              ),
+              HeightSpacer(size: 20),
+              Expanded(
+                child: Consumer<AdminProvider>(
+                  builder: (context, adminProvider, child) {
+                    adminProvider.getPendingUser();
+                    adminProvider.getAllAgents();
+                    adminProvider.getAllUsers();
+
+                    return FutureBuilder<List<PendingUserResponse>>(
+                      future: adminProvider.pendingUserList,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return LoadingIndicator();
+                        } else if (snapshot.hasError) {
+                          return Center(child: Text("Error ${snapshot.error}"));
+                        } else if (snapshot.data!.isEmpty ||
+                            snapshot.data == null) {
+                          return NoData(
+                              title: "Tidak ada mitra yang belum disetujui");
+                        } else {
+                          final pendingUserSnapshot = snapshot.data;
+
+                          return Column(
+                            children: [
+                              ReusableText(
+                                text: "Mitra ini belum disetujui",
+                                isCentre: true,
+                                style: appstyle(15, Color(kWhite2.value),
+                                    FontWeight.normal),
+                              ),
+                              HeightSpacer(size: 35),
+                              Expanded(
+                                child: ListView.builder(
+                                  itemCount: pendingUserSnapshot?.length,
+                                  physics: BouncingScrollPhysics(),
+                                  itemBuilder: (context, index) {
+                                    final pendingUserLists =
+                                        pendingUserSnapshot?[index];
+
+                                    return AdminTile(
+                                      pendingUser: pendingUserLists,
+                                      onTap: () async {
+                                        await adminProvider
+                                            .moveUser(pendingUserLists?.id);
+                                        setState(() {
+                                          pendingUserSnapshot?.removeAt(index);
+                                        });
+                                      },
+                                      onTapReject: () async {
+                                        await adminProvider
+                                            .deleteUser(pendingUserLists?.id);
+                                        setState(() {
+                                          pendingUserSnapshot?.removeAt(index);
+                                        });
+                                      },
+                                      onTapSheet: () {
+                                        pendingSheet(pendingUserLists);
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),

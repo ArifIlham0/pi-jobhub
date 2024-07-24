@@ -11,6 +11,7 @@ import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/height_spacer.dart';
 import 'package:jobhub/views/common/loading_button.dart';
 import 'package:jobhub/views/ui/auth/agent.dart';
+import 'package:jobhub/views/ui/auth/reset_password.dart';
 import 'package:jobhub/views/ui/auth/signup.dart';
 import 'package:jobhub/views/ui/mainscreen.dart';
 import 'package:provider/provider.dart';
@@ -125,72 +126,100 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      style: ButtonStyle(
-                        overlayColor: MaterialStateProperty.all(
-                            Color(kWhite2.value).withOpacity(0.1)),
-                      ),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              backgroundColor: Color(kLightGrey.value),
-                              title: Text(
-                                'Ingin daftar sebagai apa?',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Color(kDarkGrey.value),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: ReusableText(
-                                    text: "Pengguna",
-                                    style: appstyle(13, Color(kGreen.value),
-                                        FontWeight.w600),
-                                  ),
-                                  style: ButtonStyle(
-                                    overlayColor: MaterialStateProperty.all(
-                                        Color(kWhite.value).withOpacity(0.1)),
-                                  ),
-                                  onPressed: () {
-                                    Get.offAll(() => RegistrationPage());
-                                  },
-                                ),
-                                TextButton(
-                                  child: ReusableText(
-                                    text: "Mitra",
-                                    style: appstyle(13, Color(kGreen.value),
-                                        FontWeight.w600),
-                                  ),
-                                  style: ButtonStyle(
-                                    overlayColor: MaterialStateProperty.all(
-                                        Color(kWhite.value).withOpacity(0.1)),
-                                  ),
-                                  onPressed: () {
-                                    Get.to(
-                                      () => Agent(),
-                                      transition: Transition.rightToLeft,
-                                      duration: Duration(milliseconds: 100),
-                                    );
-                                  },
-                                ),
-                              ],
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                          style: ButtonStyle(
+                            overlayColor: MaterialStateProperty.all(
+                                Color(kWhite2.value).withOpacity(0.1)),
+                          ),
+                          onPressed: () {
+                            Get.to(
+                              () => ResetPassword(),
+                              transition: Transition.rightToLeft,
+                              duration: Duration(milliseconds: 100),
                             );
                           },
-                        );
-                      },
-                      child: ReusableText(
-                        text: "Daftar Pengguna/Mitra",
-                        style:
-                            appstyle(14, Color(kWhite2.value), FontWeight.w500),
+                          child: ReusableText(
+                            text: "Lupa Password?",
+                            style: appstyle(
+                                12, Color(kWhite2.value), FontWeight.w500),
+                          ),
+                        ),
                       ),
-                    ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          style: ButtonStyle(
+                            overlayColor: MaterialStateProperty.all(
+                                Color(kWhite2.value).withOpacity(0.1)),
+                          ),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  backgroundColor: Color(kLightGrey.value),
+                                  title: Text(
+                                    'Ingin daftar sebagai apa?',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Color(kDarkGrey.value),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  actions: [
+                                    TextButton(
+                                      child: ReusableText(
+                                        text: "Pengguna",
+                                        style: appstyle(13, Color(kGreen.value),
+                                            FontWeight.w600),
+                                      ),
+                                      style: ButtonStyle(
+                                        overlayColor: MaterialStateProperty.all(
+                                            Color(kWhite.value)
+                                                .withOpacity(0.1)),
+                                      ),
+                                      onPressed: () {
+                                        Get.offAll(() => RegistrationPage());
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: ReusableText(
+                                        text: "Mitra",
+                                        style: appstyle(13, Color(kGreen.value),
+                                            FontWeight.w600),
+                                      ),
+                                      style: ButtonStyle(
+                                        overlayColor: MaterialStateProperty.all(
+                                            Color(kWhite.value)
+                                                .withOpacity(0.1)),
+                                      ),
+                                      onPressed: () {
+                                        Get.to(
+                                          () => Agent(),
+                                          transition: Transition.rightToLeft,
+                                          duration: Duration(milliseconds: 100),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          child: ReusableText(
+                            text: "Daftar Pengguna/Mitra",
+                            style: appstyle(
+                                12, Color(kWhite2.value), FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   HeightSpacer(size: 50),
                   loginProvider.isLoading

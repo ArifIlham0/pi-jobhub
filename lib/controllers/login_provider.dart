@@ -3,8 +3,12 @@ import 'package:get/get.dart';
 import 'package:jobhub/constants/app_constants.dart';
 import 'package:jobhub/models/request/auth/agent_update.dart';
 import 'package:jobhub/models/request/auth/login_model.dart';
+import 'package:jobhub/models/request/auth/new_password_req.dart';
 import 'package:jobhub/models/request/auth/profile_update_model.dart';
+import 'package:jobhub/models/request/auth/reset_password_req.dart';
+import 'package:jobhub/models/response/auth/reset_password_res.dart';
 import 'package:jobhub/services/helpers/auth_helper.dart';
+import 'package:jobhub/views/ui/auth/login.dart';
 import 'package:jobhub/views/ui/auth/update_agent.dart';
 import 'package:jobhub/views/ui/auth/update_user.dart';
 import 'package:jobhub/views/ui/mainscreen.dart';
@@ -13,6 +17,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginProvider extends ChangeNotifier {
   final loginFormKey = GlobalKey<FormState>();
   final profileFormKey = GlobalKey<FormState>();
+  final resetPassKey = GlobalKey<FormState>();
+  final newPassKey = GlobalKey<FormState>();
   bool _obscureText = true;
   bool _firstTime = true;
   bool? _entrypoint;
@@ -80,6 +86,28 @@ class LoginProvider extends ChangeNotifier {
     }
   }
 
+  bool validateResetPassword() {
+    final form = resetPassKey.currentState;
+
+    if (form != null && form.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool validateNewPassword() {
+    final form = newPassKey.currentState;
+
+    if (form != null && form.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   userLogin(LoginModel model) async {
     setIsLoading = true;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -101,6 +129,58 @@ class LoginProvider extends ChangeNotifier {
       } else if (!response) {
         Get.snackbar(
           "Gagal login",
+          "Tolong cek kembali inputan anda",
+          colorText: Color(kBlack2.value),
+          backgroundColor: Colors.red,
+          icon: Icon(Icons.add_alert),
+          duration: Duration(milliseconds: 1500),
+        );
+      }
+    });
+  }
+
+  Future<String?> resetPassword(ResetPasswordReq model) async {
+    setIsLoading = true;
+    String? token;
+    try {
+      ResetPasswordRes response = await AuthHelper.resetPassowrd(model);
+      setIsLoading = false;
+      token = response.token;
+      Get.snackbar(
+        "Berhasil",
+        "Password berhasil di reset",
+        colorText: Color(kBlack2.value),
+        duration: Duration(milliseconds: 1500),
+        backgroundColor: Color(kGreen2.value),
+        icon: Icon(Icons.key),
+      );
+    } catch (e) {
+      print(e);
+    }
+    return token;
+  }
+
+  Future<void> newPassword(String tokenPass, NewPasswordReq model) async {
+    setIsLoading = true;
+    AuthHelper.newPassword(tokenPass, model).then((response) {
+      if (response) {
+        setIsLoading = false;
+        Get.snackbar(
+          "Berhasil",
+          "Password baru berhasil dibuat",
+          colorText: Color(kBlack2.value),
+          duration: Duration(milliseconds: 1500),
+          backgroundColor: Color(kGreen2.value),
+          icon: Icon(Icons.key),
+        );
+        Get.offAll(
+          () => LoginPage(),
+          transition: Transition.leftToRight,
+          duration: Duration(milliseconds: 100),
+        );
+      } else {
+        Get.snackbar(
+          "Gagal",
           "Tolong cek kembali inputan anda",
           colorText: Color(kBlack2.value),
           backgroundColor: Colors.red,
