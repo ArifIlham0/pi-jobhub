@@ -26,7 +26,7 @@ class _AllUsersPageState extends State<AllUsersPage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.h),
         child: CustomAppBar(
-          text: "Semua Akun Mitra",
+          text: "Semua Akun Pengguna",
           child: GestureDetector(
             onTap: () => Get.back(),
             child: Icon(CupertinoIcons.arrow_left),

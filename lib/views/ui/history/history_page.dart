@@ -170,129 +170,143 @@ class _HistoryListState extends State<HistoryList> {
                                       final chat = chatSnapshot?[index];
                                       var user = chat?.users!.where((user) =>
                                           user.id != chatProvider.userId);
-                                      return Padding(
-                                        padding: EdgeInsets.only(bottom: 8.h),
-                                        child: InkWell(
-                                          onTap: () {
-                                            Get.to(
-                                              () => ChatPage(
-                                                title: user.first.username,
-                                                id: chat?.id,
-                                                profile: user.first.profile,
-                                                user: [
-                                                  chat!.users![0].id!,
-                                                  chat.users![1].id!
-                                                ],
-                                              ),
-                                              transition:
-                                                  Transition.rightToLeft,
-                                              duration:
-                                                  Duration(milliseconds: 100),
-                                            );
-                                          },
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 5.h),
-                                            child: Container(
-                                              height: 80.h,
-                                              width: width,
-                                              decoration: BoxDecoration(
-                                                color: Color(kLightGrey.value),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(12)),
-                                                border: Border.all(
-                                                  color: Color(kWhite.value),
-                                                  width: 0.3,
+                                      if (user!.isNotEmpty) {
+                                        return Padding(
+                                          padding: EdgeInsets.only(bottom: 8.h),
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.to(
+                                                () => ChatPage(
+                                                  title: user.first.username,
+                                                  id: chat?.id,
+                                                  profile: user.first.profile,
+                                                  user: [
+                                                    chat!.users![0].id!,
+                                                    chat.users![1].id!
+                                                  ],
                                                 ),
-                                              ),
-                                              child: ListTile(
-                                                contentPadding: EdgeInsets.only(
-                                                    right: 8.w, left: 10.w),
-                                                minLeadingWidth: 0,
-                                                minVerticalPadding: 0,
-                                                leading: CircleAvatar(
-                                                  radius: 25,
-                                                  backgroundImage: NetworkImage(
-                                                      user!.first.profile!),
+                                                transition:
+                                                    Transition.rightToLeft,
+                                                duration:
+                                                    Duration(milliseconds: 100),
+                                              );
+                                            },
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                  vertical: 5.h),
+                                              child: Container(
+                                                height: 80.h,
+                                                width: width,
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      Color(kLightGrey.value),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(12)),
+                                                  border: Border.all(
+                                                    color: Color(kWhite.value),
+                                                    width: 0.3,
+                                                  ),
                                                 ),
-                                                title: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    ReusableText(
-                                                      text:
-                                                          user.first.username!,
-                                                      style: appstyle(
-                                                        16,
-                                                        Color(kWhite2.value),
-                                                        FontWeight.w600,
-                                                      ),
-                                                    ),
-                                                    HeightSpacer(size: 5),
-                                                    Row(
-                                                      children: [
-                                                        Icon(
-                                                          MaterialIcons
-                                                              .location_pin,
-                                                          color: Color(
-                                                              kDarkGrey.value),
-                                                          size: 20,
+                                                child: ListTile(
+                                                  contentPadding:
+                                                      EdgeInsets.only(
+                                                          right: 8.w,
+                                                          left: 10.w),
+                                                  minLeadingWidth: 0,
+                                                  minVerticalPadding: 0,
+                                                  leading: CircleAvatar(
+                                                    radius: 25,
+                                                    backgroundImage:
+                                                        NetworkImage(user
+                                                            .first.profile!),
+                                                  ),
+                                                  title: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      ReusableText(
+                                                        text: user
+                                                            .first.username!,
+                                                        style: appstyle(
+                                                          16,
+                                                          Color(kWhite2.value),
+                                                          FontWeight.w600,
                                                         ),
+                                                      ),
+                                                      HeightSpacer(size: 5),
+                                                      Row(
+                                                        children: [
+                                                          Icon(
+                                                            MaterialIcons
+                                                                .location_pin,
+                                                            color: Color(
+                                                                kDarkGrey
+                                                                    .value),
+                                                            size: 20,
+                                                          ),
+                                                          ReusableText(
+                                                            maxLine: false,
+                                                            text: user.first
+                                                                .location!,
+                                                            style: appstyle(
+                                                              16,
+                                                              Color(kDarkGrey
+                                                                  .value),
+                                                              FontWeight.normal,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  trailing: Padding(
+                                                    padding: EdgeInsets.only(
+                                                        right: 4.w),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
                                                         ReusableText(
-                                                          maxLine: false,
-                                                          text: user
-                                                              .first.location!,
+                                                          text: chatProvider
+                                                              .messageTime(chat
+                                                                  ?.updatedAt
+                                                                  .toString()),
                                                           style: appstyle(
-                                                            16,
-                                                            Color(kDarkGrey
-                                                                .value),
+                                                            12,
+                                                            Color(
+                                                                kWhite2.value),
                                                             FontWeight.normal,
                                                           ),
                                                         ),
+                                                        Icon(
+                                                          chat?.chatName ==
+                                                                  chatProvider
+                                                                      .userId
+                                                              ? Ionicons
+                                                                  .arrow_forward_circle_outline
+                                                              : Ionicons
+                                                                  .arrow_back_circle_outline,
+                                                        ),
                                                       ],
                                                     ),
-                                                  ],
-                                                ),
-                                                trailing: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      right: 4.w),
-                                                  child: Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      ReusableText(
-                                                        text: chatProvider
-                                                            .messageTime(chat
-                                                                ?.updatedAt
-                                                                .toString()),
-                                                        style: appstyle(
-                                                          12,
-                                                          Color(kWhite2.value),
-                                                          FontWeight.normal,
-                                                        ),
-                                                      ),
-                                                      Icon(
-                                                        chat?.chatName ==
-                                                                chatProvider
-                                                                    .userId
-                                                            ? Ionicons
-                                                                .arrow_forward_circle_outline
-                                                            : Ionicons
-                                                                .arrow_back_circle_outline,
-                                                      ),
-                                                    ],
                                                   ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      );
+                                        );
+                                      } else {
+                                        return Container();
+                                      }
                                     },
                                   ),
                                 ),
