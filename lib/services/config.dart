@@ -1,5 +1,5 @@
 class Config {
-  static const apiUrl = "jobhub-backend-production-5442.up.railway.app";
+  static const apiUrl = "jobhub-backend-neon.vercel.app";
   static const apiUrlLocalhost = "localhost:5001";
   static const String loginUrl = "/api/login";
   static const String resetPassUrl = "/api/reset-password";
