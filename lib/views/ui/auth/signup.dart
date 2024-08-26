@@ -132,35 +132,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                   HeightSpacer(size: 10),
-                  // Align(
-                  //   alignment: Alignment.bottomCenter,
-                  //   child: TextButton(
-                  //     style: ButtonStyle(
-                  //       overlayColor: MaterialStateProperty.all(
-                  //           Color(kWhite2.value).withOpacity(0.1)),
-                  //     ),
-                  //     onPressed: () {
-                  //       Get.to(
-                  //         () => Agent(),
-                  //         transition: Transition.rightToLeft,
-                  //         duration: Duration(milliseconds: 100),
-                  //       );
-                  //     },
-                  //     child: RichText(
-                  //         text: TextSpan(
-                  //       text: "Ingin mencari kandidat? ",
-                  //       style: appstyle(
-                  //           12, Color(kDarkGrey.value), FontWeight.w500),
-                  //       children: [
-                  //         TextSpan(
-                  //           text: "Daftar sebagai mitra",
-                  //           style: appstyle(
-                  //               12, Color(kWhite2.value), FontWeight.w500),
-                  //         ),
-                  //       ],
-                  //     )),
-                  //   ),
-                  // ),
                   CustomButton(
                     onTap: () async {
                       loginProvider.firstTime = !loginProvider.firstTime;

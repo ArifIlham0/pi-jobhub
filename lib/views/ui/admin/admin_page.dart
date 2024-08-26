@@ -18,6 +18,7 @@ import 'package:jobhub/views/common/width_spacer.dart';
 import 'package:jobhub/views/ui/admin/all_agents_page.dart';
 import 'package:jobhub/views/ui/admin/all_users_page.dart';
 import 'package:jobhub/views/ui/admin/widgets/admin_tile.dart';
+import 'package:jobhub/views/ui/jobs/admin_job_list.dart';
 import 'package:provider/provider.dart';
 
 class AdminPage extends StatefulWidget {
@@ -64,7 +65,6 @@ class _AdminPageState extends State<AdminPage> {
                   );
                 },
               ),
-              HeightSpacer(size: 20),
               Expanded(
                 child: Consumer<AdminProvider>(
                   builder: (context, adminProvider, child) {
@@ -89,6 +89,22 @@ class _AdminPageState extends State<AdminPage> {
 
                           return Column(
                             children: [
+                              InkWell(
+                                onTap: () {
+                                  Get.to(
+                                    () => AdminJobList(),
+                                    transition: Transition.rightToLeft,
+                                    duration: Duration(milliseconds: 100),
+                                  );
+                                },
+                                child: ReusableText(
+                                  text: "Semua Lowongan",
+                                  isCentre: true,
+                                  style: appstyle(15, Color(kGreen.value),
+                                      FontWeight.normal),
+                                ),
+                              ),
+                              HeightSpacer(size: 10),
                               ReusableText(
                                 text: "Mitra ini belum disetujui",
                                 isCentre: true,
