@@ -19,6 +19,12 @@ class BookMarkPage extends StatefulWidget {
 
 class _BookMarkPageState extends State<BookMarkPage> {
   @override
+  void initState() {
+    super.initState();
+    Provider.of<BookMarkProvider>(context, listen: false).getBookmarks();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -33,8 +39,6 @@ class _BookMarkPageState extends State<BookMarkPage> {
       ),
       body: Consumer<BookMarkProvider>(
         builder: (context, bookmarkProvider, child) {
-          bookmarkProvider.getBookmarks();
-
           return FutureBuilder<List<AllBookmarks>>(
             future: bookmarkProvider.bookmarks,
             builder: (context, snapshot) {
@@ -62,6 +66,7 @@ class _BookMarkPageState extends State<BookMarkPage> {
               } else if (snapshot.data == null || snapshot.data!.isEmpty) {
                 return NoData(title: "Tidak ada bookmark");
               } else {
+                print(snapshot.data);
                 final bookmarkSnapshot = snapshot.data;
 
                 return ListView.builder(

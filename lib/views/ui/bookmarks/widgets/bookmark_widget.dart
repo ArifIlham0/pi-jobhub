@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
-import 'package:jobhub/constants/app_constants.dart';
 import 'package:jobhub/models/response/bookmarks/all_bookmarks.dart';
 import 'package:jobhub/views/common/exports.dart';
 import 'package:jobhub/views/common/width_spacer.dart';
@@ -18,14 +17,20 @@ class BookmarkTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (job == null || job!.job == null) {
+      return SizedBox.shrink();
+    }
+
+    final jobDetails = job!.job!;
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 15.w),
       child: InkWell(
         onTap: () {
           Get.to(
             () => JobPage(
-              title: job!.job?.company,
-              id: job!.job?.id,
+              title: jobDetails.company,
+              id: jobDetails.id,
             ),
             transition: Transition.rightToLeft,
             duration: Duration(milliseconds: 100),
@@ -55,7 +60,7 @@ class BookmarkTileWidget extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 30,
-                        backgroundImage: NetworkImage(job!.job!.imageUrl!),
+                        backgroundImage: NetworkImage(jobDetails.imageUrl!),
                       ),
                       WidthSpacer(width: 10),
                       Column(
@@ -63,7 +68,7 @@ class BookmarkTileWidget extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           ReusableText(
-                            text: job!.job!.company!,
+                            text: jobDetails.company!,
                             style: appstyle(
                               20,
                               Color(kWhite2.value),
@@ -74,7 +79,7 @@ class BookmarkTileWidget extends StatelessWidget {
                             width: width * 0.5,
                             child: ReusableText(
                               maxLine: false,
-                              text: job!.job!.title!,
+                              text: jobDetails.title!,
                               style: appstyle(
                                 20,
                                 Color(kDarkGrey.value),
@@ -101,7 +106,7 @@ class BookmarkTileWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     ReusableText(
-                      text: job!.job!.salary!,
+                      text: jobDetails.salary!,
                       style: appstyle(
                         22,
                         Color(kWhite2.value),
@@ -109,7 +114,7 @@ class BookmarkTileWidget extends StatelessWidget {
                       ),
                     ),
                     ReusableText(
-                      text: "/${job!.job!.period}",
+                      text: "/${jobDetails.period}",
                       style: appstyle(
                         20,
                         Color(kDarkGrey.value),

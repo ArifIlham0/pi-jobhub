@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:jobhub/constants/app_constants.dart';
 import 'package:jobhub/controllers/exports.dart';
 import 'package:jobhub/models/response/auth/profile_model.dart';
 import 'package:jobhub/views/common/exports.dart';

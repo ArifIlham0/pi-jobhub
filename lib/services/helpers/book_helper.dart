@@ -75,6 +75,7 @@ class BookMarkHelper {
       var bookmarks = allBookmarksFromJson(response.body);
       return bookmarks;
     } else {
+      print("Gagal get bookmark ${response.body}");
       throw Exception('Failed to load bookmarks');
     }
   }

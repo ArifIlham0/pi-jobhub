@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:get/get.dart';
-import 'package:jobhub/constants/app_constants.dart';
 import 'package:jobhub/controllers/exports.dart';
 import 'package:jobhub/views/common/drawer/drawer_screen.dart';
 import 'package:jobhub/views/common/exports.dart';

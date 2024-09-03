@@ -180,7 +180,6 @@ class AuthHelper {
 
     if (response.statusCode == 200) {
       var profile = profileResFromJson(response.body);
-      print("Berhasil ambil profile ${response.body}");
       return profile;
     } else {
       throw Exception("Gagal ambil profil ${jsonDecode(response.body)}");
